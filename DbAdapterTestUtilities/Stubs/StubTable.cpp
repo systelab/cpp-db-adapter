@@ -4,6 +4,7 @@
 #include "StubField.h"
 #include "StubFieldValue.h"
 #include "StubTableRecord.h"
+#include "StubTableRecordSet.h"
 #include "StubPrimaryKey.h"
 #include "StubPrimaryKeyValue.h"
 
@@ -121,13 +122,15 @@ namespace systelab { namespace db { namespace test_utility {
 
 	std::unique_ptr<ITableRecordSet> StubTable::getAllRecords() const
 	{
-		std::vector<std::unique_ptr<MockTableRecord> > records;
-		std::for_each(m_tableRecords.begin(), m_tableRecords.end(), 
-			[&records](const std::unique_ptr<db::ITableRecord>& srcRecord)
+		std::vector<StubTableRecord> records;
+		std::for_each(m_tableRecords.begin(), m_tableRecords.end(),
+			[&records](const std::unique_ptr<StubTableRecord>& srcRecord)
 			{
-				records.push_back(std::unique_ptr<MockTableRecord>(new StubTableRecord(*srcRecord)));
-			});
-		std::unique_ptr<MockTableRecordSet> recordset(new MockTableRecordSet(records));
+				records.push_back(*srcRecord);
+			}
+		);
+
+		std::unique_ptr<StubTableRecordSet> recordset(new StubTableRecordSet((ITable&)*this, records));
 		return std::move(recordset);
 	}
 

@@ -54,11 +54,10 @@ namespace systelab { namespace db { namespace test_utility {
 		StubTable& operator= (const StubTable& other);
 
 	private:
-		std::vector<std::unique_ptr<ITableRecord> > m_tableRecords;
-
 		std::string m_name;
 		std::vector< std::unique_ptr<IField> > m_fields;
 		std::unique_ptr<StubPrimaryKey> m_primaryKey;
+		std::vector<std::unique_ptr<StubTableRecord> > m_tableRecords;
 
 		FieldTypes getTypeFromSQLiteTypeName(std::string typeName);
 
