@@ -4,7 +4,7 @@
 #include "StubFieldValue.h"
 
 
-namespace systelab { namespace test_utility { 
+namespace systelab { namespace db { namespace test_utility {
 
 	StubPrimaryKeyValue::StubPrimaryKeyValue(const IPrimaryKey& primaryKey)
 		:m_primaryKey(primaryKey)
@@ -102,4 +102,4 @@ namespace systelab { namespace test_utility {
 		throw std::exception( "The requested primary key field doesn't exist" );
 	}
 
-}}
+}}}
