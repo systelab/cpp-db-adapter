@@ -1,9 +1,7 @@
-#include "StdAfx.h"
 #include "StubField.h"
 
 
 namespace systelab { namespace test_utility {
-
 
 	StubField::StubField(const db::IField& other)
 		:m_index(other.getIndex())
@@ -11,7 +9,6 @@ namespace systelab { namespace test_utility {
 		,m_type(other.getType())
 		,m_primaryKey(other.isPrimaryKey())
 	{
-
 	}
 
 	StubField::StubField(const StubField& other)
@@ -39,9 +36,7 @@ namespace systelab { namespace test_utility {
 		setDefaultValue(type, defaultValue);
 	}
 
-	StubField::~StubField()
-	{
-	}
+	StubField::~StubField() = default;
 
 	unsigned int StubField::getIndex() const
 	{
@@ -73,12 +68,12 @@ namespace systelab { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't boolean" );
+				throw std::runtime_error( "Field type isn't boolean" );
 			}
 		}
 		else
 		{
-			throw std::exception( "Default value is null" );
+			throw std::runtime_error( "Default value is null" );
 		}
 	}
 
@@ -92,12 +87,12 @@ namespace systelab { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't integer" );
+				throw std::runtime_error( "Field type isn't integer" );
 			}
 		}
 		else
 		{
-			throw std::exception( "Default value is null" );
+			throw std::runtime_error( "Default value is null" );
 		}
 	}
 
@@ -111,12 +106,12 @@ namespace systelab { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't double" );
+				throw std::runtime_error( "Field type isn't double" );
 			}
 		}
 		else
 		{
-			throw std::exception( "Default value is null" );
+			throw std::runtime_error( "Default value is null" );
 		}
 	}
 
@@ -130,12 +125,12 @@ namespace systelab { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't string" );
+				throw std::runtime_error( "Field type isn't string" );
 			}
 		}
 		else
 		{
-			throw std::exception( "Default value is null" );
+			throw std::runtime_error( "Default value is null" );
 		}
 	}
 
@@ -149,18 +144,18 @@ namespace systelab { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't datetime" );
+				throw std::runtime_error( "Field type isn't datetime" );
 			}
 		}
 		else
 		{
-			throw std::exception( "Default value is null" );
+			throw std::runtime_error( "Default value is null" );
 		}
 	}
 	
 	systelab::db::IBinaryValue& StubField::getBinaryDefaultValue() const
 	{
-		throw std::exception( "Not implemented" );
+		throw std::runtime_error( "Not implemented" );
 	}
 
 	bool StubField::isPrimaryKey() const
@@ -206,7 +201,7 @@ namespace systelab { namespace test_utility {
 					//m_defaultBinaryValue = ; // Not implemented
 					break;
 				default:
-					throw std::exception("Invalid record field type." );
+					throw std::runtime_error("Invalid record field type." );
 					break;
 			}
 		}
