@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "StubPrimaryKey.h"
+
 #include "StubTable.h"
 
 

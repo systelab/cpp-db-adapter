@@ -1,7 +1,7 @@
 #pragma once
 
-#include "TestUtilities/DbAdapter/Mocks/MockTableRecord.h"
-#include "TestUtilities/DbAdapter/Stubs/StubFieldValue.h"
+#include "DbAdapterTestUtilities/Mocks/MockTableRecord.h"
+#include "DbAdapterTestUtilities/Stubs/StubFieldValue.h"
 
 #include <memory>
 #include <vector>

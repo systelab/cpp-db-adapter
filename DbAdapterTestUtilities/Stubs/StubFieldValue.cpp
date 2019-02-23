@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "StubFieldValue.h"
 
 #include "StubField.h"
