@@ -14,7 +14,7 @@ namespace systelab { namespace db { namespace test_utility {
 		StubTable(const std::string& name);
 		virtual ~StubTable();
 
-		std::string getName() const;
+		std::string getNameStub() const;
 		const IPrimaryKey& getPrimaryKey() const;
 
 		unsigned int getFieldsCount() const;
@@ -54,7 +54,6 @@ namespace systelab { namespace db { namespace test_utility {
 		StubTable& operator= (const StubTable& other);
 
 	private:
-
 		std::vector<std::unique_ptr<ITableRecord> > m_tableRecords;
 
 		std::string m_name;

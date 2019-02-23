@@ -19,17 +19,15 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		m_primaryKey = std::unique_ptr<StubPrimaryKey>( new StubPrimaryKey(*this) );
 
+		ON_CALL(*this, getName()).WillByDefault(Invoke(this, &StubTable::getNameStub));
 		ON_CALL(*this, insertRecord(_)).WillByDefault(Invoke(this, &StubTable::insertRecordProxy));
 		ON_CALL(*this, updateRecord(_)).WillByDefault(Invoke(this, &StubTable::updateRecordProxy));
 		ON_CALL(*this, deleteRecord(testing::An<const ITableRecord&>())).WillByDefault(Invoke(this, &StubTable::deleteRecordProxy));
-		
 	}
 
-	StubTable::~StubTable()
-	{
-	}
+	StubTable::~StubTable() = default;
 
-	std::string StubTable::getName() const
+	std::string StubTable::getNameStub() const
 	{
 		return m_name;
 	}
