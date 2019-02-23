@@ -2,6 +2,9 @@
 
 #include "DbAdapterInterface/IPrimaryKey.h"
 
+#include <vector>
+
+
 using namespace systelab::db;
 
 namespace systelab { namespace test_utility {
