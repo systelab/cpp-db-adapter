@@ -3,7 +3,7 @@
 #include "DbAdapterInterface/IPrimaryKeyValue.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	using namespace testing;
 
@@ -17,5 +17,5 @@ namespace systelab { namespace test_utility {
 		MOCK_CONST_METHOD1(getFieldValue, db::IFieldValue&(unsigned int));
 		MOCK_CONST_METHOD1(getFieldValue, db::IFieldValue&(const std::string&));
 	};
-}}
+}}}
 

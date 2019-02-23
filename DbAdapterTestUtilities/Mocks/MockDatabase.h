@@ -2,9 +2,10 @@
 
 #include "DbAdapterInterface/IDatabase.h"
 
-namespace systelab { namespace test_utility {
 
-	using namespace testing;
+using namespace testing;
+
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockDatabase: public db::IDatabase
 	{
@@ -55,5 +56,5 @@ namespace systelab { namespace test_utility {
 
 	};
 
-}}
+}}}
 

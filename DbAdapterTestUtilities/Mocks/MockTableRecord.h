@@ -6,7 +6,7 @@
 #include "MockFieldValue.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockTableRecord : public db::ITableRecord
 	{
@@ -128,5 +128,5 @@ namespace systelab { namespace test_utility {
 		std::vector<MockFieldValue*> m_mockFieldValues;
 	};
 
-}}
+}}}
 

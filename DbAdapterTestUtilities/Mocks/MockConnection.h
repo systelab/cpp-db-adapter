@@ -2,7 +2,8 @@
 
 #include "DbAdapterInterface/IConnection.h"
 
-namespace systelab { namespace test_utility {
+
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockConnection : public db::IConnection
 	{
@@ -14,5 +15,5 @@ namespace systelab { namespace test_utility {
 		}
 	};
 
-}}
+}}}
 

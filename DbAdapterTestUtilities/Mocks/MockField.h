@@ -3,7 +3,7 @@
 #include "DbAdapterInterface/IField.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	using namespace testing;
 
@@ -48,7 +48,7 @@ namespace systelab { namespace test_utility {
 		{
 			return !(field1 == field2);
 		}
-
 	};
-}}
+
+}}}
 

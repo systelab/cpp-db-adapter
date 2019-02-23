@@ -4,7 +4,7 @@
 
 #include "MockFieldValue.h"
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockRecord : public db::IRecord
 	{
@@ -107,5 +107,6 @@ namespace systelab { namespace test_utility {
 	{
 		return !(record1 == record2);
 	}
-}}
+
+}}}
 

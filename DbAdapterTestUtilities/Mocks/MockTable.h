@@ -5,7 +5,7 @@
 #include "MockTableRecordSet.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockTable: public db::ITable
 	{
@@ -150,5 +150,5 @@ namespace systelab { namespace test_utility {
 		std::unique_ptr<MockTableRecordSet> m_allMockRecordset;
 	};
 
-}}
+}}}
 

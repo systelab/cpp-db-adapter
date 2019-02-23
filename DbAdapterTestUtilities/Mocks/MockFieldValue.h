@@ -8,7 +8,7 @@
 #include <boost/optional.hpp>
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockFieldValue: public db::IFieldValue
 	{
@@ -338,5 +338,5 @@ namespace systelab { namespace test_utility {
 		MockField* m_mockField;
 	};
 
-}}
+}}}
 

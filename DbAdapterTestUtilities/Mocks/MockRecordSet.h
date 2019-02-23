@@ -5,7 +5,7 @@
 #include "MockRecord.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class MockRecordSet : public db::IRecordSet
 	{
@@ -37,5 +37,6 @@ namespace systelab { namespace test_utility {
 
 		std::vector< std::unique_ptr<MockRecord> > m_mockRecords;
 	};
-}}
+
+}}}
 
