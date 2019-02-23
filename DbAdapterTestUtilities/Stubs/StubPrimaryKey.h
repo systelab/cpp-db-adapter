@@ -5,8 +5,6 @@
 #include <vector>
 
 
-using namespace systelab::db;
-
 namespace systelab { namespace db { namespace test_utility {
 
 	class StubTable;

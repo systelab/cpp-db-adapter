@@ -12,7 +12,6 @@ namespace systelab { namespace db {
 	class IField;
 }}
 
-
 namespace systelab { namespace db { namespace test_utility {
 
 	class StubField;

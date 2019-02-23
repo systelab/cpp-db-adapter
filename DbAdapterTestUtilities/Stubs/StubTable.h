@@ -4,8 +4,6 @@
 #include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
 
 
-using namespace systelab::db;
-
 namespace systelab { namespace db { namespace test_utility {
 
 	class StubPrimaryKey;
