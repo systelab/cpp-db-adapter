@@ -46,7 +46,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	unsigned int StubTableRecordSet::getRecordsCount() const
 	{
-		return m_records.size();
+		return (unsigned int) m_records.size();
 	}
 
 	const ITableRecord& StubTableRecordSet::getCurrentRecord() const

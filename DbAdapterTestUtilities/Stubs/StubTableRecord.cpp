@@ -19,7 +19,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	StubTableRecord::StubTableRecord(const StubTableRecord& other)
 	{
-		unsigned int nFieldValues = other.m_fieldValues.size();
+		unsigned int nFieldValues = (unsigned int) other.m_fieldValues.size();
 		for (unsigned int i = 0; i < nFieldValues; i++)
 		{
 			m_fieldValues.push_back( std::unique_ptr<StubFieldValue>(new StubFieldValue(*other.m_fieldValues[i].get())) );
@@ -28,7 +28,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	StubTableRecord::StubTableRecord(std::vector< std::unique_ptr<StubFieldValue> >& fieldValues)
 	{
-		unsigned int nFieldValues = fieldValues.size();
+		unsigned int nFieldValues = (unsigned int) fieldValues.size();
 		for( unsigned int i = 0; i < nFieldValues; i++ )
 		{
 			m_fieldValues.push_back( std::move(fieldValues[i]) );
@@ -46,7 +46,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	unsigned int StubTableRecord::getFieldValuesCount() const
 	{
-		return m_fieldValues.size();
+		return (unsigned int) m_fieldValues.size();
 	}
 
 	StubFieldValue& StubTableRecord::getFieldValue(unsigned int index) const
@@ -63,7 +63,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	db::IFieldValue& StubTableRecord::getFieldValue(const std::string& fieldName) const
 	{
-		unsigned int nFields = m_fieldValues.size();
+		unsigned int nFields = (unsigned int) m_fieldValues.size();
 		for (unsigned int i = 0; i < nFields; i++)
 		{
 			if (m_fieldValues[i]->getField().getName() == fieldName)
@@ -77,7 +77,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	bool StubTableRecord::hasFieldValue(const std::string& fieldName) const
 	{
-		unsigned int nFields = m_fieldValues.size();
+		unsigned int nFields = (unsigned int) m_fieldValues.size();
 		for (unsigned int i = 0; i < nFields; i++)
 		{
 			if (m_fieldValues[i]->getField().getName() == fieldName)
@@ -109,7 +109,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	StubTableRecord& StubTableRecord::operator= (const StubTableRecord& other)
 	{
-		unsigned int nFieldValues = other.m_fieldValues.size();
+		unsigned int nFieldValues = (unsigned int) other.m_fieldValues.size();
 		for (unsigned int i = 0; i < nFieldValues; i++)
 		{
 			m_fieldValues.push_back( std::unique_ptr<StubFieldValue>(new StubFieldValue(*other.m_fieldValues[i].get())) );

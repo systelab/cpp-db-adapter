@@ -40,7 +40,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	unsigned int StubTable::getFieldsCount() const
 	{
-		return m_fields.size();
+		return (unsigned int) m_fields.size();
 	}
 
 	const IField& StubTable::getField(unsigned int index) const
@@ -57,7 +57,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	const IField& StubTable::getField(const std::string& fieldName) const
 	{
-		unsigned int nFields = m_fields.size();
+		unsigned int nFields = (unsigned int) m_fields.size();
 		for (unsigned int i = 0; i < nFields; i++)
 		{
 			if (m_fields[i]->getName() == fieldName)
@@ -165,7 +165,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{		
 		std::vector< std::unique_ptr<StubFieldValue> > fieldValues;
 
-		unsigned int nFields = m_fields.size();
+		unsigned int nFields = (unsigned int) m_fields.size();
 		for (unsigned int i = 0; i < nFields; i++)
 		{
 			IField& field = *m_fields[i].get();
@@ -201,7 +201,7 @@ namespace systelab { namespace db { namespace test_utility {
 	RowsAffected StubTable::insertRecordProxy(ITableRecord& record)
 	{
 		std::unique_ptr<StubTableRecord> recordCopy(new StubTableRecord(record));
-		m_tableRecords.push_back(std::move(recordCopy));		
+		m_tableRecords.push_back(std::move(recordCopy));
 		return 1;
 	}
 
@@ -249,7 +249,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	RowsAffected StubTable::deleteAllRecords()
 	{
-		RowsAffected size = m_tableRecords.size(); 
+		RowsAffected size = (unsigned int) m_tableRecords.size();
 		m_tableRecords.clear();
 
 		return size;
@@ -355,7 +355,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		std::string to_return = "";
 
-		unsigned int nItems = items.size();
+		unsigned int nItems = (unsigned int) items.size();
 		for (unsigned int i = 0; i < nItems; i++)
 		{
 			to_return += (i > 0) ? separator : "";

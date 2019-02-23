@@ -22,7 +22,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	unsigned int StubRecordSet::getRecordsCountStub() const
 	{
-		return m_records.size();
+		return (unsigned int) m_records.size();
 	}
 
 	const IRecord& StubRecordSet::getCurrentRecordStub() const
