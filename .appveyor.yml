@@ -9,6 +9,12 @@ configuration:
   - Debug
   - Release
 
+install:
+  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - pip.exe install conan
+  - conan user
+  - conan --version
+
 before_build:
   - md build
   - cd build
