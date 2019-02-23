@@ -5,7 +5,7 @@
 
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockConnection : public db::IConnection
+	class MockConnection : public IConnection
 	{
 	public:
 		MOCK_METHOD1(loadDatabaseProxy, db::IDatabase* (db::IConnectionConfiguration&));

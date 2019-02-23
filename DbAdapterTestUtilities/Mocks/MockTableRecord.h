@@ -8,7 +8,7 @@
 
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockTableRecord : public db::ITableRecord
+	class MockTableRecord : public ITableRecord
 	{
 	public:
 		MockTableRecord()

@@ -7,7 +7,7 @@ using namespace testing;
 
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockDatabase: public db::IDatabase
+	class MockDatabase: public IDatabase
 	{
 	public:
 		MockDatabase()

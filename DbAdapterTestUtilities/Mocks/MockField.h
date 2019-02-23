@@ -3,11 +3,11 @@
 #include "DbAdapterInterface/IField.h"
 
 
+using namespace testing;
+
 namespace systelab { namespace db { namespace test_utility {
 
-	using namespace testing;
-
-	class MockField : public db::IField
+	class MockField : public IField
 	{
 	public:
 		MockField()

@@ -4,9 +4,10 @@
 
 #include "MockFieldValue.h"
 
+
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockRecord : public db::IRecord
+	class MockRecord : public IRecord
 	{
 	public:
 		MockRecord()

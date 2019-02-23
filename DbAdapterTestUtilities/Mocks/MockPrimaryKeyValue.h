@@ -3,11 +3,11 @@
 #include "DbAdapterInterface/IPrimaryKeyValue.h"
 
 
+using namespace testing;
+
 namespace systelab { namespace db { namespace test_utility {
 
-	using namespace testing;
-
-	class MockPrimaryKeyValue : public db::IPrimaryKeyValue
+	class MockPrimaryKeyValue : public IPrimaryKeyValue
 	{
 	public:
 		MOCK_CONST_METHOD0(getTable, db::ITable&());

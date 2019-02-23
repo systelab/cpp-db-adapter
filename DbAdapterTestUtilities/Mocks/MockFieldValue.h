@@ -10,7 +10,7 @@
 
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockFieldValue: public db::IFieldValue
+	class MockFieldValue: public IFieldValue
 	{
 	public:
 		MockFieldValue()

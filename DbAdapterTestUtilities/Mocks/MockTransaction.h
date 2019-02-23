@@ -2,6 +2,7 @@
 
 #include "DbAdapterInterface/ITransaction.h"
 
+
 namespace systelab { namespace db { namespace test_utility {
 
 	class MockTransaction : public ITransaction

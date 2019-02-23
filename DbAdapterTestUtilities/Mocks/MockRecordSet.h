@@ -7,7 +7,7 @@
 
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockRecordSet : public db::IRecordSet
+	class MockRecordSet : public IRecordSet
 	{
 	public:
 		MockRecordSet()

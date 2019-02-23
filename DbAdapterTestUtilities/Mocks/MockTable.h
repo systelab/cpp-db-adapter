@@ -7,7 +7,7 @@
 
 namespace systelab { namespace db { namespace test_utility {
 
-	class MockTable: public db::ITable
+	class MockTable: public ITable
 	{
 	public:
 		MockTable()
