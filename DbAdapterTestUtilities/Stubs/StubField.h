@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_STUBFIELD_DMC_0410161846_H
-#define _DBADAPTERTESTUTILITIES_STUBFIELD_DMC_0410161846_H
+#pragma once
 
 #include "DbAdapterInterface/IField.h"
 
@@ -53,4 +52,3 @@ namespace systelab { namespace db { namespace test_utility {
 
 }}}
 
-#endif //_DBADAPTERTESTUTILITIES_STUBFIELD_DMC_0410161846_H

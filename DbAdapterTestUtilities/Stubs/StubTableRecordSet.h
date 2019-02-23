@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_STUBTABLERECORDSET_DMC_1310161816_H
-#define _DBADAPTERTESTUTILITIES_STUBTABLERECORDSET_DMC_1310161816_H
+#pragma once
 
 #include "DbAdapterTestUtilities/Mocks/MockTableRecordSet.h"
 
@@ -47,4 +46,3 @@ namespace systelab { namespace db { namespace test_utility {
 
 }}}
 
-#endif //_DBADAPTERTESTUTILITIES_STUBTABLERECORDSET_DMC_1310161816_H

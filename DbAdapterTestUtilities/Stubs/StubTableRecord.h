@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_STUBTABLERECORD_DMC_0410161816_H
-#define _DBADAPTERTESTUTILITIES_STUBTABLERECORD_DMC_0410161816_H
+#pragma once
 
 #include "TestUtilities/DbAdapter/Mocks/MockTableRecord.h"
 #include "TestUtilities/DbAdapter/Stubs/StubFieldValue.h"
@@ -37,4 +36,3 @@ namespace systelab { namespace db { namespace test_utility {
 
 }}}
 
-#endif //_DBADAPTERTESTUTILITIES_STUBTABLERECORD_DMC_0410161816_H

@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_STUBFIELDVALUE_QUIM_VILA_0610161430_H
-#define _DBADAPTERTESTUTILITIES_STUBFIELDVALUE_QUIM_VILA_0610161430_H
+#pragma once
 
 #include "DbAdapterInterface/IFieldValue.h"
 
@@ -77,4 +76,3 @@ namespace systelab { namespace db { namespace test_utility {
 
 }}}
 
-#endif //_DBADAPTERTESTUTILITIES_STUBFIELDVALUE_QUIM_VILA_0610161430_H
