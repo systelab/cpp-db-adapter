@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKFIELD_QV_2202161907_H
-#define _DBADAPTERTESTUTILITIES_MOCKFIELD_QV_2202161907_H
+#pragma once
 
 #include "DbAdapterInterface/IField.h"
 
@@ -53,4 +52,3 @@ namespace systelab { namespace test_utility {
 	};
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKFIELD_QV_2202161907_H

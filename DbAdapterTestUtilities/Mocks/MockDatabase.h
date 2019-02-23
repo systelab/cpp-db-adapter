@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKDATABASE_QV_2202161822_H
-#define _DBADAPTERTESTUTILITIES_MOCKDATABASE_QV_2202161822_H
+#pragma once
 
 #include "DbAdapterInterface/IDatabase.h"
 
@@ -58,4 +57,3 @@ namespace systelab { namespace test_utility {
 
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKDATABASE_QV_2202161822_H

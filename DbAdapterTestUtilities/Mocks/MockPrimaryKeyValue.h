@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKPRIMARYKEYVALUE_QV_1003161907_H
-#define _DBADAPTERTESTUTILITIES_MOCKPRIMARYKEYVALUE_QV_1003161907_H
+#pragma once
 
 #include "DbAdapterInterface/IPrimaryKeyValue.h"
 
@@ -20,4 +19,3 @@ namespace systelab { namespace test_utility {
 	};
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKPRIMARYKEYVALUE_QV_1003161907_H

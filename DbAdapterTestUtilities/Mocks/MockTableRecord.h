@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKTABLERECORD_QV_0303161220_H
-#define _DBADAPTERTESTUTILITIES_MOCKTABLERECORD_QV_0303161220_H
+#pragma once
 
 #include "DbAdapterInterface/ITableRecord.h"
 #include "DbAdapterInterface/ITable.h"
@@ -131,4 +130,3 @@ namespace systelab { namespace test_utility {
 
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKTABLERECORD_QV_0303161220_H

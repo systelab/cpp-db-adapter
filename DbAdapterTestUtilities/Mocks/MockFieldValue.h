@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKFIELDVALUE_QV_2201161915_H
-#define _DBADAPTERTESTUTILITIES_MOCKFIELDVALUE_QV_2201161915_H
+#pragma once
 
 #include "DbAdapterInterface/IFieldValue.h"
 #include "DbAdapterInterface/IBinaryValue.h"
@@ -341,4 +340,3 @@ namespace systelab { namespace test_utility {
 
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKFIELDVALUE_QV_2201161915_H

@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKTABLE_QV_2202161823_H
-#define _DBADAPTERTESTUTILITIES_MOCKTABLE_QV_2202161823_H
+#pragma once
 
 #include "DbAdapterInterface/ITable.h"
 
@@ -153,4 +152,3 @@ namespace systelab { namespace test_utility {
 
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKTABLE_QV_2202161823_H

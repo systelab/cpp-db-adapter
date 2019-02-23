@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKBINARYVALUE_QV_2202161903_H
-#define _DBADAPTERTESTUTILITIES_MOCKBINARYVALUE_QV_2202161903_H
+#pragma once
 
 #include "DbAdapterInterface/IBinaryValue.h"
 
@@ -13,4 +12,3 @@ namespace systelab { namespace test_utility {
 	};
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKBINARYVALUE_QV_2202161903_H

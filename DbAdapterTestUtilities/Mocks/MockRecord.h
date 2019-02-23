@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKRECORD_QV_2202161923_H
-#define _DBADAPTERTESTUTILITIES_MOCKRECORD_QV_2202161923_H
+#pragma once
 
 #include "DbAdapterInterface/IRecord.h"
 
@@ -110,4 +109,3 @@ namespace systelab { namespace test_utility {
 	}
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKRECORD_QV_2202161923_H

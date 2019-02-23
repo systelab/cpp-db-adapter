@@ -1,17 +1,15 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKTRANSACTION_QV_2202161919_H
-#define _DBADAPTERTESTUTILITIES_MOCKTRANSACTION_QV_2202161919_H
+#pragma once
 
 #include "DbAdapterInterface/ITransaction.h"
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
-	class MockTransaction : public db::ITransaction
+	class MockTransaction : public ITransaction
 	{
 	public:
 		MOCK_METHOD0(commit, void());
 		MOCK_METHOD0(rollback, void());
 	};
 
-}}
+}}}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKTRANSACTION_QV_2202161919_H

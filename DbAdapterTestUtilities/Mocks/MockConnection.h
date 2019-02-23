@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKCONNECTION_QV_2202161817_H
-#define _DBADAPTERTESTUTILITIES_MOCKCONNECTION_QV_2202161817_H
+#pragma once
 
 #include "DbAdapterInterface/IConnection.h"
 
@@ -17,4 +16,3 @@ namespace systelab { namespace test_utility {
 
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKCONNECTION_QV_2202161817_H

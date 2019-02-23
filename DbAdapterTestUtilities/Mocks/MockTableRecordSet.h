@@ -1,15 +1,14 @@
-#ifndef _DBADAPTERTESTUTILITIES_MOCKTABLERECORDSET_QV_0403160901_H
-#define _DBADAPTERTESTUTILITIES_MOCKTABLERECORDSET_QV_0403160901_H
+#pragma once
 
 #include "DbAdapterInterface/ITableRecordSet.h"
-
-#include "MockTableRecord.h"
+#include "DbAdapterTestUtilities/Mocks/MockTableRecord.h"
 
 #include <gmock/gmock.h>
 
-namespace systelab { namespace test_utility {
 
-	class MockTableRecordSet : public db::ITableRecordSet
+namespace systelab { namespace db { namespace test_utility {
+
+	class MockTableRecordSet : public ITableRecordSet
 	{
 	public:
 		MockTableRecordSet()
@@ -92,6 +91,6 @@ namespace systelab { namespace test_utility {
 		std::vector< std::unique_ptr<MockTableRecord> > m_mockRecords;
 		unsigned int m_index;
 	};
-}}
 
-#endif //_DBADAPTERTESTUTILITIES_MOCKTABLERECORDSET_QV_0403160901_H
+}}}
+
