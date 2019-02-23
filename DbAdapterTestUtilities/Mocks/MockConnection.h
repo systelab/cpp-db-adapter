@@ -1,24 +1,20 @@
-#ifndef CPPSQLITEDBADAPTER_TEST_UTILITIES_MOCKS_MOCKCONNECTION_H_
-#define CPPSQLITEDBADAPTER_TEST_UTILITIES_MOCKS_MOCKCONNECTION_H_
+#ifndef _DBADAPTERTESTUTILITIES_MOCKCONNECTION_QV_2202161817_H
+#define _DBADAPTERTESTUTILITIES_MOCKCONNECTION_QV_2202161817_H
 
-#include "gmock/gmock.h"
+#include "DbAdapterInterface/IConnection.h"
 
-#include "cpp-db-adapter/IConnection.h"
+namespace systelab { namespace test_utility {
 
-namespace systelab {
-namespace test_utility {
+	class MockConnection : public db::IConnection
+	{
+	public:
+		MOCK_METHOD1(loadDatabaseProxy, db::IDatabase* (db::IConnectionConfiguration&));
+		std::unique_ptr<db::IDatabase> loadDatabase(db::IConnectionConfiguration& config)
+		{
+			return std::unique_ptr<db::IDatabase>(loadDatabaseProxy(config));
+		}
+	};
 
-class MockConnection : public db::IConnection {
-public:
-  MOCK_METHOD1(loadDatabaseProxy,
-               db::IDatabase *(db::IConnectionConfiguration &));
-  std::unique_ptr<db::IDatabase>
-  loadDatabase(db::IConnectionConfiguration &config) {
-    return std::unique_ptr<db::IDatabase>(loadDatabaseProxy(config));
-  }
-};
+}}
 
-} // namespace test_utility
-} // namespace systelab
-
-#endif // CPP_SQLITE_DB_ADAPTER_TEST_UTILITIES_MOCKS_MOCKCONNECTION_H_
+#endif //_DBADAPTERTESTUTILITIES_MOCKCONNECTION_QV_2202161817_H
