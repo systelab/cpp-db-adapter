@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "StubTableRecordSet.h"
 
 #include "StubField.h"

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "StubPrimaryKeyValue.h"
 
 #include "StubField.h"

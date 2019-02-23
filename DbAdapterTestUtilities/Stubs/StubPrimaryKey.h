@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERTESTUTILITIES_STUBPRIMARYKEY_DMC_1310161846_H
-#define _DBADAPTERTESTUTILITIES_STUBPRIMARYKEY_DMC_1310161846_H
+#pragma once
 
 #include "DbAdapterInterface/IPrimaryKey.h"
 
@@ -31,4 +30,3 @@ namespace systelab { namespace test_utility {
 
 }}
 
-#endif //_DBADAPTERTESTUTILITIES_STUBPRIMARYKEY_DMC_1310161846_H
