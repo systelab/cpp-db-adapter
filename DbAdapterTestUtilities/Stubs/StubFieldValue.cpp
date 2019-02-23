@@ -3,7 +3,7 @@
 #include "StubField.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	StubFieldValue::StubFieldValue(const db::IFieldValue& other)
 		:m_nullValue(other.isNull())
@@ -583,5 +583,5 @@ namespace systelab { namespace test_utility {
 		return *this;
 	}
 
-}}
+}}}
 

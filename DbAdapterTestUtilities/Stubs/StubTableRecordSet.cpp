@@ -6,7 +6,7 @@
 #include "DbAdapterInterface/ITable.h"
 
 
-namespace systelab { namespace test_utility { 
+namespace systelab { namespace db { namespace test_utility {
 
 	StubTableRecordSet::StubTableRecordSet(ITable& table, std::vector< StubTableRecord >& records)
 		:m_table(table)
@@ -70,4 +70,4 @@ namespace systelab { namespace test_utility {
 		m_iterator++;
 	}
 
-}}
+}}}

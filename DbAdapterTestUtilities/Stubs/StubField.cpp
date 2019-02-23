@@ -1,7 +1,7 @@
 #include "StubField.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	StubField::StubField(const db::IField& other)
 		:m_index(other.getIndex())
@@ -231,4 +231,4 @@ namespace systelab { namespace test_utility {
 		return *this;
 	}
 
-}}
+}}}

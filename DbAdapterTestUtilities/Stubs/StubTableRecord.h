@@ -8,7 +8,7 @@
 #include <vector>
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class StubField;
 
@@ -35,6 +35,6 @@ namespace systelab { namespace test_utility {
 		std::vector< std::unique_ptr<StubFieldValue> > m_fieldValues;
 	};
 
-}}
+}}}
 
 #endif //_DBADAPTERTESTUTILITIES_STUBTABLERECORD_DMC_0410161816_H

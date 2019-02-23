@@ -8,7 +8,7 @@
 
 using namespace systelab::db;
 
-namespace systelab { namespace test_utility { 
+namespace systelab { namespace db { namespace test_utility {
 
 	class StubPrimaryKeyValue : public IPrimaryKeyValue
 	{
@@ -29,6 +29,6 @@ namespace systelab { namespace test_utility {
 
 	};
 
-}}
+}}}
 
 #endif // _DBADAPTERTESTUTILITIES_STUBPRIMARYKEYVALUE_DMC_1310161846_H

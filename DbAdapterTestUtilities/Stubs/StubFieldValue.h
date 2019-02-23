@@ -14,7 +14,7 @@ namespace systelab { namespace db {
 }}
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class StubField;
 
@@ -75,6 +75,6 @@ namespace systelab { namespace test_utility {
 		boost::posix_time::ptime m_dateTimeValue;
 	};
 
-}}
+}}}
 
 #endif //_DBADAPTERTESTUTILITIES_STUBFIELDVALUE_QUIM_VILA_0610161430_H

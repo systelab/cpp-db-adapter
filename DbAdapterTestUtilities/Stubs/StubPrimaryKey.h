@@ -7,7 +7,7 @@
 
 using namespace systelab::db;
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class StubTable;
 
@@ -31,5 +31,5 @@ namespace systelab { namespace test_utility {
 			std::vector<const IField*> m_fields;
 	};
 
-}}
+}}}
 

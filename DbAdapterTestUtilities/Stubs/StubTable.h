@@ -6,7 +6,7 @@
 
 using namespace systelab::db;
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class StubPrimaryKey;
 
@@ -70,5 +70,5 @@ namespace systelab { namespace test_utility {
 		std::string getStringList(const std::vector<std::string>& items, const std::string& separator) const;
 	};
 
-}}
+}}}
 

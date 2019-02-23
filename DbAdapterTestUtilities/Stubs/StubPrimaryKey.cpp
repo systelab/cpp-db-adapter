@@ -2,7 +2,7 @@
 #include "StubTable.h"
 
 
-namespace systelab { namespace test_utility { 
+namespace systelab { namespace db { namespace test_utility {
 
 	StubPrimaryKey::StubPrimaryKey(StubTable& table)
 		:m_table(table)
@@ -62,4 +62,4 @@ namespace systelab { namespace test_utility {
 		}
 	}
 
-}}
+}}}

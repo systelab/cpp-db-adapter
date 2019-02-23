@@ -4,7 +4,7 @@
 #include "StubField.h"
 
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	StubTableRecord::StubTableRecord(const ITableRecord& other)
 	{
@@ -117,4 +117,4 @@ namespace systelab { namespace test_utility {
 		return *this;
 	}
 
-}}
+}}}

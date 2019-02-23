@@ -9,9 +9,7 @@
 #include "DbAdapterInterface/IDatabase.h"
 
 
-using namespace systelab::db;
-
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	StubTable::StubTable(const std::string& name)
 		:m_name(name)
@@ -363,4 +361,4 @@ namespace systelab { namespace test_utility {
 		return to_return;
 	}
 
-}}
+}}}

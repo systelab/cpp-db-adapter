@@ -7,7 +7,7 @@ namespace systelab { namespace db {
 	class IBinaryValue;
 }}
 
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 
 	class StubField : public db::IField
 	{
@@ -51,6 +51,6 @@ namespace systelab { namespace test_utility {
 		boost::posix_time::ptime getDateTimeFromSQLiteString(const std::string& sqliteDateTime) const;
 	};
 
-}}
+}}}
 
 #endif //_DBADAPTERTESTUTILITIES_STUBFIELD_DMC_0410161846_H

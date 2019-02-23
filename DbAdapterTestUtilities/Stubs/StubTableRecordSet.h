@@ -1,7 +1,7 @@
 #ifndef _DBADAPTERTESTUTILITIES_STUBTABLERECORDSET_DMC_1310161816_H
 #define _DBADAPTERTESTUTILITIES_STUBTABLERECORDSET_DMC_1310161816_H
 
-#include "TestUtilities/DbAdapter/Mocks/MockTableRecordSet.h"
+#include "DbAdapterTestUtilities/Mocks/MockTableRecordSet.h"
 
 #include "DbAdapterInterface/ITableRecordSet.h"
 #include "DbAdapterInterface/ITableRecord.h"
@@ -12,14 +12,13 @@
 #include <memory>
 #include <vector>
 
+
 namespace systelab { namespace db {
 	class IField;
 	class ITable;
 }}
 
-using namespace systelab::db;
-
-namespace systelab { namespace test_utility {
+namespace systelab { namespace db { namespace test_utility {
 	
 	class StubTableRecordSet : public MockTableRecordSet
 	{
@@ -46,6 +45,6 @@ namespace systelab { namespace test_utility {
 		std::vector< std::unique_ptr<StubTableRecord> >::iterator m_iterator;
 	};
 
-}}
+}}}
 
 #endif //_DBADAPTERTESTUTILITIES_STUBTABLERECORDSET_DMC_1310161816_H
