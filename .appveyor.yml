@@ -25,5 +25,5 @@ build:
   project: $(APPVEYOR_BUILD_FOLDER)\build\DbAdapter.sln
    
 artifacts:
-  - path: 'build/DbAdapterTestUtilities/$(configuration)/DbAdapterTestUtilities.lib'
+  - path: 'build\lib\DbAdapterTestUtilities.lib'
     name: DbAdapterTestUtilities.lib
