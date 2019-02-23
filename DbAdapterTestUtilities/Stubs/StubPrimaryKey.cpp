@@ -1,48 +1,66 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "StubPrimaryKey.h"
 #include "StubTable.h"
 
-namespace systelab {
-namespace test_utility {
 
-StubPrimaryKey::StubPrimaryKey(StubTable &table) : m_table(table) {
-  unsigned int nTableFields = m_table.getFieldsCount();
-  for (unsigned int i = 0; i < nTableFields; i++) {
-    const IField &tableField = m_table.getField(i);
-    if (tableField.isPrimaryKey()) {
-      m_fields.push_back(&tableField);
-    }
-  }
-}
+namespace systelab { namespace test_utility { 
 
-ITable &StubPrimaryKey::getTable() const { return m_table; }
+	StubPrimaryKey::StubPrimaryKey(StubTable& table)
+		:m_table(table)
+	{
+		unsigned int nTableFields = m_table.getFieldsCount();
+		for (unsigned int i = 0; i < nTableFields; i++)
+		{
+			const IField& tableField = m_table.getField(i);
+			if (tableField.isPrimaryKey())
+			{
+				m_fields.push_back(&tableField);
+			}
+		}
+	}
 
-unsigned int StubPrimaryKey::getFieldsCount() const { return m_fields.size(); }
+	ITable& StubPrimaryKey::getTable() const
+	{
+		return m_table;
+	}
 
-const IField &StubPrimaryKey::getField(unsigned int index) const {
-  if (index < m_fields.size()) {
-    return *(m_fields[index]);
-  } else {
-    throw std::runtime_error("Invalid primary key field index");
-  }
-}
+	unsigned int StubPrimaryKey::getFieldsCount() const
+	{
+		return m_fields.size();
+	}
 
-const IField &StubPrimaryKey::getField(const std::string &fieldName) const {
-  unsigned int nFields = m_fields.size();
-  for (unsigned int i = 0; i < nFields; i++) {
-    if (m_fields[i]->getName() == fieldName) {
-      return *(m_fields[i]);
-    }
-  }
+	const IField& StubPrimaryKey::getField(unsigned int index) const
+	{
+		if (index < m_fields.size())
+		{
+			return *(m_fields[index]);
+		}
+		else
+		{
+			throw std::exception( "Invalid primary key field index" );
+		}
+	}
 
-  throw std::runtime_error("The requested primary key field doesn't exist");
-}
+	const IField& StubPrimaryKey::getField(const std::string& fieldName) const
+	{
+		unsigned int nFields = m_fields.size();
+		for (unsigned int i = 0; i < nFields; i++)
+		{
+			if (m_fields[i]->getName() == fieldName)
+			{
+				return *(m_fields[i]);
+			}
+		}
 
-void StubPrimaryKey::addField(const IField &tableField) {
-  if (tableField.isPrimaryKey()) {
-    m_fields.push_back(&tableField);
-  }
-}
+		throw std::exception( "The requested primary key field doesn't exist" );
+	}
 
-} // namespace test_utility
-} // namespace systelab
+	void StubPrimaryKey::addField(const IField& tableField)
+	{
+		if (tableField.isPrimaryKey())
+		{
+			m_fields.push_back(&tableField);
+		}
+	}
+
+}}

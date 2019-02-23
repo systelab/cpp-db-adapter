@@ -1,36 +1,34 @@
-#ifndef CPPSQLITEDBADAPTER_TEST_UTILITIES_STUBS_STUBPRIMARYKEY_H_
-#define CPPSQLITEDBADAPTER_TEST_UTILITIES_STUBS_STUBPRIMARYKEY_H_
+#ifndef _DBADAPTERTESTUTILITIES_STUBPRIMARYKEY_DMC_1310161846_H
+#define _DBADAPTERTESTUTILITIES_STUBPRIMARYKEY_DMC_1310161846_H
 
-#include "cpp-db-adapter/IPrimaryKey.h"
-
-#include <vector>
+#include "DbAdapterInterface/IPrimaryKey.h"
 
 using namespace systelab::db;
 
-namespace systelab {
-namespace test_utility {
+namespace systelab { namespace test_utility {
 
-class StubTable;
+	class StubTable;
 
-class StubPrimaryKey : public db::IPrimaryKey {
-public:
-  StubPrimaryKey(StubTable &table);
-  ~StubPrimaryKey() {}
+	class StubPrimaryKey : public db::IPrimaryKey
+	{
+		public:
 
-  ITable &getTable() const;
+			StubPrimaryKey(StubTable& table);
+			~StubPrimaryKey(){};
 
-  unsigned int getFieldsCount() const;
-  const IField &getField(unsigned int index) const;
-  const IField &getField(const std::string &fieldName) const;
+			ITable& getTable() const;
 
-  void addField(const IField &tableField);
+			unsigned int getFieldsCount() const;
+			const IField& getField(unsigned int index) const;
+			const IField& getField(const std::string& fieldName) const;
 
-private:
-  StubTable &m_table;
-  std::vector<const IField *> m_fields;
-};
+			void addField(const IField& tableField);
 
-} // namespace test_utility
-} // namespace systelab
+		private:
+			StubTable& m_table;
+			std::vector<const IField*> m_fields;
+	};
 
-#endif // CPP_SQLITE_DB_ADAPTER_TEST_UTILITIES_STUBS_STUBPRIMARYKEY_H_
+}}
+
+#endif //_DBADAPTERTESTUTILITIES_STUBPRIMARYKEY_DMC_1310161846_H

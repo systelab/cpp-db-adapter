@@ -1,95 +1,106 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "StubPrimaryKeyValue.h"
 
 #include "StubField.h"
 #include "StubFieldValue.h"
 
-namespace systelab {
-namespace test_utility {
 
-StubPrimaryKeyValue::StubPrimaryKeyValue(const IPrimaryKey &primaryKey)
-    : m_primaryKey(primaryKey) {
-  unsigned int nPrimaryKeyFields = m_primaryKey.getFieldsCount();
-  for (unsigned int i = 0; i < nPrimaryKeyFields; i++) {
-    std::unique_ptr<IFieldValue> fieldValue;
+namespace systelab { namespace test_utility { 
 
-    const IField &field = primaryKey.getField(i);
-    if (field.hasNullDefaultValue()) {
-      fieldValue.reset(new StubFieldValue(field.getName()));
-    } else {
-      FieldTypes fieldType = field.getType();
-      switch (fieldType) {
-      case db::BOOLEAN:
-        fieldValue.reset(new StubFieldValue(field.getName(),
-                                            field.getBooleanDefaultValue()));
-        break;
+	StubPrimaryKeyValue::StubPrimaryKeyValue(const IPrimaryKey& primaryKey)
+		:m_primaryKey(primaryKey)
+	{
+		unsigned int nPrimaryKeyFields = m_primaryKey.getFieldsCount();
+		for (unsigned int i = 0; i < nPrimaryKeyFields; i++)
+		{
+			std::unique_ptr<IFieldValue> fieldValue;
 
-      case db::INT:
-        fieldValue.reset(
-            new StubFieldValue(field.getName(), field.getIntDefaultValue()));
-        break;
+			const IField& field = primaryKey.getField(i);
+			if (field.hasNullDefaultValue())
+			{
+				fieldValue.reset( new StubFieldValue(field.getName()) );
+			}
+			else
+			{
+				FieldTypes fieldType = field.getType();
+				switch(fieldType)
+				{
+					case db::BOOLEAN:
+						fieldValue.reset( new StubFieldValue(field.getName(), field.getBooleanDefaultValue()) );
+						break;
 
-      case db::DOUBLE:
-        fieldValue.reset(
-            new StubFieldValue(field.getName(), field.getDoubleDefaultValue()));
-        break;
+					case db::INT:
+						fieldValue.reset( new StubFieldValue(field.getName(), field.getIntDefaultValue()) );
+						break;
 
-      case STRING:
-        fieldValue.reset(
-            new StubFieldValue(field.getName(), field.getStringDefaultValue()));
-        break;
+					case db::DOUBLE:
+						fieldValue.reset( new StubFieldValue(field.getName(), field.getDoubleDefaultValue()) );
+						break;
 
-      case DATETIME:
-        fieldValue.reset(new StubFieldValue(field.getName(),
-                                            field.getDateTimeDefaultValue()));
-        break;
+					case STRING:
+						fieldValue.reset( new StubFieldValue(field.getName(), field.getStringDefaultValue()) );
+						break;
 
-      case BINARY:
-        throw std::runtime_error("Binary fields can't belong to primary key.");
-        break;
+					case DATETIME:
+						fieldValue.reset( new StubFieldValue(field.getName(), field.getDateTimeDefaultValue()) );
+						break;
 
-      default:
-        throw std::runtime_error("Unknown field type.");
-      }
-    }
+					case BINARY:
+						throw std::exception( "Binary fields can't belong to primary key." );
+						break;
 
-    m_fieldValues.push_back(std::move(fieldValue));
-  }
-}
+					default:
+						throw std::exception( "Unknown field type." );
+				}
+			}
 
-StubPrimaryKeyValue::~StubPrimaryKeyValue() {}
+			m_fieldValues.push_back( std::move(fieldValue) );
+		}
+	}
 
-ITable &StubPrimaryKeyValue::getTable() const {
-  return m_primaryKey.getTable();
-}
+	StubPrimaryKeyValue::~StubPrimaryKeyValue()
+	{
+	}
 
-const IPrimaryKey &StubPrimaryKeyValue::getPrimaryKey() const {
-  return m_primaryKey;
-}
+	ITable& StubPrimaryKeyValue::getTable() const
+	{
+		return m_primaryKey.getTable();
+	}
 
-unsigned int StubPrimaryKeyValue::getFieldValuesCount() const {
-  return m_fieldValues.size();
-}
+	const IPrimaryKey& StubPrimaryKeyValue::getPrimaryKey() const
+	{
+		return m_primaryKey;
+	}
 
-IFieldValue &StubPrimaryKeyValue::getFieldValue(unsigned int index) const {
-  if (index < m_fieldValues.size()) {
-    return *(m_fieldValues[index]);
-  } else {
-    throw std::runtime_error("Invalid primary key field index");
-  }
-}
+	unsigned int StubPrimaryKeyValue::getFieldValuesCount() const
+	{
+		return m_fieldValues.size();
+	}
 
-IFieldValue &
-StubPrimaryKeyValue::getFieldValue(const std::string &fieldName) const {
-  unsigned int nFields = m_fieldValues.size();
-  for (unsigned int i = 0; i < nFields; i++) {
-    if (m_fieldValues[i]->getField().getName() == fieldName) {
-      return *(m_fieldValues[i]);
-    }
-  }
+	IFieldValue& StubPrimaryKeyValue::getFieldValue(unsigned int index) const
+	{
+		if (index < m_fieldValues.size())
+		{
+			return *(m_fieldValues[index]);
+		}
+		else
+		{
+			throw std::exception( "Invalid primary key field index" );
+		}
+	}
 
-  throw std::runtime_error("The requested primary key field doesn't exist");
-}
+	IFieldValue& StubPrimaryKeyValue::getFieldValue(const std::string& fieldName) const
+	{
+		unsigned int nFields = m_fieldValues.size();
+		for (unsigned int i = 0; i < nFields; i++)
+		{
+			if (m_fieldValues[i]->getField().getName() == fieldName)
+			{
+				return *(m_fieldValues[i]);
+			}
+		}
 
-} // namespace test_utility
-} // namespace systelab
+		throw std::exception( "The requested primary key field doesn't exist" );
+	}
+
+}}

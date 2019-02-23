@@ -1,85 +1,76 @@
-#ifndef CPP_SQLITE_DB_ADAPTER_TEST_UTILITIES_STUBS_STUBTABLE_H_
-#define CPP_SQLITE_DB_ADAPTER_TEST_UTILITIES_STUBS_STUBTABLE_H_
+#ifndef _DBADAPTERTESTUTILITIES_STUBTABLE_DMC_1110161846_H
+#define _DBADAPTERTESTUTILITIES_STUBTABLE_DMC_1110161846_H
 
-#include "../Mocks/MockTable.h"
-#include "../Stubs/StubTableRecord.h"
+#include "TestUtilities/DbAdapter/Mocks/MockTable.h"
+#include "TestUtilities/DbAdapter/Stubs/StubTableRecord.h"
+
 
 using namespace systelab::db;
 
-namespace systelab {
-namespace test_utility {
+namespace systelab { namespace test_utility {
 
-class StubPrimaryKey;
+	class StubPrimaryKey;
 
-class StubTable : public MockTable {
-public:
-  StubTable(const std::string &name);
-  virtual ~StubTable();
+	class StubTable : public MockTable
+	{
+	public:
+		StubTable(const std::string& name);
+		virtual ~StubTable();
 
-  std::string getName() const;
-  const IPrimaryKey &getPrimaryKey() const;
+		std::string getName() const;
+		const IPrimaryKey& getPrimaryKey() const;
 
-  unsigned int getFieldsCount() const;
-  const IField &getField(unsigned int index) const;
-  const IField &getField(const std::string &fieldName) const;
-  void addField(std::unique_ptr<IField> field);
+		unsigned int getFieldsCount() const;
+		const IField& getField(unsigned int index) const;
+		const IField& getField(const std::string& fieldName) const;
+		void addField(std::unique_ptr<IField> field);
 
-  std::unique_ptr<IFieldValue> createFieldValue(const IField &) const;
-  std::unique_ptr<IFieldValue> createFieldValue(const IField &, bool) const;
-  std::unique_ptr<IFieldValue> createFieldValue(const IField &, int) const;
-  std::unique_ptr<IFieldValue> createFieldValue(const IField &, double) const;
-  std::unique_ptr<IFieldValue> createFieldValue(const IField &,
-                                                const std::string &) const;
-  std::unique_ptr<IFieldValue>
-  createFieldValue(const IField &, const boost::posix_time::ptime &) const;
-  std::unique_ptr<IFieldValue>
-  createFieldValue(const IField &, std::unique_ptr<IBinaryValue>) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, bool) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, int) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, double) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::string&) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, const boost::posix_time::ptime&) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, std::unique_ptr<IBinaryValue>) const;
 
-  std::unique_ptr<IPrimaryKeyValue> createPrimaryKeyValue() const;
+		std::unique_ptr<IPrimaryKeyValue> createPrimaryKeyValue() const;
 
-  std::unique_ptr<ITableRecordSet> getAllRecords() const;
-  std::unique_ptr<ITableRecord>
-  getRecordByPrimaryKey(const IPrimaryKeyValue &) const;
-  int getMaxFieldValueInt(const IField &) const;
+		std::unique_ptr<ITableRecordSet> getAllRecords() const;
+		std::unique_ptr<ITableRecord> getRecordByPrimaryKey(const IPrimaryKeyValue&) const;
+		int getMaxFieldValueInt(const IField&) const;
 
-  std::unique_ptr<ITableRecord> createRecord() const;
-  std::unique_ptr<ITableRecord> copyRecord(const ITableRecord &) const;
+		std::unique_ptr<ITableRecord> createRecord() const;
+		std::unique_ptr<ITableRecord> copyRecord(const ITableRecord&) const;
 
-  RowsAffected insertRecordProxy(ITableRecord &);
-  RowsAffected updateRecordProxy(const ITableRecord &);
-  RowsAffected updateRecord(const std::vector<IFieldValue *> &newValues,
-                            const IPrimaryKeyValue &);
-  RowsAffected deleteRecordProxy(const ITableRecord &);
-  RowsAffected deleteRecord(const IPrimaryKeyValue &);
+		RowsAffected insertRecordProxy(ITableRecord&);
+		RowsAffected updateRecordProxy(const ITableRecord&);
+		RowsAffected updateRecord(const std::vector<IFieldValue*>& newValues, const IPrimaryKeyValue&);
+		RowsAffected deleteRecordProxy(const ITableRecord&);
+		RowsAffected deleteRecord(const IPrimaryKeyValue&);
 
-  RowsAffected
-  updateRecordsByCondition(const std::vector<IFieldValue *> &newValues,
-                           const std::vector<IFieldValue *> &conditionValues);
-  RowsAffected
-  deleteRecordsByCondition(const std::vector<IFieldValue *> &conditionValues);
-  RowsAffected deleteRecordsByCondition(const std::string &condition);
+		RowsAffected updateRecordsByCondition(const std::vector<IFieldValue*>& newValues, const std::vector<IFieldValue*>& conditionValues);
+		RowsAffected deleteRecordsByCondition(const std::vector<IFieldValue*>& conditionValues);
+		RowsAffected deleteRecordsByCondition(const std::string& condition);
 
-  RowsAffected deleteAllRecords();
+		RowsAffected deleteAllRecords();
 
-  StubTable &operator=(const StubTable &other);
+		StubTable& operator= (const StubTable& other);
 
-private:
-  std::vector<std::unique_ptr<ITableRecord>> m_tableRecords;
+	private:
 
-  std::string m_name;
-  std::vector<std::unique_ptr<IField>> m_fields;
-  std::unique_ptr<StubPrimaryKey> m_primaryKey;
+		std::vector<std::unique_ptr<ITableRecord> > m_tableRecords;
 
-  FieldTypes getTypeFromSQLiteTypeName(std::string typeName);
+		std::string m_name;
+		std::vector< std::unique_ptr<IField> > m_fields;
+		std::unique_ptr<StubPrimaryKey> m_primaryKey;
 
-  bool isOwned(const IField &field) const;
-  std::string getSQLValue(const IFieldValue &fieldValue, bool forComparison,
-                          bool forAssignment) const;
-  std::string getStringList(const std::vector<std::string> &items,
-                            const std::string &separator) const;
-};
+		FieldTypes getTypeFromSQLiteTypeName(std::string typeName);
 
-} // namespace test_utility
-} // namespace systelab
+		bool isOwned(const IField& field) const;
+		std::string getSQLValue(const IFieldValue& fieldValue, bool forComparison, bool forAssignment) const;
+		std::string getStringList(const std::vector<std::string>& items, const std::string& separator) const;
+	};
 
-#endif // CPP_SQLITE_DB_ADAPTER_TEST_UTILITIES_STUBS_STUBTABLE_H_
+}}
+
+#endif //_DBADAPTERTESTUTILITIES_STUBTABLE_DMC_1110161846_H
