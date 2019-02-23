@@ -45,11 +45,11 @@ namespace systelab { namespace db { namespace test_utility {
 						break;
 
 					case BINARY:
-						throw std::exception( "Binary fields can't belong to primary key." );
+						throw std::runtime_error( "Binary fields can't belong to primary key." );
 						break;
 
 					default:
-						throw std::exception( "Unknown field type." );
+						throw std::runtime_error( "Unknown field type." );
 				}
 			}
 
@@ -84,7 +84,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Invalid primary key field index" );
+			throw std::runtime_error( "Invalid primary key field index" );
 		}
 	}
 
@@ -99,7 +99,7 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 		}
 
-		throw std::exception( "The requested primary key field doesn't exist" );
+		throw std::runtime_error( "The requested primary key field doesn't exist" );
 	}
 
 }}}

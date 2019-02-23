@@ -40,7 +40,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	db::ITable& StubTableRecord::getTable() const
 	{
-		throw std::exception( "Not implemented" );
+		throw std::runtime_error( "Not implemented" );
 	}
 
 	unsigned int StubTableRecord::getFieldValuesCount() const
@@ -56,7 +56,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Invalid field value index" );
+			throw std::runtime_error( "Invalid field value index" );
 		}
 	}
 
@@ -71,7 +71,7 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 		}
 
-		throw std::exception( "The requested field value doesn't exist" );
+		throw std::runtime_error( "The requested field value doesn't exist" );
 	}
 
 	bool StubTableRecord::hasFieldValue(const std::string& fieldName) const

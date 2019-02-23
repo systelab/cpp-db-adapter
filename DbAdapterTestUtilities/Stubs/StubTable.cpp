@@ -9,6 +9,8 @@
 #include "DbAdapterInterface/IDatabase.h"
 
 
+using namespace testing;
+
 namespace systelab { namespace db { namespace test_utility {
 
 	StubTable::StubTable(const std::string& name)
@@ -49,7 +51,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Invalid field index" );
+			throw std::runtime_error( "Invalid field index" );
 		}
 	}
 
@@ -64,7 +66,7 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 		}
 
-		throw std::exception( "The requested field doesn't exist" );
+		throw std::runtime_error( "The requested field doesn't exist" );
 	}
 
 	void StubTable::addField(std::unique_ptr<IField> field)
@@ -178,7 +180,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		/*if (&record.getTable() != this)
 		{
-			throw std::exception("Can't copy records from other tables." );
+			throw std::runtime_error("Can't copy records from other tables." );
 		}
 
 		std::vector< std::unique_ptr<IFieldValue> > copyFieldValues;
@@ -277,7 +279,7 @@ namespace systelab { namespace db { namespace test_utility {
 		else
 		{
 			std::string excMessage = "SQLite type name not recognized: " + SQLiteTypeName;
-			throw std::exception(excMessage.c_str());
+			throw std::runtime_error(excMessage.c_str());
 		}
 	}
 
@@ -330,16 +332,16 @@ namespace systelab { namespace db { namespace test_utility {
 					fieldValueStream << std::setprecision(10) << fieldValue.getDoubleValue();
 					break;
 				case STRING:
-					throw std::exception("Invalid record field type." );
+					throw std::runtime_error("Invalid record field type." );
 					break;
 				case DATETIME:
 					fieldValueStream << "'" << boost::posix_time::to_iso_string( fieldValue.getDateTimeValue() ) << "'";
 					break;
 				case BINARY:
-					throw std::exception("Insert of tables with binary fields not implemented." );
+					throw std::runtime_error("Insert of tables with binary fields not implemented." );
 					break;
 				default:
-					throw std::exception("Invalid record field type." );
+					throw std::runtime_error("Invalid record field type." );
 					break;
 			}
 		}

@@ -261,18 +261,18 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't boolean" );
+				throw std::runtime_error( "Field type isn't boolean" );
 			}
 		}
 		else
 		{
 			if (isNull())
 			{
-				throw std::exception( "Field value is null" );
+				throw std::runtime_error( "Field value is null" );
 			}
 			else
 			{
-				throw std::exception( "Field value is default" );
+				throw std::runtime_error( "Field value is default" );
 			}
 		}
 	}
@@ -287,18 +287,18 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't integer" );
+				throw std::runtime_error( "Field type isn't integer" );
 			}
 		}
 		else
 		{
 			if (isNull())
 			{
-				throw std::exception( "Field value is null" );
+				throw std::runtime_error( "Field value is null" );
 			}
 			else
 			{
-				throw std::exception( "Field value is default" );
+				throw std::runtime_error( "Field value is default" );
 			}
 		}
 	}
@@ -313,18 +313,18 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't double" );
+				throw std::runtime_error( "Field type isn't double" );
 			}
 		}
 		else
 		{
 			if (isNull())
 			{
-				throw std::exception( "Field value is null" );
+				throw std::runtime_error( "Field value is null" );
 			}
 			else
 			{
-				throw std::exception( "Field value is default" );
+				throw std::runtime_error( "Field value is default" );
 			}
 		}
 	}
@@ -339,18 +339,18 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't string" );
+				throw std::runtime_error( "Field type isn't string" );
 			}
 		}
 		else
 		{
 			if (isNull())
 			{
-				throw std::exception( "Field value is null" );
+				throw std::runtime_error( "Field value is null" );
 			}
 			else
 			{
-				throw std::exception( "Field value is default" );
+				throw std::runtime_error( "Field value is default" );
 			}
 		}
 	}
@@ -377,18 +377,18 @@ namespace systelab { namespace db { namespace test_utility {
 			}
 			else
 			{
-				throw std::exception( "Field type isn't datetime" );
+				throw std::runtime_error( "Field type isn't datetime" );
 			}
 		}
 		else
 		{
-			throw std::exception( "Field value is default" );
+			throw std::runtime_error( "Field value is default" );
 		}
 	}
 
 	db::IBinaryValue& StubFieldValue::getBinaryValue() const
 	{
-		throw std::exception( "Not implemented" );
+		throw std::runtime_error( "Not implemented" );
 	}
 
 	void StubFieldValue::setValue(const db::IFieldValue& srcFieldValue)
@@ -396,7 +396,7 @@ namespace systelab { namespace db { namespace test_utility {
 		db::FieldTypes srcFieldType = srcFieldValue.getField().getType();
 		if (srcFieldType != getField().getType())
 		{
-			throw std::exception( "Can't set the value of a field of another type" );
+			throw std::runtime_error( "Can't set the value of a field of another type" );
 		}
 
 		if (srcFieldValue.isNull())
@@ -465,7 +465,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Field type isn't boolean" );
+			throw std::runtime_error( "Field type isn't boolean" );
 		}
 	}
 
@@ -479,7 +479,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Field type isn't integer" );
+			throw std::runtime_error( "Field type isn't integer" );
 		}
 	}
 
@@ -493,7 +493,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Field type isn't double" );
+			throw std::runtime_error( "Field type isn't double" );
 		}
 	}
 
@@ -507,7 +507,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Field type isn't string" );
+			throw std::runtime_error( "Field type isn't string" );
 		}
 	}
 
@@ -521,13 +521,13 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 		else
 		{
-			throw std::exception( "Field type isn't datetime" );
+			throw std::runtime_error( "Field type isn't datetime" );
 		}
 	}
 
 	void StubFieldValue::setBinaryValue(std::unique_ptr<db::IBinaryValue> value)
 	{
-		throw std::exception( "Not implemented" );
+		throw std::runtime_error( "Not implemented" );
 	}
 
 	void StubFieldValue::useDefaultValue()
@@ -556,10 +556,10 @@ namespace systelab { namespace db { namespace test_utility {
 				break;
 
 			case db::BINARY:
-				throw std::exception( "Binary field type not implemented." );
+				throw std::runtime_error( "Binary field type not implemented." );
 
 			default:
-				throw std::exception( "Invalid field type." );
+				throw std::runtime_error( "Invalid field type." );
 				break;
 		}
 	}
