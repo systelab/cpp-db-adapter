@@ -2,29 +2,21 @@
 
 #include "DbAdapterInterface/ITable.h"
 
-#include "MockTableRecordSet.h"
-
 
 namespace systelab { namespace db { namespace test_utility {
 
 	class MockTable: public ITable
 	{
 	public:
-		MockTable()
-		{
-		}
-
-		MockTable(const std::string& name)
-		{
-			EXPECT_CALL(*this, getName()).Times(AnyNumber()).WillRepeatedly(Return(name));
-		}
+		MockTable();
+		virtual ~MockTable();
 
 		MOCK_CONST_METHOD0(getName, std::string ());
 		MOCK_CONST_METHOD0(getPrimaryKey, const db::IPrimaryKey&());
 
 		MOCK_CONST_METHOD0(getFieldsCount, unsigned int());
 		MOCK_CONST_METHOD1(getField, const db::IField& (unsigned int));
-		MOCK_CONST_METHOD1(getField, const db::IField& (const std::string& fieldName));
+		MOCK_CONST_METHOD1(getField, const db::IField& (const std::string&));
 
 		MOCK_CONST_METHOD1(createFieldValueProxy, db::IFieldValue* (const db::IField&));
 		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field) const
@@ -74,25 +66,10 @@ namespace systelab { namespace db { namespace test_utility {
 			return std::unique_ptr<db::IPrimaryKeyValue>(createPrimaryKeyValueProxy());
 		}
 
-		MOCK_CONST_METHOD0(getAllRecordsProxy, void());
-		MOCK_CONST_METHOD0(getAllRecordsProxyNewPointer, db::ITableRecordSet*());
+		MOCK_CONST_METHOD0(getAllRecordsProxy, db::ITableRecordSet*());
 		std::unique_ptr<db::ITableRecordSet> getAllRecords() const
 		{
-			if (m_allMockRecordset)
-			{
-				getAllRecordsProxy();
-				std::unique_ptr<MockTableRecordSet> mockRecordset = m_allMockRecordset->cloneMock();
-				return std::unique_ptr<db::ITableRecordSet>(mockRecordset.release());
-			}
-			else
-			{
-				return std::unique_ptr<db::ITableRecordSet>(getAllRecordsProxyNewPointer());
-			}
-		}
-
-		void setAllRecordsRecordSet(std::unique_ptr<MockTableRecordSet> mockRecordset)
-		{
-			m_allMockRecordset = std::move(mockRecordset);
+			return std::unique_ptr<db::ITableRecordSet>(getAllRecordsProxy());
 		}
 
 		MOCK_CONST_METHOD1(getRecordByPrimaryKeyProxy, db::ITableRecord* (const db::IPrimaryKeyValue&));
@@ -108,7 +85,6 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 
 		MOCK_CONST_METHOD1(getMaxFieldValueInt, int (const db::IField&));
-
 
 		MOCK_CONST_METHOD2(filterRecordsByFieldsProxy, db::ITableRecordSet* (const std::vector<db::IFieldValue*>&, const db::IField*));
 		std::unique_ptr<db::ITableRecordSet> filterRecordsByFields(const std::vector<db::IFieldValue*>& conditionValues, const db::IField* orderByField = NULL) const
@@ -145,9 +121,6 @@ namespace systelab { namespace db { namespace test_utility {
 		MOCK_METHOD1(deleteRecordsByCondition, db::RowsAffected(const std::string& condition));
 
 		MOCK_METHOD0(deleteAllRecords, db::RowsAffected());
-
-	private:
-		std::unique_ptr<MockTableRecordSet> m_allMockRecordset;
 	};
 
 }}}
