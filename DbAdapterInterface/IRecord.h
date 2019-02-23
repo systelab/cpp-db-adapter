@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_IRECORD_JOSEP_VILA_1712151142_H
-#define _DBADAPTERINTERFACE_IRECORD_JOSEP_VILA_1712151142_H
+#pragma once
 
 #include "IField.h"
 #include "IFieldValue.h"
@@ -21,4 +20,3 @@ namespace systelab { namespace db {
 	};
 }}
 
-#endif //_DBADAPTERINTERFACE_IRECORD_JOSEP_VILA_1712151142_H

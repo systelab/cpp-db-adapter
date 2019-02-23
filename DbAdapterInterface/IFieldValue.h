@@ -1,8 +1,8 @@
-#ifndef _DBADAPTERINTERFACE_IFIELDVALUE_JOSEP_VILA_1712150906_H
-#define _DBADAPTERINTERFACE_IFIELDVALUE_JOSEP_VILA_1712150906_H
+#pragma once
 
 #include "IField.h"
 #include "IBinaryValue.h"
+
 
 namespace systelab { namespace db {
 
@@ -39,4 +39,3 @@ namespace systelab { namespace db {
 
 }}
 
-#endif //_DBADAPTERINTERFACE_IFIELDVALUE_JOSEP_VILA_1712150906_H

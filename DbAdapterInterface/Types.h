@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_TYPES_JOSEP_VILA_1712150913_H
-#define _DBADAPTERINTERFACE_TYPES_JOSEP_VILA_1712150913_H
+#pragma once
 
 namespace systelab { namespace db {
 
@@ -18,4 +17,3 @@ namespace systelab { namespace db {
 	typedef long RowId;
 }}
 
-#endif //_DBADAPTERINTERFACE_TYPES_JOSEP_VILA_1712150913_H

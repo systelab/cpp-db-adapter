@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_ITABLE_JOSEP_VILA_1712151008_H
-#define _DBADAPTERINTERFACE_ITABLE_JOSEP_VILA_1712151008_H
+#pragma once
 
 #include "ITableRecordSet.h"
 #include "ITableRecord.h"
@@ -60,4 +59,3 @@ namespace systelab { namespace db {
 
 }}
 
-#endif //_DBADAPTERINTERFACE_ITABLE_JOSEP_VILA_1712151008_H

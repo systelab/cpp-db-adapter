@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_ITABLERECORDSET_QV_0303161112_H
-#define _DBADAPTERINTERFACE_ITABLERECORDSET_QV_0303161112_H
+#pragma once
 
 #include <string>
 #include <memory>
@@ -31,4 +30,3 @@ namespace systelab { namespace db {
 
 }}
 
-#endif //_DBADAPTERINTERFACE_ITABLERECORDSET_QV_0303161112_H

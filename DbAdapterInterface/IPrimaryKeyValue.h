@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_IPRIMARYKEYVALUE_QV_2502161528_H
-#define _DBADAPTERINTERFACE_IPRIMARYKEYVALUE_QV_2502161528_H
+#pragma once
 
 #include "IPrimaryKey.h"
 #include "IBinaryValue.h"
@@ -22,4 +21,3 @@ namespace systelab { namespace db {
 
 }}
 
-#endif //_DBADAPTERINTERFACE_IPRIMARYKEYVALUE_QV_2502161528_H

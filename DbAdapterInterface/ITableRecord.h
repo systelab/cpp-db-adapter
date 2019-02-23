@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_ITABLERECORD_QV_0303161111_H
-#define _DBADAPTERINTERFACE_ITABLERECORD_QV_0303161111_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -27,4 +26,3 @@ namespace systelab { namespace db {
 	};
 }}
 
-#endif //_DBADAPTERINTERFACE_ITABLERECORD_QV_0303161111_H

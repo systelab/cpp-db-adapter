@@ -1,10 +1,10 @@
-#ifndef _DBADAPTERINTERFACE_IFIELD_JOSEP_VILA_1712150916_H
-#define _DBADAPTERINTERFACE_IFIELD_JOSEP_VILA_1712150916_H
+#pragma once
 
 #include "Types.h"
 
 #include <string>
 #include <boost/date_time/posix_time/posix_time.hpp>
+
 
 namespace systelab { namespace db {
 
@@ -31,4 +31,3 @@ namespace systelab { namespace db {
 
 }}
 
-#endif //_DBADAPTERINTERFACE_IFIELD_JOSEP_VILA_1712150916_H

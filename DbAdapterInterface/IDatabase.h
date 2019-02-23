@@ -1,13 +1,15 @@
-#ifndef _DBADAPTERINTERFACE_IDATABASE_JOSEP_VILA_1712151006_H
-#define _DBADAPTERINTERFACE_IDATABASE_JOSEP_VILA_1712151006_H
+#pragma once
 
 #include "Types.h"
 #include "ITable.h"
 #include "IRecordSet.h"
 #include "ITransaction.h"
+
 #include <memory>
 
+
 namespace systelab { namespace db {
+
 	class IDatabase
 	{
 	public:
@@ -21,6 +23,6 @@ namespace systelab { namespace db {
 		virtual RowId getLastInsertedRowId() const = 0;
 		virtual std::unique_ptr<ITransaction> startTransaction() = 0;
 	};
+
 }}
 
-#endif //_DBADAPTERINTERFACE_IDATABASE_JOSEP_VILA_1712151006_H

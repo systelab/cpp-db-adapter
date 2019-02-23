@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_ICONNECTION_JOSEP_VILA_1712150946_H
-#define _DBADAPTERINTERFACE_ICONNECTION_JOSEP_VILA_1712150946_H
+#pragma once
 
 #include "IDatabase.h"
 #include "IConnectionConfiguration.h"
@@ -16,4 +15,3 @@ namespace systelab { namespace db {
 	};
 }}
 
-#endif //_DBADAPTERINTERFACE_ICONNECTION_JOSEP_VILA_1712150946_H

@@ -1,5 +1,4 @@
-#ifndef _DBADAPTERINTERFACE_IPRIMARYKEY_QV_2502161128_H
-#define _DBADAPTERINTERFACE_IPRIMARYKEY_QV_2502161128_H
+#pragma once
 
 #include <string>
 
@@ -22,4 +21,3 @@ namespace systelab { namespace db {
 
 }}
 
-#endif // _DBADAPTERINTERFACE_IPRIMARYKEY_QV_2502161128_H
