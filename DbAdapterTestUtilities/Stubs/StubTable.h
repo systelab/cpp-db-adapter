@@ -1,8 +1,8 @@
 #ifndef _DBADAPTERTESTUTILITIES_STUBTABLE_DMC_1110161846_H
 #define _DBADAPTERTESTUTILITIES_STUBTABLE_DMC_1110161846_H
 
-#include "TestUtilities/DbAdapter/Mocks/MockTable.h"
-#include "TestUtilities/DbAdapter/Stubs/StubTableRecord.h"
+#include "DbAdapterTestUtilities/Mocks/MockTable.h"
+#include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
 
 
 using namespace systelab::db;
