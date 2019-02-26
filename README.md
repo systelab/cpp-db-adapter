@@ -18,26 +18,26 @@ This repository defines a library-agnostic API for C++ to work with a database
 
 ## Usage
 
-# Query table contents
+### Query table contents
 
 `TBD: Add a code snipped here`
 
-# Insert a new record
+### Insert a new record
 
 `TBD: Add a code snipped here`
 
-# Update records by condition
+### Update records by condition
 
 `TBD: Add a code snipped here`
 
-# Delete records by condition
+### Delete records by condition
 
 `TBD: Add a code snipped here`
 
-# Ad-hoc SQL queries
+### Ad-hoc SQL queries
 
 `TBD: Add a code snipped here`
 
-# Transactions
+### Transactions
 
 `TBD: Add a code snipped here`
