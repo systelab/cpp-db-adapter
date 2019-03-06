@@ -19,9 +19,29 @@ This repository defines a library-agnostic API for C++ to work with a database
 
 ## Usage
 
+Build a database connection (`systelab::db::IDatabase`) using the particular instructions described on the selected implementation.
+
 ### Query table contents
 
-`TBD: Add a code snipped here`
+```cpp
+void queryTableContents(systelab::db::IDatabase& database, const std::string& tableName)
+{
+  systelab::db::ITable& table = database.getTable(tableName);
+  std::unique_ptr<systelab::db::ITableRecordSet> recordset = table.getAllRecords();
+  while (recordset->isCurrentRecordValid())
+  {
+    const systelab::db::ITableRecord& record = recordset->getCurrentRecord();
+
+    // Extract data from current record
+    int intValue = record.getFieldValue("intFieldName").getIntValue();
+		std::string stringValue = record.getFieldValue("stringFieldName").getStringValue();
+		boost::posix_time::ptime dateTimeValue = record.getFieldValue("dateTimeFieldName").getDateTimeValue();
+    ...
+    
+		recordset->nextRecord();
+	}
+}
+```
 
 ### Insert a new record
 
