@@ -62,37 +62,33 @@ table.insertRecord(*record);
 
 ```cpp
 // Create a new record of the table and fill it with the values to update
-std::unique_ptr<ITableRecord> record = table.createRecord();
+std::unique_ptr<systelab::db::ITableRecord> record = table.createRecord();
 record->getFieldValue("intField").setIntValue(5);
 record->getFieldValue("stringField").setStringValue("NEW_VALUE");
 record->getFieldValue("doubleField").setDoubleValue(777.888);
 record->getFieldValue("booleanField").setBooleanValue(false);
 
 // Add the IFieldValue's to update into a vector
-std::vector<IFieldValue*> newValues;
+std::vector<systelab::db::IFieldValue*> newValues;
 newValues.push_back( &(record->getFieldValue("stringField")) );
 newValues.push_back( &(record->getFieldValue("doubleField")) );
 newValues.push_back( &(record->getFieldValue("booleanField")) );
 
 // Add the IFieldValue's of condition into another vector
-std::vector<IFieldValue*> conditionValues;
+std::vector<systelab::db::IFieldValue*> conditionValues;
 conditionValues.push_back( &(auxRecord->getFieldValue("intField")) );
 
 // Perform the multiple records edition
-RowsAffected nRows = table.updateRecordsByCondition(newValues, conditionValues);
+systelab::db::RowsAffected nRows = table.updateRecordsByCondition(newValues, conditionValues);
 ```
 
 ### Delete records by condition
 
 ```cpp
-std::unique_ptr<IFieldValue> conditionFieldValue1 = table.createFieldValue( table.getField("conditionField1"), std::string("VALUE1") );
-std::unique_ptr<IFieldValue> conditionFieldValue2 = table.createFieldValue( table.getField("conditionField2"), 222 );
-
-std::vector<IFieldValue*> conditionValues;
-conditionValues.push_back(conditionFieldValue1.get());
-conditionValues.push_back(conditionFieldValue2.get());
-
-RowsAffected nRows = table.deleteRecordsByCondition(conditionValues);
+systelab::db::IField& conditionField = table.getField("conditionField");
+std::unique_ptr<systelab::db::IFieldValue> conditionFieldValue1 = table.createFieldValue(conditionField, std::string("VALUE"));
+std::vector<systelab::db::IFieldValue*> conditionValues = { conditionFieldValue.get() };
+systelab::db::RowsAffected nRows = table.deleteRecordsByCondition(conditionValues);
 ```
 
 ### Ad-hoc SQL queries
