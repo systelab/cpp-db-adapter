@@ -93,7 +93,15 @@ systelab::db::RowsAffected nRows = table.deleteRecordsByCondition(conditionValue
 
 ### Ad-hoc SQL queries
 
-`TBD: Add a code snipped here`
+```cpp
+std::unique_ptr<systelab::db::IRecordSet> recordSet = m_db->executeQuery("SELECT * FROM TestTable WHERE id > 50 AND id < 75");
+while (recordSet.isCurrentRecordValid())
+{
+    const systelab::db::IRecord& record = recordSet.getCurrentRecord();
+    // Extract data from record
+    recordSet.nextRecord();
+}
+```
 
 ### Transactions
 
