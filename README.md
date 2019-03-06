@@ -19,33 +19,44 @@ This repository defines a library-agnostic API for C++ to work with a database
 
 ## Usage
 
-Build a database connection (`systelab::db::IDatabase`) using the particular instructions described on the selected implementation.
+Build a database connection (`systelab::db::IDatabase`) using the particular instructions described on the selected implementation. This connection is the starting point for all the operations that interact with the database.
 
 ### Query table contents
 
 ```cpp
-void queryTableContents(systelab::db::IDatabase& database, const std::string& tableName)
+std::unique_ptr<systelab::db::IDatabase> database = connectToDatabase();
+systelab::db::ITable& table = database->getTable("Table");
+
+// Create a record set with all the records of the table and loop through it 
+std::unique_ptr<systelab::db::ITableRecordSet> recordset = table.getAllRecords();
+while (recordset->isCurrentRecordValid())
 {
-  systelab::db::ITable& table = database.getTable(tableName);
-  std::unique_ptr<systelab::db::ITableRecordSet> recordset = table.getAllRecords();
-  while (recordset->isCurrentRecordValid())
-  {
     const systelab::db::ITableRecord& record = recordset->getCurrentRecord();
 
-    // Extract data from current record
+    // Extract data from the current record
     int intValue = record.getFieldValue("intFieldName").getIntValue();
-		std::string stringValue = record.getFieldValue("stringFieldName").getStringValue();
-		boost::posix_time::ptime dateTimeValue = record.getFieldValue("dateTimeFieldName").getDateTimeValue();
-    ...
-    
-		recordset->nextRecord();
-	}
+    std::string stringValue = record.getFieldValue("stringFieldName").getStringValue();
+    boost::posix_time::ptime dateTimeValue = record.getFieldValue("dateTimeFieldName").getDateTimeValue();
+
+    recordset->nextRecord();
 }
 ```
 
 ### Insert a new record
 
-`TBD: Add a code snipped here`
+```cpp
+// Create an empty record for a table
+systelab::db::ITable& table = database.getTable("Table");
+std::unique_ptr<systelab::db::ITableRecord> record = table.createRecord();
+
+// Fill record with data
+record->getFieldValue("intFieldName").setIntValue(1234);
+record->getFieldValue("stringFieldName").setStringValue("ABCDE");
+record->getFieldValue("dateTimeFieldName").setDateTimeValue(boost::posix_time::ptime today({2020,10,23}));
+
+// Perform the record insertion
+table.insertRecord(*record);
+```
 
 ### Update records by condition
 
