@@ -108,11 +108,10 @@ while (recordSet.isCurrentRecordValid())
 ### Transactions
 
 ```cpp
-std::unique_ptr<ITransaction> transaction = database.startTransaction();
+std::unique_ptr<systelab::db::ITransaction> transaction = database.startTransaction();
 try
 {
-    // Perform some updates on the database
-
+    // Perform HERE some operations that update DB
     transaction->commit();
 }
 catch(std::exception&)
