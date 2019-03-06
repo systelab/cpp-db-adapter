@@ -84,7 +84,16 @@ RowsAffected nRows = table.updateRecordsByCondition(newValues, conditionValues);
 
 ### Delete records by condition
 
-`TBD: Add a code snipped here`
+```cpp
+std::unique_ptr<IFieldValue> conditionFieldValue1 = table.createFieldValue( table.getField("conditionField1"), std::string("VALUE1") );
+std::unique_ptr<IFieldValue> conditionFieldValue2 = table.createFieldValue( table.getField("conditionField2"), 222 );
+
+std::vector<IFieldValue*> conditionValues;
+conditionValues.push_back(conditionFieldValue1.get());
+conditionValues.push_back(conditionFieldValue2.get());
+
+RowsAffected nRows = table.deleteRecordsByCondition(conditionValues);
+```
 
 ### Ad-hoc SQL queries
 
