@@ -60,7 +60,27 @@ table.insertRecord(*record);
 
 ### Update records by condition
 
-`TBD: Add a code snipped here`
+```cpp
+// Create a new record of the table and fill it with the values to update
+std::unique_ptr<ITableRecord> record = table.createRecord();
+record->getFieldValue("intField").setIntValue(5);
+record->getFieldValue("stringField").setStringValue("NEW_VALUE");
+record->getFieldValue("doubleField").setDoubleValue(777.888);
+record->getFieldValue("booleanField").setBooleanValue(false);
+
+// Add the IFieldValue's to update into a vector
+std::vector<IFieldValue*> newValues;
+newValues.push_back( &(record->getFieldValue("stringField")) );
+newValues.push_back( &(record->getFieldValue("doubleField")) );
+newValues.push_back( &(record->getFieldValue("booleanField")) );
+
+// Add the IFieldValue's of condition into another vector
+std::vector<IFieldValue*> conditionValues;
+conditionValues.push_back( &(auxRecord->getFieldValue("intField")) );
+
+// Perform the multiple records edition
+RowsAffected nRows = table.updateRecordsByCondition(newValues, conditionValues);
+```
 
 ### Delete records by condition
 
