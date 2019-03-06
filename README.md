@@ -86,7 +86,8 @@ systelab::db::RowsAffected nRows = table.updateRecordsByCondition(newValues, con
 
 ```cpp
 systelab::db::IField& conditionField = table.getField("conditionField");
-std::unique_ptr<systelab::db::IFieldValue> conditionFieldValue1 = table.createFieldValue(conditionField, std::string("VALUE"));
+std::unique_ptr<systelab::db::IFieldValue> conditionFieldValue1 =
+    table.createFieldValue(conditionField, std::string("VALUE"));
 std::vector<systelab::db::IFieldValue*> conditionValues = { conditionFieldValue.get() };
 systelab::db::RowsAffected nRows = table.deleteRecordsByCondition(conditionValues);
 ```
@@ -94,7 +95,8 @@ systelab::db::RowsAffected nRows = table.deleteRecordsByCondition(conditionValue
 ### Ad-hoc SQL queries
 
 ```cpp
-std::unique_ptr<systelab::db::IRecordSet> recordSet = m_db->executeQuery("SELECT * FROM TestTable WHERE id > 50 AND id < 75");
+std::string sqlQuery = "SELECT * FROM TestTable WHERE id > 50 AND id < 75";
+std::unique_ptr<systelab::db::IRecordSet> recordSet = m_db->executeQuery(sqlQuery);
 while (recordSet.isCurrentRecordValid())
 {
     const systelab::db::IRecord& record = recordSet.getCurrentRecord();
@@ -105,4 +107,16 @@ while (recordSet.isCurrentRecordValid())
 
 ### Transactions
 
-`TBD: Add a code snipped here`
+```cpp
+std::unique_ptr<ITransaction> transaction = database.startTransaction();
+try
+{
+    // Perform some updates on the database
+
+    transaction->commit();
+}
+catch(std::exception&)
+{
+    transaction->rollback();
+}
+```
