@@ -56,6 +56,9 @@ script:
   - conan install .. -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX}
   - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - make
+  - cd bin
+  - if [ $TRAVIS_OS_NAME == osx ]; then cp -f *.dylib /usr/local/lib; fi
+  - cd ..
   - |
     if [ -n "$TRAVIS_TAG" ]; then
       conan export-pkg ../conanfile.py "DbAdapter/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
