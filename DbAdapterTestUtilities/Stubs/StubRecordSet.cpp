@@ -3,7 +3,7 @@
 
 #include "DbAdapterTestUtilities/Stubs/StubField.h"
 #include "DbAdapterTestUtilities/Stubs/StubFieldValue.h"
-
+#include "DbAdapterTestUtilities/Stubs/StubRecord.h"
 
 using namespace testing;
 
