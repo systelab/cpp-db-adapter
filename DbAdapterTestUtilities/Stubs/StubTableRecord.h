@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DbAdapterTestUtilities/Mocks/MockTableRecord.h"
-#include "DbAdapterTestUtilities/Stubs/StubFieldValue.h"
 
 #include <memory>
 #include <vector>
@@ -10,6 +9,7 @@
 namespace systelab { namespace db { namespace test_utility {
 
 	class StubField;
+	class StubFieldValue;
 
 	class StubTableRecord : public MockTableRecord
 	{

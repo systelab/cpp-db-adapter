@@ -1,12 +1,12 @@
 #pragma once
 
 #include "DbAdapterTestUtilities/Mocks/MockTable.h"
-#include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
 
 
 namespace systelab { namespace db { namespace test_utility {
 
 	class StubPrimaryKey;
+	class StubTableRecord;
 
 	class StubTable : public MockTable
 	{

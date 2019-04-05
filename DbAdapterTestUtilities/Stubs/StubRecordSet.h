@@ -1,10 +1,11 @@
 #pragma once
 
 #include "DbAdapterTestUtilities/Mocks/MockRecordSet.h"
-#include "DbAdapterTestUtilities/Stubs/StubRecord.h"
 
 
 namespace systelab { namespace db { namespace test_utility {
+
+	class StubRecord;
 
 	class StubRecordSet : public MockRecordSet
 	{

@@ -6,8 +6,6 @@
 #include "DbAdapterInterface/ITableRecord.h"
 #include "DbAdapterInterface/Types.h"
 
-#include "StubTableRecord.h"
-
 #include <memory>
 #include <vector>
 
@@ -18,7 +16,9 @@ namespace systelab { namespace db {
 }}
 
 namespace systelab { namespace db { namespace test_utility {
-	
+
+	class StubTableRecord;
+
 	class StubTableRecordSet : public MockTableRecordSet
 	{
 	public:
