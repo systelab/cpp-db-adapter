@@ -49,7 +49,7 @@ namespace systelab { namespace db { namespace test_utility {
 		return (unsigned int) m_fieldValues.size();
 	}
 
-	StubFieldValue& StubTableRecord::getFieldValue(unsigned int index) const
+	IFieldValue& StubTableRecord::getFieldValue(unsigned int index) const
 	{
 		if (index < m_fieldValues.size())
 		{

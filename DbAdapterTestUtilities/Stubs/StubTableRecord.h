@@ -21,7 +21,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 		db::ITable& getTable() const;
 		unsigned int getFieldValuesCount() const;
-		StubFieldValue& getFieldValue(unsigned int index) const;
+		IFieldValue& getFieldValue(unsigned int index) const;
 		db::IFieldValue& getFieldValue(const std::string& fieldName) const;
 
 		bool hasFieldValue(const std::string& fieldName) const;
