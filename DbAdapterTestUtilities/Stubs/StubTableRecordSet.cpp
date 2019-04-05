@@ -6,6 +6,8 @@
 
 #include "DbAdapterInterface/ITable.h"
 
+#include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
+
 
 namespace systelab { namespace db { namespace test_utility {
 

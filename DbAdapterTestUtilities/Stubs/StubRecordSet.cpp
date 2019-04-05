@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "StubRecordSet.h"
 
+#include "DbAdapterTestUtilities/Stubs/StubField.h"
+#include "DbAdapterTestUtilities/Stubs/StubFieldValue.h"
+
 
 using namespace testing;
 
