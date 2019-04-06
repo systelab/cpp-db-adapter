@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "StubTableRecordSet.h"
 
-#include "StubField.h"
-#include "StubTableRecord.h"
-
 #include "DbAdapterInterface/ITable.h"
 
+#include "DbAdapterTestUtilities/Stubs/StubField.h"
 #include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
 
 
