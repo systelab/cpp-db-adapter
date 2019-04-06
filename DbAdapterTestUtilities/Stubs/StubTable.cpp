@@ -325,7 +325,7 @@ namespace systelab { namespace db { namespace test_utility {
 			switch (fieldType)
 			{
 				case db::BOOLEAN:
-					fieldValueStream << fieldValue.getBooleanValue() ? 1 : 0;
+					fieldValueStream << (fieldValue.getBooleanValue() ? 1 : 0);
 					break;
 				case db::INT:
 					fieldValueStream << fieldValue.getIntValue();
