@@ -27,7 +27,11 @@ namespace systelab { namespace db {
 		virtual std::string getStringDefaultValue() const = 0;
 		virtual boost::posix_time::ptime getDateTimeDefaultValue() const = 0;
 		virtual IBinaryValue& getBinaryDefaultValue() const = 0;
+
+		inline friend bool operator== (const IField& lhs, const IField& rhs);
+		inline friend bool operator!= (const IField& lhs, const IField& rhs);
 	};
 
 }}
 
+#include "IField.inl"

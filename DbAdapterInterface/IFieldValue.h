@@ -3,7 +3,6 @@
 #include "IField.h"
 #include "IBinaryValue.h"
 
-
 namespace systelab { namespace db {
 
 	class IFieldValue
@@ -35,7 +34,11 @@ namespace systelab { namespace db {
 		virtual void useDefaultValue() = 0;
 
 		virtual std::unique_ptr<IFieldValue> clone() const = 0;
+
+		inline friend bool operator== (const IFieldValue& lhs, const IFieldValue& rhs);
+		inline friend bool operator!= (const IFieldValue& lhs, const IFieldValue& rhs);
 	};
 
 }}
 
+#include "IFieldValue.inl"

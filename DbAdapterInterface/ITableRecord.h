@@ -23,6 +23,10 @@ namespace systelab { namespace db {
 		virtual bool hasFieldValue(const std::string& fieldName) const = 0;
 
 		virtual std::vector<IFieldValue*> getValuesList() const = 0;
+
+		inline friend bool operator== (const ITableRecord& lhs, const ITableRecord& rhs);
+		inline friend bool operator!= (const ITableRecord& lhs, const ITableRecord& rhs);
 	};
 }}
 
+#include "ITableRecord.inl"
