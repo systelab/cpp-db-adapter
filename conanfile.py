@@ -23,6 +23,7 @@ class DbAdapterConan(ConanFile):
 
     def package(self):
         self.copy("*.h", dst="include/DbAdapterInterface", src="DbAdapterInterface")
+        self.copy("*.inl", dst="include/DbAdapterInterface", src="DbAdapterInterface")
         self.copy("*.h", dst="include/DbAdapterTestUtilities", src="DbAdapterTestUtilities")
         self.copy("*DbAdapterTestUtilities.lib", dst="lib", keep_path=False)
         self.copy("*DbAdapterTestUtilities.pdb", dst="lib", keep_path=False)
