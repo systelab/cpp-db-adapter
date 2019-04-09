@@ -31,6 +31,8 @@ namespace systelab { namespace db {
 				return lhs.getStringValue() == rhs.getStringValue();
 			case FieldTypes::DATETIME:
 				return lhs.getDateTimeValue() == rhs.getDateTimeValue();
+			default:
+				return true;
 			}
 		}
 
