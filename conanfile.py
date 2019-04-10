@@ -6,7 +6,7 @@ class DbAdapterConan(ConanFile):
     url = "https://github.com/systelab/cpp-db-adapter"
     homepage = "https://github.com/systelab/cpp-db-adapter"
     author = "CSW <csw@werfen.com>"
-    topics = ("conan", "db", "sql", "adapter", "wrapper")	
+    topics = ("conan", "db", "sql", "adapter", "wrapper")
     license = "MIT"
     generators = "cmake"
     settings = "os", "compiler", "build_type", "arch"
