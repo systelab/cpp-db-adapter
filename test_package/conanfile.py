@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class DbAdapterTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake"
+    generators = "cmake_find_package"
 
     def build(self):
         cmake = CMake(self)
@@ -16,6 +16,5 @@ class DbAdapterTestConan(ConanFile):
         self.copy('*.so*', dst='bin', src='lib')
 
     def test(self):
-        if not tools.cross_building(self.settings):
-            os.chdir("bin")
-            self.run(".%sDbAdapterPackageTest" % os.sep)
+        cmake = CMake(self)
+        cmake.test()
