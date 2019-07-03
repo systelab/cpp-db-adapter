@@ -1,5 +1,6 @@
 from conans import ConanFile, tools
 
+
 class DbAdapterConan(ConanFile):
     name = "DbAdapter"
     description = "Library-agnostic API for C++ to work with a database"
@@ -8,7 +9,7 @@ class DbAdapterConan(ConanFile):
     author = "CSW <csw@werfen.com>"
     topics = ("conan", "db", "sql", "adapter", "wrapper")
     license = "MIT"
-    generators = "cmake"
+    generators = "cmake_find_package"
     settings = "os", "compiler", "build_type", "arch"
     default_options = "boost:shared=True"
 
