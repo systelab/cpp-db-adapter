@@ -3,8 +3,15 @@ cmake_minimum_required(VERSION 3.2)
 # Find 3rd party dependencies
 find_package(boost)
 
+# Configure preprocessor definitions
+add_compile_options(-DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE)
+
 # Add project folder into includes
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+IF(MSVC)
+    ADD_DEFINITIONS("/EHsc")
+ENDIF(MSVC)
 
 # Configure DB Adapter test utilities project
 set(DB_ADAPTER_TEST_UTILITIES_PROJECT DbAdapterTestUtilities)
