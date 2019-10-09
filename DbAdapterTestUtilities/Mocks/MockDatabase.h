@@ -36,7 +36,7 @@ namespace systelab { namespace db { namespace test_utility {
 			m_tables.push_back( tableRawPtr );
 
 			std::string tableName = tableRawPtr->getName();
-			ON_CALL(*this, getTable(tableName)).WillRepeatedly(testing::ReturnRef(*tableRawPtr));
+			ON_CALL(*this, getTable(tableName)).WillByDefault(testing::ReturnRef(*tableRawPtr));
 		}
 
 	private:
