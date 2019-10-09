@@ -15,7 +15,7 @@ class DbAdapterConan(ConanFile):
 
     def requirements(self):
         self.requires("TestUtilitiesInterface/1.0.1@systelab/stable")
-        self.requires("boost/1.66.0@conan/stable")
+        self.requires("boost/1.67.0@conan/stable")
 
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
