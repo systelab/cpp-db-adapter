@@ -53,7 +53,7 @@ script:
   - g++ --version
   - mkdir -p build
   - cd build
-  - conan install .. -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX}
+  - conan install .. -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} --build=missing
   - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - make
   - cd bin
