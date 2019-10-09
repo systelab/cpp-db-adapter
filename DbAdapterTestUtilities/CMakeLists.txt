@@ -3,13 +3,12 @@ cmake_minimum_required(VERSION 3.2)
 # Find 3rd party dependencies
 find_package(boost)
 
-# Configure preprocessor definitions
-add_compile_options(-DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE)
-
 # Add project folder into includes
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# Polished project configuration for Visual Studio
 IF(MSVC)
+    add_compile_options(-DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE)
     ADD_DEFINITIONS("/EHsc")
 ENDIF(MSVC)
 
