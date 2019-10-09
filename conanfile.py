@@ -14,7 +14,7 @@ class DbAdapterConan(ConanFile):
     default_options = "boost:shared=True"
 
     def requirements(self):
-        self.requires("TestUtilitiesInterface/1.0.0@systelab/stable")
+        self.requires("TestUtilitiesInterface/1.0.1@systelab/stable")
         self.requires("boost/1.67.0@conan/stable")
 
     def imports(self):
