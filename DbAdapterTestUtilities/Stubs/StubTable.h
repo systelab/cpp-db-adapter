@@ -2,7 +2,6 @@
 
 #include "DbAdapterTestUtilities/Mocks/MockTable.h"
 
-
 namespace systelab { namespace db { namespace test_utility {
 
 	class StubPrimaryKey;
@@ -14,7 +13,7 @@ namespace systelab { namespace db { namespace test_utility {
 		StubTable(const std::string& name);
 		virtual ~StubTable();
 
-		std::string getNameStub() const;
+		std::string getName() const;
 		const IPrimaryKey& getPrimaryKey() const;
 
 		unsigned int getFieldsCount() const;

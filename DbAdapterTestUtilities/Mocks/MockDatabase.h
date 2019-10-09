@@ -30,11 +30,17 @@ namespace systelab { namespace db { namespace test_utility {
 			return std::unique_ptr<ITransaction>(startTransactionProxy());
 		};
 
-		MOCK_METHOD1(addTableProxy, void (ITable*));
 		void addTable(std::unique_ptr<ITable> table)
 		{
-			addTableProxy(table.release());
+			ITable* tableRawPtr = table.release();
+			m_tables.push_back( tableRawPtr );
+
+			std::string tableName = tableRawPtr->getName();
+			ON_CALL(*this, getTable(tableName)).WillByDefault(testing::ReturnRef(*tableRawPtr));
 		}
+
+	private:
+		std::vector<ITable*> m_tables;
 	};
 
 }}}

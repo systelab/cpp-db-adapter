@@ -11,16 +11,15 @@
 #include "DbAdapterInterface/IDatabase.h"
 
 
-using namespace testing;
-
 namespace systelab { namespace db { namespace test_utility {
+	
+	using namespace testing;
 
 	StubTable::StubTable(const std::string& name)
 		:m_name(name)
 	{
 		m_primaryKey = std::unique_ptr<StubPrimaryKey>( new StubPrimaryKey(*this) );
 
-		ON_CALL(*this, getName()).WillByDefault(Invoke(this, &StubTable::getNameStub));
 		ON_CALL(*this, insertRecord(_)).WillByDefault(Invoke(this, &StubTable::insertRecordProxy));
 		ON_CALL(*this, updateRecord(_)).WillByDefault(Invoke(this, &StubTable::updateRecordProxy));
 		ON_CALL(*this, deleteRecord(testing::An<const ITableRecord&>())).WillByDefault(Invoke(this, &StubTable::deleteRecordProxy));
@@ -28,7 +27,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	StubTable::~StubTable() = default;
 
-	std::string StubTable::getNameStub() const
+	std::string StubTable::getName() const
 	{
 		return m_name;
 	}
@@ -158,7 +157,6 @@ namespace systelab { namespace db { namespace test_utility {
 	int StubTable::getMaxFieldValueInt(const IField& /*field*/) const
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	std::unique_ptr<ITableRecord> StubTable::createRecord() const
@@ -205,46 +203,39 @@ namespace systelab { namespace db { namespace test_utility {
 		return 1;
 	}
 
-	RowsAffected StubTable::updateRecordProxy(const ITableRecord& newRecord)
+	RowsAffected StubTable::updateRecordProxy(const ITableRecord&)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::updateRecord(const std::vector<IFieldValue*>& /*newValues*/, const IPrimaryKeyValue& /*primaryKeyValue*/)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::deleteRecordProxy(const ITableRecord& /*record*/)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::deleteRecord(const IPrimaryKeyValue& /*primaryKeyValue*/)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::updateRecordsByCondition(const std::vector<IFieldValue*>& /*newValues*/, const std::vector<IFieldValue*>& /*conditionValues*/)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::deleteRecordsByCondition(const std::vector<IFieldValue*>& /*conditionValues*/)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::deleteRecordsByCondition(const std::string& /*condition*/)
 	{
 		throw std::runtime_error("Not implemented");
-		return 0;
 	}
 
 	RowsAffected StubTable::deleteAllRecords()
