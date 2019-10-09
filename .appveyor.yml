@@ -9,7 +9,7 @@ init:
       }
 
 platform:
-  - x86
+  - Win32
  
 configuration:
   - Debug
