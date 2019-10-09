@@ -4,6 +4,7 @@
 #include "StubField.h"
 #include "StubFieldValue.h"
 #include "StubTableRecord.h"
+#include "StubTableRecordSet.h"
 #include "StubPrimaryKey.h"
 #include "StubPrimaryKeyValue.h"
 
