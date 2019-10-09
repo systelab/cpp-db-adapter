@@ -3,9 +3,10 @@
 #include "DbAdapterInterface/IBinaryValue.h"
 #include "DbAdapterInterface/IField.h"
 
-using namespace testing;
 
 namespace systelab { namespace db { namespace test_utility {
+
+	using namespace testing;
 
 	class MockField : public IField
 	{

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DbAdapterTestUtilities/Mocks/MockTable.h"
+#include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
 
 
 namespace systelab { namespace db { namespace test_utility {
@@ -14,7 +15,7 @@ namespace systelab { namespace db { namespace test_utility {
 		StubTable(const std::string& name);
 		virtual ~StubTable();
 
-		std::string getNameStub() const;
+		std::string getName() const;
 		const IPrimaryKey& getPrimaryKey() const;
 
 		unsigned int getFieldsCount() const;
