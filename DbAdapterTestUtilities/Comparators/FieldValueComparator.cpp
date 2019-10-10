@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TestUtilitiesInterface/EntityComparator.h"
+#include "TestUtilitiesInterface/EntityComparatorMacros.h"
 
 #include "DbAdapterInterface/IFieldValue.h"
 
