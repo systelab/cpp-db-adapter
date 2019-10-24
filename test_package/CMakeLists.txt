@@ -10,17 +10,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Setup up Google test
-include(ConfigureGoogleTest)
-configure_google_test()
-
 # Find tested package
-find_package(DbAdapter)
+find_package(DbAdapterTestUtilities)
 
 # Configure test package project
 set(DB_ADAPTER_PACKAGE_TEST_PROJECT DbAdapterPackageTest)
 add_executable(${DB_ADAPTER_PACKAGE_TEST_PROJECT} DbAdapterExample.cpp)
-target_link_libraries(${DB_ADAPTER_PACKAGE_TEST_PROJECT} DbAdapter::DbAdapter gmock_main)
+target_link_libraries(${DB_ADAPTER_PACKAGE_TEST_PROJECT} DbAdapterTestUtilities::DbAdapterTestUtilities)
 
 # Register tests
 enable_testing()
