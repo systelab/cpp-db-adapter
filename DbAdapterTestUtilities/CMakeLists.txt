@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 
-# Find 3rd party dependencies
-find_package(boost)
+# Find external dependencides
+find_package(gtest)
+find_package(TestUtilitiesInterface)
+find_package(DbAdapterInterface)
 
 # Add project folder into includes
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -17,7 +19,7 @@ set(DB_ADAPTER_TEST_UTILITIES_PROJECT DbAdapterTestUtilities)
 file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC "*.cpp")
 file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR "*.h")
 add_library(${DB_ADAPTER_TEST_UTILITIES_PROJECT} STATIC ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
-target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT} gmock_main boost::boost)
+target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT} gtest::gtest TestUtilitiesInterface::TestUtilitiesInterface DbAdapterInterface::DbAdapterInterface)
 
 # Configure source groups
 foreach(FILE ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
