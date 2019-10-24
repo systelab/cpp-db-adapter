@@ -72,9 +72,9 @@ script:
   - cd ..
   - |
     if [ -n "$TRAVIS_TAG" ]; then
-      conan export-pkg ../conanfile.py "DbAdapterTestUtilities/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+      conan export-pkg ../DbAdapterTestUtilities/conanfile.py "DbAdapterTestUtilities/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
     else
-      conan export-pkg ../conanfile.py "DbAdapterTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+      conan export-pkg ../DbAdapterTestUtilities/conanfile.py "DbAdapterTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
     fi
   - |
     if [ "$BUILD_TYPE" == "Release" ] || [ "$BUILD_TYPE" == "Debug" ]; then
