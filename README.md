@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/systelab/cpp-db-adapter.svg?branch=master)](https://travis-ci.org/systelab/cpp-db-adapter)
 [![Build status](https://ci.appveyor.com/api/projects/status/56l40w9pu3i21bu8?svg=true)](https://ci.appveyor.com/project/systelab/cpp-db-adapter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f45f045c1a894879943e249547e10a3d)](https://www.codacy.com/app/systelab/cpp-db-adapter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=systelab/cpp-db-adapter&amp;utm_campaign=Badge_Grade)
-[![Download](https://api.bintray.com/packages/systelab/conan/DbAdapter:systelab/images/download.svg)](https://bintray.com/systelab/conan/DbAdapter:systelab/_latestVersion)
+[![Download](https://api.bintray.com/packages/systelab/conan/DbAdapterInterface:systelab/images/download.svg)](https://bintray.com/systelab/conan/DbAdapterInterface:systelab/_latestVersion)
 
 # C++ Database Adapter
 
