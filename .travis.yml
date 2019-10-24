@@ -51,9 +51,20 @@ install:
 
 script:
   - g++ --version
+  - |
+    if [ -n "$TRAVIS_TAG" ]; then
+      conan export-pkg DbAdapterInterface/conanfile.py "DbAdapterInterface/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+    else
+      conan export-pkg DbAdapterInterface/conanfile.py "DbAdapterInterface/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+    fi
   - mkdir -p build
   - cd build
-  - conan install .. -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} --build=missing
+  - |
+    if [ -n "$TRAVIS_TAG" ]; then
+      conan install ../DbAdapterTestUtilities -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -e VERSION="${TRAVIS_TAG:1}";
+    else
+      conan install ../DbAdapterTestUtilities -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX} -e VERSION="0.0.${TRAVIS_BUILD_NUMBER}";
+    fi
   - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - make
   - cd bin
@@ -61,21 +72,22 @@ script:
   - cd ..
   - |
     if [ -n "$TRAVIS_TAG" ]; then
-      conan export-pkg ../conanfile.py "DbAdapter/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+      conan export-pkg ../conanfile.py "DbAdapterTestUtilities/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
     else
-      conan export-pkg ../conanfile.py "DbAdapter/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+      conan export-pkg ../conanfile.py "DbAdapterTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
     fi
   - |
     if [ "$BUILD_TYPE" == "Release" ] || [ "$BUILD_TYPE" == "Debug" ]; then
       if [ -n "$TRAVIS_TAG" ]; then
-        conan test ../test_package/conanfile.py DbAdapter/${TRAVIS_TAG:1}@systelab/stable -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+        conan test ../test_package/conanfile.py DbAdapterTestUtilities/${TRAVIS_TAG:1}@systelab/stable -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
       else
-        conan test ../test_package/conanfile.py DbAdapter/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
+        conan test ../test_package/conanfile.py DbAdapterTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
       fi
     fi
 
 deploy:
   provider: script
-  script: conan upload "DbAdapter/${TRAVIS_TAG:1}@systelab/stable" --all -r systelab-bintray --force
+  skip_cleanup: true
+  script: bash ./deploy.sh -v "${TRAVIS_TAG:1}"
   on:
     tags: true
