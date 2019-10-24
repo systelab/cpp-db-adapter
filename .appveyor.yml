@@ -8,12 +8,23 @@ init:
         Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))"
       }
 
-platform:
-  - Win32
- 
 configuration:
   - Debug
   - Release
+
+environment:
+  matrix:
+  - arch: x86
+    platform: Win32
+    visual_studio: Visual Studio 15 2017
+    boost: 1.66.0
+    gtest: 1.7.0
+
+  - arch: x86_64
+    platform: x64
+    visual_studio: Visual Studio 15 2017 Win64
+    boost: 1.67.0
+    gtest: 1.8.1
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
@@ -23,17 +34,18 @@ install:
   - conan --version
 
 before_build:
+  - conan export-pkg DbAdapterInterface/conanfile.py DbAdapterInterface/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -o boost=%BOOST%
   - md build
   - cd build
-  - conan install .. -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=x86
-  - cmake .. -G "Visual Studio 15 2017"
+  - conan install ../DbAdapterTestUtilities -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
+  - cmake .. -G "%VISUAL_STUDIO%"
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\build\DbAdapter.sln
 
 after_build:
-  - conan export-pkg ../conanfile.py DbAdapter/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=x86
-  - conan test ../test_package/conanfile.py DbAdapter/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=x86
+  - conan export-pkg ../DbAdapterTestUtilities/conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
+  - conan test ../test_package/conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
 
 artifacts:
   - path: 'build\lib\%CONFIGURATION%\DbAdapterTestUtilities.lib'
@@ -42,7 +54,8 @@ artifacts:
 deploy_script:
   - ps: >- 
       if($env:appveyor_repo_tag -eq 'True') {
-        conan upload DbAdapter/$env:appveyor_build_version@systelab/stable --all -r systelab-bintray --force
+        conan upload DbAdapterInterface/$env:appveyor_build_version@systelab/stable --all -r systelab-bintray --force
+        conan upload DbAdapterTestUtilities/$env:appveyor_build_version@systelab/stable --all -r systelab-bintray --force
       } else {
         echo "Not uploading because this is not a tag build"
       }
