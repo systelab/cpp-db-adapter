@@ -84,6 +84,7 @@ script:
         conan test ../test_package/conanfile.py DbAdapterTestUtilities/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable -s build_type=${CONAN_BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
       fi
     fi
+  - cd ..
 
 deploy:
   provider: script
