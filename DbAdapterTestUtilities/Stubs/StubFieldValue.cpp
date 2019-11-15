@@ -197,7 +197,7 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_doubleValue(0.)
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::DOUBLE));
+		m_field.reset(new StubField(name, db::STRING));
 			
 		if (value)
 		{
