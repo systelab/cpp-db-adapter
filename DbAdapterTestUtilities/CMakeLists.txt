@@ -11,7 +11,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Configure include directories
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/..)
 
 # Find external dependencides
 find_package(gtest)
@@ -36,6 +36,24 @@ target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT}
                       gtest::gtest
                       TestUtilitiesInterface::TestUtilitiesInterface
                       DbAdapterInterface::DbAdapterInterface)
+
+
+# Exclude files from test_package
+set(EXCLUDE_DIR test_package)
+foreach (TMP_PATH ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC})
+    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+        list (REMOVE_ITEM DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC ${TMP_PATH})
+    endif ()
+endforeach(TMP_PATH)
+
+foreach (TMP_PATH ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
+    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
+    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+        list (REMOVE_ITEM DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR ${TMP_PATH})
+    endif ()
+endforeach(TMP_PATH)
+
 
 # Configure source groups
 foreach(FILE ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
