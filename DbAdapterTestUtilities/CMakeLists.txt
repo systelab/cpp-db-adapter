@@ -14,6 +14,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 include_directories(${CMAKE_SOURCE_DIR}/..)
 
 # Find external dependencides
+find_package(boost)
 find_package(gtest)
 find_package(TestUtilitiesInterface)
 find_package(DbAdapterInterface)
@@ -41,6 +42,7 @@ file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR
 
 add_library(${DB_ADAPTER_TEST_UTILITIES_PROJECT} STATIC ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
 target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT}
+                      boost::boost
                       gtest::gtest
                       TestUtilitiesInterface::TestUtilitiesInterface
                       DbAdapterInterface::DbAdapterInterface)
