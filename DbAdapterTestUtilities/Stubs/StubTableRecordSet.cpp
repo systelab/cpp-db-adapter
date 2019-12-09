@@ -3,8 +3,8 @@
 
 #include "DbAdapterInterface/ITable.h"
 
-#include "DbAdapterTestUtilities/Stubs/StubField.h"
-#include "DbAdapterTestUtilities/Stubs/StubTableRecord.h"
+#include "StubField.h"
+#include "StubTableRecord.h"
 
 
 namespace systelab { namespace db { namespace test_utility {

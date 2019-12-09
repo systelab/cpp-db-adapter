@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "StubTableRecord.h"
 
-#include "DbAdapterTestUtilities/Stubs/StubField.h"
-#include "DbAdapterTestUtilities/Stubs/StubFieldValue.h"
+#include "StubField.h"
+#include "StubFieldValue.h"
 
 
 namespace systelab { namespace db { namespace test_utility {
