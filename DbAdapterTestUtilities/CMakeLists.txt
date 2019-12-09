@@ -1,8 +1,19 @@
 cmake_minimum_required(VERSION 3.2)
 
+project(DbAdapterTestUtilities)
+
+# Configure environment
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Configure include directories
+include_directories(${CMAKE_SOURCE_DIR})
+
 # Find external dependencides
 find_package(gtest)
-find_package(boost)
 find_package(TestUtilitiesInterface)
 find_package(DbAdapterInterface)
 
@@ -22,7 +33,6 @@ file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR "*.h")
 add_library(${DB_ADAPTER_TEST_UTILITIES_PROJECT} STATIC ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
 target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT}
                       gtest::gtest
-                      boost::boost 
                       TestUtilitiesInterface::TestUtilitiesInterface
                       DbAdapterInterface::DbAdapterInterface)
 
