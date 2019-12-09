@@ -13,17 +13,13 @@ class DbAdapterInterfaceConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"boost": ["1.66.0", "1.67.0"]}
     default_options = {"boost":"1.67.0"}
+    exports_sources = "*"
 
     def configure(self):
         self.options["boost"].shared = True
 
     def requirements(self):
         self.requires(("boost/%s@conan/stable") % self.options.boost)
-
-    def imports(self):
-        self.copy("*.dll", dst="bin", src="bin")
-        self.copy("*.dylib*", dst="bin", src="lib")
-        self.copy("*.so*", dst="bin", src="lib")
 
     def package(self):
         self.copy("*.h", dst="include/DbAdapterInterface")
