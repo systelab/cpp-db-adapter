@@ -10,8 +10,8 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockDatabase::~MockDatabase()
 	{
-		unsigned int nTables = m_tables.size();
-		for (unsigned int i = 0; i < nTables; i++)
+		size_t nTables = m_tables.size();
+		for (size_t i = 0; i < nTables; i++)
 		{
 			delete m_tables[i];
 		}
