@@ -1,5 +1,5 @@
 import os
-from conans import ConanFile, tools
+from conans import ConanFile, CMake, tools
 
 
 class DbAdapterTestUtilitiesConan(ConanFile):
@@ -14,6 +14,7 @@ class DbAdapterTestUtilitiesConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"boost": ["1.66.0", "1.67.0"], "gtest": ["1.7.0", "1.8.1"]}
     default_options = {"boost":"1.67.0", "gtest": "1.8.1"}
+    exports_sources = "*"
 
     def configure(self):
         self.options["DbAdapterInterface"].boost = self.options.boost
@@ -29,6 +30,11 @@ class DbAdapterTestUtilitiesConan(ConanFile):
             self.requires("DbAdapterInterface/%s@systelab/stable" % os.environ['VERSION'])
         else:
             self.requires("DbAdapterInterface/%s@systelab/stable" % self.version)
+
+    def build(self):
+        cmake = CMake(self)
+        cmake.configure(source_folder=".")
+        cmake.build()
 
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
