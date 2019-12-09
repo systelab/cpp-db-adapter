@@ -29,31 +29,21 @@ ENDIF(MSVC)
 
 # Configure DB Adapter test utilities project
 set(DB_ADAPTER_TEST_UTILITIES_PROJECT DbAdapterTestUtilities)
-file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC "*.cpp")
-file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR "*.h")
+file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC
+                  "${PROJECT_SOURCE_DIR}/Comparators/*.cpp"
+                  "${PROJECT_SOURCE_DIR}/Mocks/*.cpp"
+                  "${PROJECT_SOURCE_DIR}/Stubs/*.cpp")
+file(GLOB_RECURSE DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR
+                  "${PROJECT_SOURCE_DIR}/Comparators/*.h"
+                  "${PROJECT_SOURCE_DIR}/Mocks/*.h"
+                  "${PROJECT_SOURCE_DIR}/Stubs/*.h"
+                  "${PROJECT_SOURCE_DIR}/stdafx.h")
+
 add_library(${DB_ADAPTER_TEST_UTILITIES_PROJECT} STATIC ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
 target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT}
                       gtest::gtest
                       TestUtilitiesInterface::TestUtilitiesInterface
                       DbAdapterInterface::DbAdapterInterface)
-
-
-# Exclude files from test_package
-set(EXCLUDE_DIR test_package)
-foreach (TMP_PATH ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC})
-    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
-    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
-        list (REMOVE_ITEM DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC ${TMP_PATH})
-    endif ()
-endforeach(TMP_PATH)
-
-foreach (TMP_PATH ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
-    string (FIND ${TMP_PATH} ${EXCLUDE_DIR} EXCLUDE_DIR_FOUND)
-    if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
-        list (REMOVE_ITEM DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR ${TMP_PATH})
-    endif ()
-endforeach(TMP_PATH)
-
 
 # Configure source groups
 foreach(FILE ${DB_ADAPTER_TEST_UTILITIES_PROJECT_SRC} ${DB_ADAPTER_TEST_UTILITIES_PROJECT_HDR})
