@@ -39,7 +39,7 @@ install:
   - conan --version
 
 before_build:
-  - conan export-pkg DbAdapterInterface/conanfile.py DbAdapterInterface/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -o boost=%BOOST% -o gtest=%GTEST%
+  - conan export-pkg DbAdapterInterface/conanfile.py DbAdapterInterface/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -o boost=%BOOST%
   - cd DbAdapterTestUtilities
   - md build
   - cd build
