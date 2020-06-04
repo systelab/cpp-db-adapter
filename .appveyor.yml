@@ -44,7 +44,7 @@ before_build:
   - md build
   - cd build
   - conan install .. -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
-  - cmake .. -G "%VISUAL_STUDIO%"
+  - cmake .. -G "%VISUAL_STUDIO%" -A %PLATFORM%
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\DbAdapterTestUtilities\build\DbAdapterTestUtilities.sln
