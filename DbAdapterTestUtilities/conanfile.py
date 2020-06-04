@@ -21,11 +21,11 @@ class DbAdapterTestUtilitiesConan(ConanFile):
 
     def requirements(self):
         if self.options.gtest == "1.7.0":
-            self.build_requires("gtest/1.7.0@systelab/stable")
+            self.requires("gtest/1.7.0@systelab/stable")
         elif self.options.gtest == "1.8.1":
-            self.build_requires("gtest/1.8.1")
+            self.requires("gtest/1.8.1")
         else:
-            self.build_requires("gtest/1.10.0")
+            self.requires("gtest/1.10.0")
 
         self.requires("TestUtilitiesInterface/1.0.4@systelab/stable")
         if ("%s" % self.version) == "None":
