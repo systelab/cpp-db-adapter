@@ -11,15 +11,20 @@ class DbAdapterInterfaceConan(ConanFile):
     license = "MIT"
     generators = "cmake_find_package"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"boost": ["1.66.0", "1.67.0"]}
-    default_options = {"boost":"1.67.0"}
+    options = {"boost": ["1.66.0", "1.67.0", "1.71.0"]}
+    default_options = {"boost": "1.71.0"}
     exports_sources = "*"
 
     def configure(self):
         self.options["boost"].shared = True
 
     def requirements(self):
-        self.requires(("boost/%s@conan/stable") % self.options.boost)
+        if self.options.boost == "1.66.0":
+            self.requires("boost/1.66.0@conan/stable")
+        elif self.options.boost == "1.67.0":
+            self.requires("boost/1.67.0@conan/stable")
+        else:
+            self.requires(("boost/%s") % self.options.boost)
 
     def package(self):
         self.copy("*.h", dst="include/DbAdapterInterface")

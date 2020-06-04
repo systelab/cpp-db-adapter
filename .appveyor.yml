@@ -1,7 +1,5 @@
 version: '0.0.{build}'
 
-image: Visual Studio 2017
-
 init:
   - ps: >-
       if($env:appveyor_repo_tag -eq 'True') {
@@ -13,40 +11,47 @@ configuration:
   - Release
 
 environment:
+  global:
+    PYTHON: "C:\\Python36"
+
   matrix:
-  - arch: x86
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    arch: x86_64
+    platform: x64
+    visual_studio: Visual Studio 16 2019
+    compiler_toolset: v142
+    gtest: 1.10.0
+    boost: 1.71.0
+
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    arch: x86
     platform: Win32
     visual_studio: Visual Studio 15 2017
-    boost: 1.66.0
+    compiler_toolset: v141
     gtest: 1.7.0
-
-  - arch: x86_64
-    platform: x64
-    visual_studio: Visual Studio 15 2017 Win64
-    boost: 1.67.0
-    gtest: 1.8.1
+    boost: 1.66.0
 
 install:
-  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - "SET PATH=%PYTHON%;%PYTHON%/Scripts/;%PATH%"
   - pip.exe install conan
   - conan user
   - conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
   - conan --version
 
 before_build:
-  - conan export-pkg DbAdapterInterface/conanfile.py DbAdapterInterface/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -o boost=%BOOST%
+  - conan export-pkg DbAdapterInterface/conanfile.py DbAdapterInterface/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -o boost=%BOOST% -o gtest=%GTEST%
   - cd DbAdapterTestUtilities
   - md build
   - cd build
-  - conan install .. -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
+  - conan install .. -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
   - cmake .. -G "%VISUAL_STUDIO%"
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\DbAdapterTestUtilities\build\DbAdapterTestUtilities.sln
 
 after_build:
-  - conan export-pkg ../conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
-  - conan test ../test_package/conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=v141 -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
+  - conan export-pkg ../conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
+  - conan test ../test_package/conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
 
 artifacts:
   - path: 'DbAdapterTestUtilities\build\lib\%CONFIGURATION%\DbAdapterTestUtilities.lib'
