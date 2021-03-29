@@ -1,5 +1,16 @@
 # Summary of changes
 
+
+## Changes for version 1.1.11 (29 Mar 2021)
+
+### Bug Fixes
+
+- Updated continuous integration to:
+  - Use GitHub Action to generate library documentation
+  - Upload generated packages to Systelab's public Artifactory
+  - Moved VS2017 configurations to work with GoogleTest 1.10.0
+
+
 ## Changes for version 1.1.10 (3 Sep 2020)
 
 ### Bug Fixes
