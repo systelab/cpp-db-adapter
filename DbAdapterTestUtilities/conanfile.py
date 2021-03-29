@@ -27,7 +27,13 @@ class DbAdapterTestUtilitiesConan(ConanFile):
         else:
             self.requires("gtest/1.10.0")
 
-        self.requires(("boost/%s@conan/stable") % self.options.boost)
+        if self.options.boost == "1.66.0":
+            self.requires("boost/1.66.0@conan/stable")
+        elif self.options.boost == "1.67.0":
+            self.requires("boost/1.67.0@conan/stable")
+        else:
+            self.requires(("boost/%s") % self.options.boost)
+
         self.requires("TestUtilitiesInterface/1.0.4@systelab/stable")
         if ("%s" % self.version) == "None":
             self.requires("DbAdapterInterface/%s@systelab/stable" % os.environ['VERSION'])
