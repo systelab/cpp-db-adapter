@@ -27,7 +27,6 @@ class DbAdapterInterfaceConan(ConanFile):
             self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
         elif self.options.boost == "1.75.0":
             self.requires("boost/1.75.0#32c81e4e89c54b95b2c2c198fe3cb65f")
-            self.required("bzip2/1.0.8#f85c479b79b300b1b5e17510aca55c35")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
