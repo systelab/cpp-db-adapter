@@ -1,7 +1,7 @@
 # Summary of changes
 
 
-## Changes for version 1.1.11 (29 Mar 2021)
+## Changes for version 1.1.11 (30 Mar 2021)
 
 ### Bug Fixes
 
