@@ -53,7 +53,7 @@ build:
 after_build:
   - conan export-pkg ../conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
   - conan test ../test_package/conanfile.py DbAdapterTestUtilities/%APPVEYOR_BUILD_VERSION%@systelab/stable -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
-  - conan upload gtest/1.10.0 --all -r systelab-public --force
+  - conan upload gtest/1.10.0 --all -r systelab-public --force --confirm
 
 artifacts:
   - path: 'DbAdapterTestUtilities\build\lib\%CONFIGURATION%\DbAdapterTestUtilities.lib'
