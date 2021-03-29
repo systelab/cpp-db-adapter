@@ -16,14 +16,6 @@ environment:
     CYG_ROOT: C:\cygwin64
 
   matrix:
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    arch: x86_64
-    platform: x64
-    visual_studio: Visual Studio 16 2019
-    compiler_toolset: v142
-    gtest: 1.10.0
-    boost: 1.72.0
-
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     arch: x86
     platform: Win32
@@ -31,6 +23,14 @@ environment:
     compiler_toolset: v141
     gtest: 1.10.0
     boost: 1.66.0
+  
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    arch: x86_64
+    platform: x64
+    visual_studio: Visual Studio 16 2019
+    compiler_toolset: v142
+    gtest: 1.10.0
+    boost: 1.72.0
 
 install:
   - "SET PATH=%PYTHON%;%PYTHON%/Scripts/;%PATH%"
@@ -44,7 +44,7 @@ before_build:
   - cd DbAdapterTestUtilities
   - md build
   - cd build
-  - conan install .. -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST%
+  - conan install .. -s build_type=%CONFIGURATION% -s compiler.toolset=%COMPILER_TOOLSET% -s arch=%ARCH% -e VERSION="%APPVEYOR_BUILD_VERSION%" -o boost=%BOOST% -o gtest=%GTEST% --build=missing
   - cmake .. -G "%VISUAL_STUDIO%" -A %PLATFORM%
 
 build:
@@ -61,6 +61,7 @@ artifacts:
 deploy_script:
   - ps: >- 
       if($env:appveyor_repo_tag -eq 'True') {
+        conan upload gtest/1.10.0 --all -r systelab-public --force
         conan upload DbAdapterInterface/$env:appveyor_build_version@systelab/stable --all -r systelab-public --force
         conan upload DbAdapterTestUtilities/$env:appveyor_build_version@systelab/stable --all -r systelab-public --force
       } else {
