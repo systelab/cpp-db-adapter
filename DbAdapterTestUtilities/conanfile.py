@@ -38,7 +38,7 @@ class DbAdapterTestUtilitiesConan(ConanFile):
         else:
             self.requires(("boost/%s") % self.options.boost)
 
-        self.requires("TestUtilitiesInterface/1.0.4@systelab/stable")
+        self.requires("TestUtilitiesInterface/1.0.6@systelab/stable")
         if ("%s" % self.version) == "None":
             self.requires("DbAdapterInterface/%s@systelab/stable" % os.environ['VERSION'])
         else:
