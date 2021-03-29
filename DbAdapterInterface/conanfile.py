@@ -11,7 +11,7 @@ class DbAdapterInterfaceConan(ConanFile):
     license = "MIT"
     generators = "cmake_find_package"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"boost": ["1.66.0", "1.67.0", "1.72.0"]}
+    options = {"boost": ["1.66.0", "1.67.0", "1.72.0", "1.75.0"]}
     default_options = {"boost": "1.72.0"}
     exports_sources = "*"
 
@@ -25,6 +25,8 @@ class DbAdapterInterfaceConan(ConanFile):
             self.requires("boost/1.67.0@conan/stable")
         elif self.options.boost == "1.72.0":
             self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
+        elif self.options.boost == "1.75.0":
+            self.requires("boost/1.75.0#e1f7de6b38f85eb22e3a0741e70e03ed")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
