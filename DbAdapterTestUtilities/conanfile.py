@@ -25,12 +25,14 @@ class DbAdapterTestUtilitiesConan(ConanFile):
         elif self.options.gtest == "1.8.1":
             self.requires("gtest/1.8.1")
         else:
-            self.requires("gtest/1.10.0")
+            self.requires("gtest/1.10.0#0c895f60b461f8fee0da53a84d659131")
 
         if self.options.boost == "1.66.0":
             self.requires("boost/1.66.0@conan/stable")
         elif self.options.boost == "1.67.0":
             self.requires("boost/1.67.0@conan/stable")
+        elif self.options.boost == "1.72.0":
+            self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
         else:
             self.requires(("boost/%s") % self.options.boost)
 

@@ -23,6 +23,8 @@ class DbAdapterInterfaceConan(ConanFile):
             self.requires("boost/1.66.0@conan/stable")
         elif self.options.boost == "1.67.0":
             self.requires("boost/1.67.0@conan/stable")
+        elif self.options.boost == "1.72.0":
+            self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
