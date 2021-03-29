@@ -1,3 +1,5 @@
+language: cpp
+
 matrix:
   include:
   - os: linux
@@ -13,6 +15,7 @@ matrix:
           - gcc-7
           - g++-7
     env:
+      - COMPILER_NAME=gcc-7
       - BUILD_TYPE=Release
       - CONAN_BUILD_TYPE=Release
       - COMPILER_LIBCXX=libstdc++11
@@ -32,6 +35,7 @@ matrix:
           - gcc-7
           - g++-7
     env:
+      - COMPILER_NAME=gcc-7
       - BUILD_TYPE=Debug
       - CONAN_BUILD_TYPE=Debug
       - COMPILER_LIBCXX=libstdc++11
@@ -39,10 +43,11 @@ matrix:
       - BOOST_VERSION=1.67.0
 
   - os: osx
-    osx_image: xcode10.1
+    osx_image: xcode12.2
     language: cpp
     compiler: clang   
     env:
+      - COMPILER_NAME=clang-MacOS
       - BUILD_TYPE=Release
       - CONAN_BUILD_TYPE=Release
       - COMPILER_LIBCXX=libc++
@@ -55,7 +60,7 @@ install:
   - if [ $TRAVIS_OS_NAME == linux ]; then pip install conan; fi
   - if [ $TRAVIS_OS_NAME == osx ]; then brew install conan; fi
   - conan user
-  - conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
+  - conan remote add systelab-public https://csw.jfrog.io/artifactory/api/conan/cpp-conan-production-local
   - conan --version
 
 script:
@@ -98,8 +103,13 @@ script:
   - cd ..
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: bash ./deploy.sh -v "${TRAVIS_TAG:1}"
-  on:
-    tags: true
+  - provider: script
+    skip_cleanup: true
+    script: bash ./ci/deploy.sh -v "${TRAVIS_TAG:1}"
+    on:
+      tags: true
+  - provider: script
+    script: bash ./ci/build_docs.sh -o "systelab" -s "cpp-db-adapter" -t "${TRAVIS_TAG}" -c "Travis" -n "${COMPILER_NAME} ${BUILD_TYPE}" -j "${TRAVIS_JOB_ID}"
+    skip_cleanup: true
+    on:
+      tags: true
