@@ -34,7 +34,7 @@ class DbAdapterTestUtilitiesConan(ConanFile):
         elif self.options.boost == "1.72.0":
             self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
         elif self.options.boost == "1.75.0":
-            self.requires("boost/1.75.0#e1f7de6b38f85eb22e3a0741e70e03ed")
+            self.requires("boost/1.75.0#0ed59b755652bd604846c84b0e721bd2")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
