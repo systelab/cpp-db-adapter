@@ -46,7 +46,7 @@ pipeline
 			{
 				script
 				{
-					sh "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} -o boost=${props.conanBoostVersion}"
+					
 					def configurations = ['SnowDebug', 'SnowRelease']
 					for(int i=0; i < configurations.size(); i++)
 					{
@@ -55,6 +55,7 @@ pipeline
 							def props = readProperties file:"ci/pipelines/${configurations[i]}.properties"							
 							props.each { propKey, propValue -> println "${propKey}: ${propValue}" }
 
+							sh "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} -o boost=${props.conanBoostVersion}"
 							sh "mkdir build-${configurations[i]}"
 							dir("build-${configurations[i]}")
 							{
