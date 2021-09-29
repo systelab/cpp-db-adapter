@@ -36,7 +36,6 @@ pipeline
 			steps
 			{
 				deleteDir()
-				configureConanRemotes()
 				checkoutSourceCode()
 			}
 		}
