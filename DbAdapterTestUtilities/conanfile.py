@@ -40,9 +40,9 @@ class DbAdapterTestUtilitiesConan(ConanFile):
 
         self.requires("TestUtilitiesInterface/1.0.7@systelab/stable")
         if ("%s" % self.version) == "None":
-            self.requires("DbAdapterInterface/%s@systelab/stable" % os.environ['VERSION'])
+            self.requires(f"DbAdapterInterface/{os.environ['VERSION']}@systelab/{os.environ['CHANNEL']}")
         else:
-            self.requires("DbAdapterInterface/%s@systelab/stable" % self.version)
+            self.requires(f"DbAdapterInterface/{self.version}@systelab/{self.channel}")
 
     def build(self):
         cmake = CMake(self)
