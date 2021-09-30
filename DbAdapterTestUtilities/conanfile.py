@@ -31,10 +31,12 @@ class DbAdapterTestUtilitiesConan(ConanFile):
             self.requires("boost/1.66.0@conan/stable")
         elif self.options.boost == "1.67.0":
             self.requires("boost/1.67.0@conan/stable")
-        elif self.options.boost == "1.72.0#50e13743ed3c867fe95f151e113bc1ba":
-            self.requires("boost/1.72.0")
-        elif self.options.boost == "1.75.0#32c81e4e89c54b95b2c2c198fe3cb65f":
-            self.requires("boost/1.75.0")
+        elif self.options.boost == "1.72.0":
+            self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
+        elif self.options.boost == "1.75.0":
+            self.requires("boost/1.75.0#32c81e4e89c54b95b2c2c198fe3cb65f")
+        elif self.options.boost == "1.76.0":
+            self.requires("boost/1.76.0#329123a826d0a53fef8318ec3e729a52")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
