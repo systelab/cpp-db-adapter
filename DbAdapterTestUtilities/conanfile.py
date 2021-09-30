@@ -25,20 +25,20 @@ class DbAdapterTestUtilitiesConan(ConanFile):
         elif self.options.gtest == "1.8.1":
             self.requires("gtest/1.8.1")
         else:
-            self.requires("gtest/1.10.0")
+            self.requires("gtest/1.10.0#0c895f60b461f8fee0da53a84d659131")
 
         if self.options.boost == "1.66.0":
             self.requires("boost/1.66.0@conan/stable")
         elif self.options.boost == "1.67.0":
             self.requires("boost/1.67.0@conan/stable")
-        elif self.options.boost == "1.72.0":
+        elif self.options.boost == "1.72.0#50e13743ed3c867fe95f151e113bc1ba":
             self.requires("boost/1.72.0")
-        elif self.options.boost == "1.75.0":
+        elif self.options.boost == "1.75.0#32c81e4e89c54b95b2c2c198fe3cb65f":
             self.requires("boost/1.75.0")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
-        self.requires("TestUtilitiesInterface/1.0.7@systelab/stable")
+        self.requires("TestUtilitiesInterface/1.0.8@systelab/stable")
         if ("%s" % self.version) == "None":
             self.requires(f"DbAdapterInterface/{os.environ['VERSION']}@systelab/{os.environ['CHANNEL']}")
         else:
