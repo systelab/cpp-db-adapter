@@ -1,5 +1,20 @@
 # Summary of changes
 
+## Changes for version 1.1.13 (30 Sep 2021)
+
+### Continuous Integration Improvements
+
+- Updated dependencies:
+  - Added option for boost 1.76
+  - Upgraded TestUtilities to 1.0.8
+- Fixed adapter interface pipeline to not include settings in package.
+- Added jenkins files to build the library and removed appeveyor and travis files.
+
+## Changes for version 1.1.12 (30 Jun 2021)
+
+### Bug Fixes
+
+- Updated TestUtilities version to 1.0.7
 
 ## Changes for version 1.1.11 (30 Mar 2021)
 
