@@ -12,8 +12,8 @@ class DbAdapterTestUtilitiesConan(ConanFile):
     license = "MIT"
     generators = "cmake_find_package"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"boost": ["1.66.0", "1.67.0", "1.72.0", "1.75.0"], "gtest": ["1.7.0", "1.8.1", "1.10.0"]}
-    default_options = {"boost":"1.72.0", "gtest": "1.10.0"}
+    options = {"boost": ["1.66.0", "1.67.0", "1.72.0", "1.75.0", "1.76.0"], "gtest": ["1.7.0", "1.8.1", "1.10.0"]}
+    default_options = {"boost":"1.76.0", "gtest": "1.10.0"}
     exports_sources = "*"
 
     def configure(self):
@@ -35,14 +35,16 @@ class DbAdapterTestUtilitiesConan(ConanFile):
             self.requires("boost/1.72.0#50e13743ed3c867fe95f151e113bc1ba")
         elif self.options.boost == "1.75.0":
             self.requires("boost/1.75.0#32c81e4e89c54b95b2c2c198fe3cb65f")
+        elif self.options.boost == "1.76.0":
+            self.requires("boost/1.76.0#329123a826d0a53fef8318ec3e729a52")
         else:
             self.requires(("boost/%s") % self.options.boost)
 
-        self.requires("TestUtilitiesInterface/1.0.6@systelab/stable")
+        self.requires("TestUtilitiesInterface/1.0.8@systelab/stable")
         if ("%s" % self.version) == "None":
-            self.requires("DbAdapterInterface/%s@systelab/stable" % os.environ['VERSION'])
+            self.requires(f"DbAdapterInterface/{os.environ['VERSION']}@systelab/{os.environ['CHANNEL']}")
         else:
-            self.requires("DbAdapterInterface/%s@systelab/stable" % self.version)
+            self.requires(f"DbAdapterInterface/{self.version}@systelab/{self.channel}")
 
     def build(self):
         cmake = CMake(self)
