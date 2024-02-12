@@ -4,7 +4,7 @@
 #include "IBinaryValue.h"
 #include "IFieldValue.h"
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IPrimaryKeyValue
 	{
@@ -19,5 +19,5 @@ namespace systelab { namespace db {
 		virtual IFieldValue& getFieldValue(const std::string& fieldName) const = 0;
 	};
 
-}}
+}
 

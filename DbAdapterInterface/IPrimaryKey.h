@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class ITable;
 	class IField;
@@ -18,6 +18,5 @@ namespace systelab { namespace db {
 		virtual const IField& getField(unsigned int index) const = 0;
 		virtual const IField& getField(const std::string& fieldName) const = 0;
 	};
-
-}}
+}
 

@@ -3,8 +3,7 @@
 #include <ostream>
 #include <istream>
 
-
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IBinaryValue
 	{
@@ -14,5 +13,4 @@ namespace systelab { namespace db {
 		virtual std::ostream getOutputStream() const = 0;
 		virtual std::istream getInputStream() const = 0;
 	};
-
-}}
+}

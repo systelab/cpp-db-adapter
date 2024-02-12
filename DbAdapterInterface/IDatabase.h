@@ -8,7 +8,7 @@
 #include <memory>
 
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IDatabase
 	{
@@ -23,6 +23,5 @@ namespace systelab { namespace db {
 		virtual RowId getLastInsertedRowId() const = 0;
 		virtual std::unique_ptr<ITransaction> startTransaction() = 0;
 	};
-
-}}
+}
 

@@ -5,8 +5,7 @@
 
 #include <memory>
 
-
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IConnection
 	{
@@ -24,6 +23,5 @@ namespace systelab { namespace db {
 			}
 		};
 	};
-
-}}
+}
 

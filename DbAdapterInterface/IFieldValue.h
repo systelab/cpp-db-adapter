@@ -3,7 +3,7 @@
 #include "IField.h"
 #include "IBinaryValue.h"
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IFieldValue
 	{
@@ -38,7 +38,6 @@ namespace systelab { namespace db {
 		inline friend bool operator== (const IFieldValue& lhs, const IFieldValue& rhs);
 		inline friend bool operator!= (const IFieldValue& lhs, const IFieldValue& rhs);
 	};
-
-}}
+}
 
 #include "IFieldValue.inl"

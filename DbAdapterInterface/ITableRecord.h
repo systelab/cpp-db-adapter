@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class ITable;
 	class IField;
@@ -27,6 +27,6 @@ namespace systelab { namespace db {
 		inline friend bool operator== (const ITableRecord& lhs, const ITableRecord& rhs);
 		inline friend bool operator!= (const ITableRecord& lhs, const ITableRecord& rhs);
 	};
-}}
+}
 
 #include "ITableRecord.inl"

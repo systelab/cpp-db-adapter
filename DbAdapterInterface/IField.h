@@ -6,8 +6,8 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 
-namespace systelab { namespace db {
 
+namespace systelab::db {
 	class IBinaryValue;
 
 	class IField
@@ -31,7 +31,6 @@ namespace systelab { namespace db {
 		inline friend bool operator== (const IField& lhs, const IField& rhs);
 		inline friend bool operator!= (const IField& lhs, const IField& rhs);
 	};
-
-}}
+}
 
 #include "IField.inl"

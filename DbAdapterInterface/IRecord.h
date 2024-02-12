@@ -2,8 +2,7 @@
 
 #include "IField.h"
 #include "IFieldValue.h"
-
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class ITable;
 
@@ -18,5 +17,5 @@ namespace systelab { namespace db {
 
 		virtual bool hasFieldValue(const std::string& fieldName) const = 0;
 	};
-}}
+}
 

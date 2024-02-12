@@ -1,5 +1,4 @@
-
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	bool operator== (const IField& lhs, const IField& rhs)
 	{
@@ -16,5 +15,4 @@ namespace systelab { namespace db {
 	{
 		return !(lhs == rhs);
 	}
-
-}}
+}

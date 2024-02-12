@@ -2,7 +2,7 @@
 
 #include "Types.h"
 
-namespace systelab { namespace db {
+namespace systelab::db {
 	class ITransaction
 	{
 	public:
@@ -11,5 +11,5 @@ namespace systelab { namespace db {
 		virtual void commit() = 0;
 		virtual void rollback() = 0;
 	};
-}}
+}
 

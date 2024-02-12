@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IField;
 	class ITableRecord;
@@ -27,6 +27,5 @@ namespace systelab { namespace db {
 		virtual bool isCurrentRecordValid() const = 0;
 		virtual void nextRecord() = 0;
 	};
-
-}}
+}
 

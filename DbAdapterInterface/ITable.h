@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class ITable
 	{
@@ -57,5 +57,5 @@ namespace systelab { namespace db {
 		virtual RowsAffected deleteAllRecords() = 0;
 	};
 
-}}
+}
 
