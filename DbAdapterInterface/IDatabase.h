@@ -1,14 +1,13 @@
 #pragma once
 
 #include "Types.h"
-#include "ITable.h"
-#include "IRecordSet.h"
-#include "ITransaction.h"
 
 #include <memory>
 
-
 namespace systelab::db {
+	class ITable;
+	class IRecordSet;
+	class ITransaction;
 
 	class IDatabase
 	{

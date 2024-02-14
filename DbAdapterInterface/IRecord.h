@@ -1,10 +1,8 @@
 #pragma once
 
-#include "IField.h"
-#include "IFieldValue.h"
 namespace systelab::db {
 
-	class ITable;
+	class IFieldValue;
 
 	class IRecord
 	{

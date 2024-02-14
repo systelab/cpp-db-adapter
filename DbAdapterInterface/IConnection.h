@@ -1,11 +1,10 @@
 #pragma once
 
-#include "IDatabase.h"
-#include "IConnectionConfiguration.h"
-
 #include <memory>
 
 namespace systelab::db {
+	class IConnectionConfiguration;
+	class IDatabase;
 
 	class IConnection
 	{

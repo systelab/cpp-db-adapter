@@ -1,10 +1,12 @@
 #pragma once
 
-#include "IPrimaryKey.h"
-#include "IBinaryValue.h"
-#include "IFieldValue.h"
+#include <string>
 
 namespace systelab::db {
+
+	class IFieldValue;
+	class IPrimaryKey;
+	class ITable;
 
 	class IPrimaryKeyValue
 	{

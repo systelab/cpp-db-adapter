@@ -1,11 +1,11 @@
 #pragma once
 
-#include "IField.h"
-#include "IRecord.h"
-
 #include <memory>
 
 namespace systelab::db {
+
+	class IField;
+	class IRecord;
 
 	class IRecordSet
 	{
