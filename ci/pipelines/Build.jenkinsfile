@@ -46,26 +46,21 @@ pipeline
 			{
 				script
 				{
-					
-					def configurations = ['SnowDebug', 'SnowRelease']
+					def configurations = ['Debug', 'Release']
 					for(int i=0; i < configurations.size(); i++)
 					{
-						stage('Build ' + configurations[i])
+						stage("Build ${configurations[i]})
 						{
-							def props = readProperties file:"ci/pipelines/${configurations[i]}.properties"							
-							props.each { propKey, propValue -> println "${propKey}: ${propValue}" }
-
-							sh "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} -o boost=${props.conanBoostVersion} --force"
+							bat "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile ./package.profile --force"
 							dir("DbAdapterTestUtilities")
 							{
-								sh "mkdir build-${configurations[i]}"
+								bat "mkdir build-${configurations[i]}"
 								dir("build-${configurations[i]}")
 								{
-									sh "conan install .. -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s compiler.version=${props.conanCompilerVersion} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o boost=${props.conanBoostVersion} -e VERSION=${version} -e CHANNEL=${channel} "
-									sh "cmake .. -G '${props.cmakeVS}' -A ${props.cmakePlatform}"
-									sh "cmake --build . --config ${props.cmakeConfiguration}"
-									sh "conan export-pkg ../conanfile.py ${packageNameTestUtilities}/${version}@systelab/${channel} -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s compiler.version=${props.conanCompilerVersion} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o boost=${props.conanBoostVersion} --force"
-									sh "conan test ../test_package/conanfile.py ${packageNameTestUtilities}/${version}@systelab/${channel} -s build_type=${props.conanBuildType} -s compiler.toolset=${props.conanCompilerToolset} -s compiler.version=${props.conanCompilerVersion} -s arch=${props.conanArch} -o gtest=${props.conanGTestVersion} -o boost=${props.conanBoostVersion}"
+									bat "conan install .. --profile ../../build.profile -s build_type=${configurations[i]} -e VERSION=${version} -e CHANNEL=${channel}"
+									bat "cmake .."
+									bat "cmake --build ."
+									bat "conan export-pkg .. ${packageNameTestUtilities}/${version}@systelab/${channel} --profile ../../package.profile-s build_type=${props.conanBuildType} --force"
 								}
 							}
 						}
@@ -84,8 +79,8 @@ pipeline
 			{
 				script
 				{
-					sh "conan remove ${packageNameTestUtilities}/${version}@systelab/${channel} -r systelab-conan-local --force"
-					sh "conan upload ${packageNameTestUtilities}/${version}@systelab/${channel} --all -r systelab-conan-local --force"
+					bat "conan remove ${packageNameTestUtilities}/${version}@systelab/${channel} -r systelab-conan-local --force"
+					bat "conan upload ${packageNameTestUtilities}/${version}@systelab/${channel} --all -r systelab-conan-local --force"
 				}
 			}
 		}
