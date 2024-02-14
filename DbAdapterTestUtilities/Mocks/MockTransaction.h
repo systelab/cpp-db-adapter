@@ -2,18 +2,16 @@
 
 #include "DbAdapterInterface/ITransaction.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockTransaction : public ITransaction
 	{
 	public:
 		MockTransaction();
-		virtual ~MockTransaction();
+		~MockTransaction() override;
 
-		MOCK_METHOD0(commit, void());
-		MOCK_METHOD0(rollback, void());
+		MOCK_METHOD(void, commit, (), (override));
+		MOCK_METHOD(void, rollback, (), (override));
 	};
-
-}}}
+}
 

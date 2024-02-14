@@ -6,35 +6,29 @@
 #include "DbAdapterInterface/ITable.h"
 #include "DbAdapterInterface/ITableRecord.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockTableRecordSet : public ITableRecordSet
 	{
 	public:
 		MockTableRecordSet();
-		virtual ~MockTableRecordSet();
+		~MockTableRecordSet() override;
 
-		MOCK_CONST_METHOD0(getTable, db::ITable&());
+		MOCK_METHOD(ITable& , getTable, (), (const, override));
 
-		MOCK_CONST_METHOD0(getFieldsCount, unsigned int());
-		MOCK_CONST_METHOD1(getField, const db::IField&(unsigned int));
-		MOCK_CONST_METHOD1(getField, const db::IField&(const std::string&));
+		MOCK_METHOD(unsigned int, getFieldsCount, (), (const, override));
+		MOCK_METHOD(const db::IField&, getField, (unsigned int), (const, override));
+		MOCK_METHOD(const db::IField&, getField, (const std::string&), (const, override));
 
-		MOCK_CONST_METHOD0(getRecordsCount, unsigned int());
+		MOCK_METHOD(unsigned int, getRecordsCount, (), (const, override));
 
-		MOCK_CONST_METHOD0(getCurrentRecord, const db::ITableRecord&());
+		MOCK_METHOD(const db::ITableRecord&, getCurrentRecord, (), (const, override));
 
-		MOCK_CONST_METHOD0(copyCurrentRecordProxy, db::ITableRecord*());
-		std::unique_ptr<db::ITableRecord> copyCurrentRecord() const
-		{
-			return std::unique_ptr<db::ITableRecord>(copyCurrentRecordProxy());
-		}
+		MOCK_METHOD(std::unique_ptr<db::ITableRecord>, copyCurrentRecord, (), (const, override));
 
-		MOCK_CONST_METHOD0(isCurrentRecordValid, bool());
+		MOCK_METHOD(bool, isCurrentRecordValid, (), (const, override));
 
-		MOCK_METHOD0(nextRecord, void());
+		MOCK_METHOD(void, nextRecord, (), (override));
 	};
-
-}}}
+}
 

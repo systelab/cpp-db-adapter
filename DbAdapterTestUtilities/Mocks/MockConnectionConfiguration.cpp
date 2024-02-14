@@ -2,7 +2,7 @@
 #include "MockConnectionConfiguration.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockConnectionConfiguration::MockConnectionConfiguration()
 	{
@@ -10,5 +10,5 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockConnectionConfiguration::~MockConnectionConfiguration() = default;
 
-}}}
+}
 

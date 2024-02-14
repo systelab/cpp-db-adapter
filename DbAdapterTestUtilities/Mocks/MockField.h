@@ -1,10 +1,9 @@
 #pragma once
 
-#include "DbAdapterInterface/IBinaryValue.h"
 #include "DbAdapterInterface/IField.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	using namespace testing;
 
@@ -14,19 +13,18 @@ namespace systelab { namespace db { namespace test_utility {
 		MockField();
 		virtual ~MockField();
 
-		MOCK_CONST_METHOD0(hasNullDefaultValue, bool());
-		MOCK_CONST_METHOD0(getIndex, unsigned int());
-		MOCK_CONST_METHOD0(getName, std::string());
-		MOCK_CONST_METHOD0(getType, db::FieldTypes());
-		MOCK_CONST_METHOD0(isPrimaryKey, bool());
+		MOCK_METHOD(bool, hasNullDefaultValue, (), (const, override));
+		MOCK_METHOD(unsigned int, getIndex, (), (const, override));
+		MOCK_METHOD(std::string, getName, (), (const, override));
+		MOCK_METHOD(FieldTypes, getType, (), (const, override));
+		MOCK_METHOD(bool, isPrimaryKey, (), (const, override));
 
-		MOCK_CONST_METHOD0(getIntDefaultValue, int());
-		MOCK_CONST_METHOD0(getBooleanDefaultValue, bool());
-		MOCK_CONST_METHOD0(getDoubleDefaultValue, double());
-		MOCK_CONST_METHOD0(getStringDefaultValue, std::string());
-		MOCK_CONST_METHOD0(getDateTimeDefaultValue, boost::posix_time::ptime());
-		MOCK_CONST_METHOD0(getBinaryDefaultValue, db::IBinaryValue&());
+		MOCK_METHOD(int, getIntDefaultValue, (), (const, override));
+		MOCK_METHOD(bool, getBooleanDefaultValue, (), (const, override));
+		MOCK_METHOD(double, getDoubleDefaultValue, (), (const, override));
+		MOCK_METHOD(std::string, getStringDefaultValue, (), (const, override));
+		MOCK_METHOD(std::chrono::system_clock::time_point, getDateTimeDefaultValue, (), (const, override));
+		MOCK_METHOD(IBinaryValue&, getBinaryDefaultValue, (), (const, override));
 	};
-
-}}}
+}
 

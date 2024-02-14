@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "MockTable.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockTable::MockTable()
 	{
@@ -10,4 +9,4 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockTable::~MockTable() = default;
 
-}}}
+}

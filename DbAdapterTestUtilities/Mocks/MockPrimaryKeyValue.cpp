@@ -2,7 +2,7 @@
 #include "MockPrimaryKeyValue.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockPrimaryKeyValue::MockPrimaryKeyValue()
 	{
@@ -10,4 +10,4 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockPrimaryKeyValue::~MockPrimaryKeyValue() = default;
 
-}}}
+}

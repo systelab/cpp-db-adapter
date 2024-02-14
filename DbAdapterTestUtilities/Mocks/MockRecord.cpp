@@ -2,7 +2,7 @@
 #include "MockRecord.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockRecord::MockRecord()
 	{
@@ -10,4 +10,4 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockRecord::~MockRecord() = default;
 
-}}}
+}
