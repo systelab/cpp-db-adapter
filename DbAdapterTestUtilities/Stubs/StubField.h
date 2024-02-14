@@ -2,41 +2,41 @@
 
 #include "DbAdapterInterface/IField.h"
 
-namespace systelab { namespace db {
+namespace systelab::db {
 	class IBinaryValue;
-}}
+}
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
-	class StubField : public db::IField
+	class StubField : public IField
 	{
 	public:
-		StubField(const db::IField&);
+		StubField(const IField&);
 		StubField(const StubField& other);
-		StubField(const std::string& name, db::FieldTypes type);
-		StubField(unsigned int index, const std::string& name, db::FieldTypes type, const std::string& defaultValue, bool primaryKey);
-		virtual ~StubField();
+		StubField(const std::string& name, FieldTypes type);
+		StubField(unsigned int index, const std::string& name, FieldTypes type, const std::string& defaultValue, bool primaryKey);
+		~StubField() override;
 
-		unsigned int getIndex() const;
-		std::string getName() const;
-		db::FieldTypes getType() const;
+		unsigned int getIndex() const override;
+		std::string getName() const override;
+		FieldTypes getType() const override;
 
-		bool hasNullDefaultValue() const;
-		bool getBooleanDefaultValue() const;
-		int getIntDefaultValue() const;
-		double getDoubleDefaultValue() const;
-		std::string getStringDefaultValue() const;
-		boost::posix_time::ptime getDateTimeDefaultValue() const;
-		db::IBinaryValue& getBinaryDefaultValue() const;
+		bool hasNullDefaultValue() const override;
+		bool getBooleanDefaultValue() const override;
+		int getIntDefaultValue() const override;
+		double getDoubleDefaultValue() const override;
+		std::string getStringDefaultValue() const override;
+		std::chrono::system_clock::time_point getDateTimeDefaultValue() const override;
+		IBinaryValue& getBinaryDefaultValue() const override;
 
-		bool isPrimaryKey() const;
+		bool isPrimaryKey() const override;
 
 		StubField& operator= (const StubField& other);
 
 	private:
 		unsigned int m_index;
 		std::string m_name;
-		db::FieldTypes m_type;
+		FieldTypes m_type;
 		bool m_primaryKey;
 
 		bool m_nullDefaultValue;
@@ -44,11 +44,9 @@ namespace systelab { namespace db { namespace test_utility {
 		int m_defaultIntValue;
 		double m_defaultDoubleValue;
 		std::string m_defaultStringValue;
-		boost::posix_time::ptime m_defaultDateTimeValue;
+		std::chrono::system_clock::time_point m_defaultDateTimeValue;
 
 		void setDefaultValue(db::FieldTypes type, const std::string& defaultValue);
-		boost::posix_time::ptime getDateTimeFromSQLiteString(const std::string& sqliteDateTime) const;
+		std::chrono::system_clock::time_point getDateTimeFromISOString(const std::string& postgresDateTime) const;
 	};
-
-}}}
-
+}

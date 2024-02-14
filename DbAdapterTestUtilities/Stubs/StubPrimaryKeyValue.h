@@ -2,29 +2,24 @@
 
 #include "DbAdapterInterface/IPrimaryKeyValue.h"
 
-#include <memory>
-#include <vector>
-
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class StubPrimaryKeyValue : public IPrimaryKeyValue
 	{
 	public:
 		StubPrimaryKeyValue(const IPrimaryKey& primaryKey);
-		virtual ~StubPrimaryKeyValue();
+		virtual ~StubPrimaryKeyValue() override;
 
-		ITable& getTable() const;
-		const IPrimaryKey& getPrimaryKey() const;
+		ITable& getTable() const override;
+		const IPrimaryKey& getPrimaryKey() const override;
 
-		unsigned int getFieldValuesCount() const;
-		IFieldValue& getFieldValue(unsigned int index) const;
-		IFieldValue& getFieldValue(const std::string& fieldName) const;
+		unsigned int getFieldValuesCount() const override;
+		IFieldValue& getFieldValue(unsigned int index) const override;
+		IFieldValue& getFieldValue(const std::string& fieldName) const override;
 
 	private:
 		const IPrimaryKey& m_primaryKey;
-		std::vector< std::unique_ptr<IFieldValue> > m_fieldValues;
+		std::vector<std::unique_ptr<IFieldValue>> m_fieldValues;
 
 	};
-
-}}}
+}

@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "StubPrimaryKeyValue.h"
-
-#include "StubField.h"
 #include "StubFieldValue.h"
 
+#include "DbAdapterInterface/IPrimaryKey.h"
+#include "DbAdapterInterface/IField.h"
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubPrimaryKeyValue::StubPrimaryKeyValue(const IPrimaryKey& primaryKey)
 		:m_primaryKey(primaryKey)
@@ -74,33 +74,34 @@ namespace systelab { namespace db { namespace test_utility {
 
 	unsigned int StubPrimaryKeyValue::getFieldValuesCount() const
 	{
-		return (unsigned int) m_fieldValues.size();
+		return static_cast<unsigned int>(m_fieldValues.size());
 	}
 
 	IFieldValue& StubPrimaryKeyValue::getFieldValue(unsigned int index) const
 	{
-		if (index < m_fieldValues.size())
+		if (index >= m_fieldValues.size())
 		{
-			return *(m_fieldValues[index]);
+			throw std::runtime_error("Invalid primary key field index");
+
 		}
-		else
-		{
-			throw std::runtime_error( "Invalid primary key field index" );
-		}
+
+		return *(m_fieldValues.at(index));
 	}
 
 	IFieldValue& StubPrimaryKeyValue::getFieldValue(const std::string& fieldName) const
 	{
-		unsigned int nFields = (unsigned int) m_fieldValues.size();
-		for (unsigned int i = 0; i < nFields; i++)
-		{
-			if (m_fieldValues[i]->getField().getName() == fieldName)
+		const auto fieldValue = std::find_if(m_fieldValues.cbegin(), m_fieldValues.cend(),
+			[&fieldName](const std::unique_ptr<IFieldValue>& field)
 			{
-				return *(m_fieldValues[i]);
-			}
+				return field->getField().getName() == fieldName;
+			});
+
+		if (fieldValue != m_fieldValues.cend())
+		{
+			return *(fieldValue->get());
 		}
 
-		throw std::runtime_error( "The requested primary key field doesn't exist" );
+		throw std::runtime_error("The requested primary key field doesn't exist");
 	}
 
-}}}
+}

@@ -2,21 +2,16 @@
 
 #include "DbAdapterInterface/IFieldValue.h"
 
-#include <boost/optional.hpp>
-#include <string>
-#include <memory>
-
-
-namespace systelab { namespace db {
+namespace systelab::db {
 	class IBinaryValue;
 	class IField;
-}}
+}
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class StubField;
 
-	class StubFieldValue : public db::IFieldValue
+	class StubFieldValue : public IFieldValue
 	{
 	public:
 		StubFieldValue(const db::IFieldValue&);
@@ -26,39 +21,39 @@ namespace systelab { namespace db { namespace test_utility {
 		StubFieldValue(const std::string& name, bool value);
 		StubFieldValue(const std::string& name, double value);
 		StubFieldValue(const std::string& name, const std::string& value);
-		StubFieldValue(const std::string& name, const boost::posix_time::ptime& value);
+		StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value);
 
-		StubFieldValue(const std::string& name, const boost::optional<int>& value);
-		StubFieldValue(const std::string& name, const boost::optional<bool>& value);
-		StubFieldValue(const std::string& name, const boost::optional<double>& value);
-		StubFieldValue(const std::string& name, const boost::optional<std::string>& value);
-		StubFieldValue(const std::string& name, const boost::optional<boost::posix_time::ptime>& value);
+		StubFieldValue(const std::string& name, const std::optional<int>& value);
+		StubFieldValue(const std::string& name, const std::optional<bool>& value);
+		StubFieldValue(const std::string& name, const std::optional<double>& value);
+		StubFieldValue(const std::string& name, const std::optional<std::string>& value);
+		StubFieldValue(const std::string& name, const std::optional<std::chrono::system_clock::time_point>& value);
 
-		virtual ~StubFieldValue();
+		virtual ~StubFieldValue() override;
 
-		const db::IField& getField() const;
-		bool isNull() const;
-		bool isDefault() const;
+		const IField& getField() const override;
+		bool isNull() const override;
+		bool isDefault() const override;
 
-		bool getBooleanValue() const;
-		int getIntValue() const;
-		double getDoubleValue() const;
-		std::string getStringValue() const;
-		boost::posix_time::ptime getDateTimeValue() const;
-		db::IBinaryValue& getBinaryValue() const;
+		bool getBooleanValue() const override;
+		int getIntValue() const override;
+		double getDoubleValue() const override;
+		std::string getStringValue() const override;
+		std::chrono::system_clock::time_point getDateTimeValue() const override;
+		IBinaryValue& getBinaryValue() const override;
 
-		void setValue(const db::IFieldValue&);
-		void setNull();
-		void setDefault();
-		void setBooleanValue(bool);
-		void setIntValue(int);
-		void setDoubleValue(double);
-		void setStringValue(const std::string&);
-		void setDateTimeValue(const boost::posix_time::ptime&);
-		void setBinaryValue(std::unique_ptr<db::IBinaryValue>);
+		void setValue(const IFieldValue&) override;
+		void setNull() override;
+		void setDefault() override;
+		void setBooleanValue(bool) override;
+		void setIntValue(int) override;
+		void setDoubleValue(double) override;
+		void setStringValue(const std::string&) override;
+		void setDateTimeValue(const std::chrono::system_clock::time_point&) override;
+		void setBinaryValue(std::unique_ptr<IBinaryValue>) override;
 
-		void useDefaultValue();
-		std::unique_ptr<db::IFieldValue> clone() const;
+		void useDefaultValue() override;
+		std::unique_ptr<IFieldValue> clone() const override;
 
 		StubFieldValue& operator= (const StubFieldValue& other);
 
@@ -70,8 +65,9 @@ namespace systelab { namespace db { namespace test_utility {
 		int m_intValue;
 		double m_doubleValue;
 		std::string m_stringValue;
-		boost::posix_time::ptime m_dateTimeValue;
-	};
+		std::chrono::system_clock::time_point m_dateTimeValue;
 
-}}}
+		std::chrono::system_clock::time_point getDateTimeFromISOString(const std::string& ISODateTime) const;
+	};
+}
 

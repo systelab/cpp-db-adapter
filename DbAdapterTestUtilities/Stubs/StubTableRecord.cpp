@@ -5,14 +5,14 @@
 #include "StubFieldValue.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubTableRecord::StubTableRecord(const ITableRecord& other)
 	{
 		unsigned int nFieldValues = other.getFieldValuesCount();
 		for (unsigned int i = 0; i < nFieldValues; i++)
 		{
-			db::IFieldValue& fieldValue = other.getFieldValue(i);
+			IFieldValue& fieldValue = other.getFieldValue(i);
 			m_fieldValues.push_back( std::unique_ptr<StubFieldValue>(new StubFieldValue(fieldValue)));
 		}
 	}
@@ -33,10 +33,6 @@ namespace systelab { namespace db { namespace test_utility {
 		{
 			m_fieldValues.push_back( std::move(fieldValues[i]) );
 		}
-	}
-
-	StubTableRecord::~StubTableRecord()
-	{
 	}
 
 	db::ITable& StubTableRecord::getTable() const
@@ -89,9 +85,9 @@ namespace systelab { namespace db { namespace test_utility {
 		return false;
 	}
 
-	std::vector<db::IFieldValue*> StubTableRecord::getValuesList() const
+	std::vector<IFieldValue*> StubTableRecord::getValuesList() const
 	{
-		std::vector<db::IFieldValue*> values;
+		std::vector<IFieldValue*> values;
 
 		unsigned int nRecordFieldValues = getFieldValuesCount();
 		for(unsigned int i = 0; i < nRecordFieldValues; i++)
@@ -118,4 +114,4 @@ namespace systelab { namespace db { namespace test_utility {
 		return *this;
 	}
 
-}}}
+}

@@ -3,10 +3,9 @@
 
 #include "StubFieldValue.h"
 
-
 using namespace testing;
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubRecord::StubRecord()
 		:m_fieldValues()
@@ -66,17 +65,13 @@ namespace systelab { namespace db { namespace test_utility {
 
 	bool StubRecord::hasFieldValueStub(const std::string& name) const
 	{
-		unsigned int nFieldValues = (unsigned int) m_fieldValues.size();
-		for (unsigned int i = 0; i < nFieldValues; i++)
-		{
-			std::string fieldName = m_fieldValues[i]->getField().getName();
-			if (fieldName == name)
+		const auto fieldValueIterator = std::find_if(m_fieldValues.cbegin(), m_fieldValues.cend(),
+			[&name](const std::unique_ptr<IFieldValue>& fieldValue)
 			{
-				return true;
-			}
-		}
+				return fieldValue->getField().getName() == name;
+			});
 
-		return false;
+		return fieldValueIterator != m_fieldValues.cend(
 	}
 
 	StubRecord& StubRecord::operator= (const StubRecord& other)
@@ -97,5 +92,4 @@ namespace systelab { namespace db { namespace test_utility {
 		ON_CALL(*this, getFieldValue(A<const std::string&>())).WillByDefault(Invoke(this, &StubRecord::getFieldValueByNameStub));
 		ON_CALL(*this, hasFieldValue(_)).WillByDefault(Invoke(this, &StubRecord::hasFieldValueStub));
 	}
-
-}}}
+}

@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "StubFieldValue.h"
-
 #include "StubField.h"
 
+#include "DbAdapterInterface/IBinaryValue.h"
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubFieldValue::StubFieldValue(const db::IFieldValue& other)
 		:m_nullValue(other.isNull())
@@ -21,22 +21,22 @@ namespace systelab { namespace db { namespace test_utility {
 		{
 			switch (m_field->getType())
 			{
-				case db::BOOLEAN:
+				case BOOLEAN:
 					setBooleanValue(other.getBooleanValue());
 					break;
-				case db::INT:
+				case INT:
 					setIntValue(other.getIntValue());
 					break;
-				case db::DOUBLE:
+				case DOUBLE:
 					setDoubleValue(other.getDoubleValue());
 					break;
-				case db::STRING:
+				case STRING:
 					setStringValue(other.getStringValue());
 					break;
-				case db::DATETIME:
+				case DATETIME:
 					setDateTimeValue(other.getDateTimeValue());
 					break;
-				case db::BINARY:
+				case BINARY:
 					//setBinaryValue(other.getBinaryValue()); // Not implemented
 					break;
 			}
@@ -64,7 +64,7 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::INT));
+		m_field.reset(new StubField(name, INT));
 	}
 
 	StubFieldValue::StubFieldValue(const std::string& name, int value)
@@ -76,7 +76,7 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::INT));
+		m_field.reset(new StubField(name, INT));
 	}
 
 	StubFieldValue::StubFieldValue(const std::string& name, bool value)
@@ -88,7 +88,7 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::BOOLEAN));
+		m_field.reset(new StubField(name, BOOLEAN));
 	}
 
 	StubFieldValue::StubFieldValue(const std::string& name, double value)
@@ -100,7 +100,7 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::DOUBLE));
+		m_field.reset(new StubField(name, DOUBLE));
 	}
 
 	StubFieldValue::StubFieldValue(const std::string& name, const std::string& value)
@@ -112,10 +112,10 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_stringValue(value)
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::STRING));
+		m_field.reset(new StubField(name, STRING));
 	}
 
-	StubFieldValue::StubFieldValue(const std::string& name, const boost::posix_time::ptime& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value)
 		:m_nullValue(false)
 		,m_default(false)
 		,m_boolValue(false)
@@ -124,21 +124,21 @@ namespace systelab { namespace db { namespace test_utility {
 		,m_stringValue("")
 		,m_dateTimeValue(value)
 	{
-		m_field.reset(new StubField(name, db::DATETIME));
+		m_field.reset(new StubField(name, DATETIME));
 	}
 
-	StubFieldValue::StubFieldValue(const std::string& name, const boost::optional<int>& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<int>& value)
 		:m_default(false)
 		,m_boolValue(false)
 		,m_doubleValue(0.)
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::INT));
+		m_field.reset(new StubField(name, INT));
 			
 		if (value)
 		{
-			m_intValue = value.get();
+			m_intValue = value.value();
 			m_nullValue = false;
 		}
 		else
@@ -148,18 +148,18 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-	StubFieldValue::StubFieldValue(const std::string& name, const boost::optional<bool>& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<bool>& value)
 		:m_default(false)
 		,m_intValue(0)
 		,m_doubleValue(0.)
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::BOOLEAN));
+		m_field.reset(new StubField(name, BOOLEAN));
 
 		if (value)
 		{
-			m_boolValue = value.get();
+			m_boolValue = value.value();
 			m_nullValue = false;
 		}
 		else
@@ -169,18 +169,18 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 		
-	StubFieldValue::StubFieldValue(const std::string& name, const boost::optional<double>& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<double>& value)
 		:m_default(false)
 		,m_intValue(0)
 		,m_boolValue(false)
 		,m_stringValue("")
 		,m_dateTimeValue()
 	{
-		m_field.reset(new StubField(name, db::DOUBLE));
+		m_field.reset(new StubField(name, DOUBLE));
 
 		if (value)
 		{
-			m_doubleValue = value.get();
+			m_doubleValue = value.value();
 			m_nullValue = false;
 		}
 		else
@@ -190,7 +190,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-	StubFieldValue::StubFieldValue(const std::string& name, const boost::optional<std::string>& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<std::string>& value)
 		:m_default(false)
 		,m_intValue(0)
 		,m_boolValue(false)
@@ -201,7 +201,7 @@ namespace systelab { namespace db { namespace test_utility {
 			
 		if (value)
 		{
-			m_stringValue = value.get();
+			m_stringValue = value.value();
 			m_nullValue = false;
 		}
 		else
@@ -212,7 +212,7 @@ namespace systelab { namespace db { namespace test_utility {
 	}
 
 
-	StubFieldValue::StubFieldValue(const std::string& name, const boost::optional<boost::posix_time::ptime>& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<std::chrono::system_clock::time_point>& value)
 		:m_default(false)
 		,m_intValue(0)
 		,m_boolValue(false)
@@ -222,20 +222,19 @@ namespace systelab { namespace db { namespace test_utility {
 		m_field.reset(new StubField(name, db::DATETIME));
 		if (value)
 		{
-			m_dateTimeValue = value.get();
+			m_dateTimeValue = value.value();
 			m_nullValue = false;
 		}
 		else
 		{
-			m_dateTimeValue = boost::posix_time::ptime();
+			m_dateTimeValue = std::chrono::system_clock::time_point{};
 			m_nullValue = true;
 		}
 
 	}
 
 	StubFieldValue::~StubFieldValue()
-	{
-	}
+	{}
 
 	const db::IField& StubFieldValue::getField() const
 	{
@@ -256,7 +255,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!isNull() && !isDefault())
 		{
-			if( m_field->getType() == db::BOOLEAN )
+			if( m_field->getType() == BOOLEAN )
 			{
 				return m_boolValue;
 			}
@@ -282,7 +281,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!isNull() && !isDefault())
 		{
-			if( m_field->getType() == db::INT )
+			if( m_field->getType() == INT )
 			{
 				return m_intValue;
 			}
@@ -308,7 +307,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!isNull() && !isDefault())
 		{
-			if( m_field->getType() == db::DOUBLE )
+			if( m_field->getType() == DOUBLE )
 			{
 				return m_doubleValue;
 			}
@@ -334,7 +333,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!isNull() && !isDefault())
 		{
-			if( m_field->getType() == db::STRING )
+			if( m_field->getType() == STRING )
 			{
 				return m_stringValue;
 			}
@@ -357,23 +356,23 @@ namespace systelab { namespace db { namespace test_utility {
 	}
 		
 
-	boost::posix_time::ptime StubFieldValue::getDateTimeValue() const
+	std::chrono::system_clock::time_point StubFieldValue::getDateTimeValue() const
 	{
 		if (!isDefault())
 		{
-			if( m_field->getType() == db::DATETIME )
+			if( m_field->getType() == DATETIME )
 			{
 				return m_dateTimeValue;
 			}
-			else if ( m_field->getType() == db::STRING )
+			else if ( m_field->getType() == STRING )
 			{
 				if (!isNull())
 				{
-					return boost::posix_time::from_iso_string(m_stringValue);
+					return getDateTimeFromISOString(m_stringValue);
 				}
 				else
 				{
-					return boost::posix_time::ptime();
+					return std::chrono::system_clock::time_point{};
 				}
 			}
 			else
@@ -392,7 +391,7 @@ namespace systelab { namespace db { namespace test_utility {
 		throw std::runtime_error( "Not implemented" );
 	}
 
-	void StubFieldValue::setValue(const db::IFieldValue& srcFieldValue)
+	void StubFieldValue::setValue(const IFieldValue& srcFieldValue)
 	{
 		db::FieldTypes srcFieldType = srcFieldValue.getField().getType();
 		if (srcFieldType != getField().getType())
@@ -412,22 +411,22 @@ namespace systelab { namespace db { namespace test_utility {
 		{
 			switch (srcFieldType)
 			{
-				case db::BOOLEAN:
+				case BOOLEAN:
 					setBooleanValue(srcFieldValue.getBooleanValue());
 					break;
-				case db::INT:
+				case INT:
 					setIntValue(srcFieldValue.getIntValue());
 					break;
-				case db::DOUBLE:
+				case DOUBLE:
 					setDoubleValue(srcFieldValue.getDoubleValue());
 					break;
-				case db::STRING:
+				case STRING:
 					setStringValue(srcFieldValue.getStringValue());
 					break;
-				case db::DATETIME:
+				case DATETIME:
 					setDateTimeValue(srcFieldValue.getDateTimeValue());
 					break;
-				case db::BINARY:
+				case BINARY:
 					//setBinaryValue(srcFieldValue.getBinaryValue()); // Not implemented
 					break;
 			}
@@ -442,7 +441,7 @@ namespace systelab { namespace db { namespace test_utility {
 		m_intValue = 0;
 		m_doubleValue = 0.;
 		m_stringValue = "";
-		m_dateTimeValue = boost::posix_time::ptime();
+		m_dateTimeValue = std::chrono::system_clock::time_point{};
 	}
 
 	void StubFieldValue::setDefault()
@@ -453,12 +452,12 @@ namespace systelab { namespace db { namespace test_utility {
 		m_intValue = 0;
 		m_doubleValue = 0.;
 		m_stringValue = "";
-		m_dateTimeValue = boost::posix_time::ptime();
+		m_dateTimeValue = std::chrono::system_clock::time_point{};
 	}
 
 	void StubFieldValue::setBooleanValue(bool value)
 	{
-		if( m_field->getType() == db::BOOLEAN )
+		if( m_field->getType() == BOOLEAN )
 		{
 			m_boolValue = value;
 			m_nullValue = false;
@@ -472,7 +471,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	void StubFieldValue::setIntValue(int value)
 	{
-		if( m_field->getType() == db::INT )
+		if( m_field->getType() == INT )
 		{
 			m_intValue = value;
 			m_nullValue = false;
@@ -486,7 +485,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	void StubFieldValue::setDoubleValue(double value)
 	{
-		if( m_field->getType() == db::DOUBLE )
+		if( m_field->getType() == DOUBLE )
 		{
 			m_doubleValue = value;
 			m_nullValue = false;
@@ -500,7 +499,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	void StubFieldValue::setStringValue(const std::string& value)
 	{
-		if( m_field->getType() == db::STRING )
+		if( m_field->getType() == STRING )
 		{
 			m_stringValue = value;
 			m_nullValue = false;
@@ -512,12 +511,12 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-	void StubFieldValue::setDateTimeValue(const boost::posix_time::ptime& value)
+	void StubFieldValue::setDateTimeValue(const std::chrono::system_clock::time_point& value)
 	{
-		if( m_field->getType() == db::DATETIME )
+		if( m_field->getType() == DATETIME )
 		{
 			m_dateTimeValue = value;
-			m_nullValue = value.is_not_a_date_time();
+			m_nullValue = (value == std::chrono::system_clock::time_point {});
 			m_default = false;
 		}
 		else
@@ -536,27 +535,27 @@ namespace systelab { namespace db { namespace test_utility {
 		db::FieldTypes fieldType = m_field->getType();
 		switch (fieldType)
 		{
-			case db::BOOLEAN:
+			case BOOLEAN:
 				setBooleanValue(m_field->getBooleanDefaultValue());
 				break;
 
-			case db::INT:
+			case INT:
 				setIntValue(m_field->getIntDefaultValue());
 				break;
 
-			case db::DOUBLE:
+			case DOUBLE:
 				setDoubleValue(m_field->getDoubleDefaultValue());
 				break;
 
-			case db::STRING:
+			case STRING:
 				setStringValue(m_field->getStringDefaultValue());
 				break;
 
-			case db::DATETIME:
+			case DATETIME:
 				setDateTimeValue(m_field->getDateTimeDefaultValue());
 				break;
 
-			case db::BINARY:
+			case BINARY:
 				throw std::runtime_error( "Binary field type not implemented." );
 
 			default:
@@ -565,7 +564,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-	std::unique_ptr<db::IFieldValue> StubFieldValue::clone() const
+	std::unique_ptr<IFieldValue> StubFieldValue::clone() const
 	{
 		return std::unique_ptr<db::IFieldValue>(new StubFieldValue(*this));
 	}
@@ -584,5 +583,18 @@ namespace systelab { namespace db { namespace test_utility {
 		return *this;
 	}
 
-}}}
+	std::chrono::system_clock::time_point StubFieldValue::getDateTimeFromISOString(const std::string& ISODateTime) const
+	{
+		if (!ISODateTime.empty())
+		{
+			std::chrono::system_clock::time_point result;
+			std::istringstream{ ISODateTime } >> std::chrono::parse("%FT%T%z", result);
+			return result;
+		}
+		else
+		{
+			return std::chrono::system_clock::time_point{};
+		}
+	}
+}
 

@@ -6,10 +6,9 @@
 #include "StubField.h"
 #include "StubTableRecord.h"
 
+namespace systelab::db::test_utility {
 
-namespace systelab { namespace db { namespace test_utility {
-
-	StubTableRecordSet::StubTableRecordSet(ITable& table, std::vector< StubTableRecord >& records)
+	StubTableRecordSet::StubTableRecordSet(ITable& table, std::vector<StubTableRecord>& records)
 		:m_table(table)
 	{
 		for(unsigned int i = 0; i < records.size(); i++)
@@ -58,7 +57,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		const ITableRecord& currentRecord = getCurrentRecord();
 		
-		return std::unique_ptr<ITableRecord>( new StubTableRecord(currentRecord) );
+		return std::unique_ptr<ITableRecord>(new StubTableRecord(currentRecord));
 	}
 
 	bool StubTableRecordSet::isCurrentRecordValid() const
@@ -71,4 +70,4 @@ namespace systelab { namespace db { namespace test_utility {
 		m_iterator++;
 	}
 
-}}}
+}

@@ -6,7 +6,7 @@
 #include <vector>
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class StubField;
 	class StubFieldValue;
@@ -17,7 +17,7 @@ namespace systelab { namespace db { namespace test_utility {
 		StubTableRecord(const ITableRecord&);
 		StubTableRecord(const StubTableRecord&);
 		StubTableRecord(std::vector< std::unique_ptr<StubFieldValue> >&);
-		virtual ~StubTableRecord();
+		~StubTableRecord() override = default;
 
 		db::ITable& getTable() const;
 		unsigned int getFieldValuesCount() const;
@@ -26,13 +26,12 @@ namespace systelab { namespace db { namespace test_utility {
 
 		bool hasFieldValue(const std::string& fieldName) const;
 
-		std::vector<db::IFieldValue*> getValuesList() const;
+		std::vector<IFieldValue*> getValuesList() const;
 
 		StubTableRecord& operator= (const StubTableRecord& other);
 
 	private:
-		std::vector< std::unique_ptr<StubFieldValue> > m_fieldValues;
+		std::vector<std::unique_ptr<StubFieldValue>> m_fieldValues;
 	};
-
-}}}
+}
 

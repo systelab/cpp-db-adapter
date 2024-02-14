@@ -8,7 +8,7 @@
 
 using namespace testing;
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubRecordSet::StubRecordSet( std::vector< std::unique_ptr<StubRecord> >& records)
 	{
@@ -52,5 +52,5 @@ namespace systelab { namespace db { namespace test_utility {
 		ON_CALL(*this, nextRecord()).WillByDefault(Invoke(this, &StubRecordSet::nextRecordStub));
 	}
 
-}}}
+}
 

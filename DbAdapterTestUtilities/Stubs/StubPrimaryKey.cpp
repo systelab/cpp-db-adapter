@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "StubPrimaryKey.h"
-
 #include "StubTable.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubPrimaryKey::StubPrimaryKey(StubTable& table)
 		:m_table(table)
@@ -64,4 +62,4 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-}}}
+}

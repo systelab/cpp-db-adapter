@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Mocks/MockRecordSet.h"
+#include "Mocks/MockRecordSet.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class StubRecord;
 
@@ -11,7 +11,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 	public:
 		StubRecordSet(std::vector< std::unique_ptr<StubRecord> >& records);
-		virtual ~StubRecordSet();
+		virtual ~StubRecordSet() override;
 
 		unsigned int getRecordsCountStub() const;
 		const IRecord& getCurrentRecordStub() const;
@@ -22,9 +22,8 @@ namespace systelab { namespace db { namespace test_utility {
 		void setUpStubMethods();
 
 	private:
-		std::vector< std::unique_ptr<StubRecord> > m_records;
-		std::vector< std::unique_ptr<StubRecord> >::iterator m_iterator;
+		std::vector<std::unique_ptr<StubRecord>> m_records;
+		std::vector<std::unique_ptr<StubRecord>>::iterator m_iterator;
 	};
-
-}}}
+}
 

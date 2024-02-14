@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../Mocks/MockRecord.h"
+#include "Mocks/MockRecord.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class StubFieldValue;
 
@@ -12,8 +11,8 @@ namespace systelab { namespace db { namespace test_utility {
 	public:
 		StubRecord();
 		StubRecord(const StubRecord&);
-		StubRecord(std::vector< std::unique_ptr<StubFieldValue> >& fieldValues);
-		virtual ~StubRecord();
+		StubRecord(std::vector<std::unique_ptr<StubFieldValue>>& fieldValues);
+		virtual ~StubRecord() override;
 
 		unsigned int getFieldValuesCountStub() const;
 		db::IFieldValue& getFieldValueByIndexStub(unsigned int index) const;
@@ -26,8 +25,7 @@ namespace systelab { namespace db { namespace test_utility {
 		void setUpStubMethods();
 
 	private:
-		std::vector< std::unique_ptr<StubFieldValue> > m_fieldValues;
+		std::vector<std::unique_ptr<StubFieldValue>> m_fieldValues;
 	};
-
-}}}
+}
 
