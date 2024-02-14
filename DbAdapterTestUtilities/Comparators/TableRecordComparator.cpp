@@ -1,16 +1,14 @@
 #include "stdafx.h"
-#include "TestUtilitiesInterface/EntityComparator.h"
-#include "TestUtilitiesInterface/EntityComparatorMacros.h"
+#include "TableRecordComparator.h"
 
 #include "DbAdapterInterface/IFieldValue.h"
 #include "DbAdapterInterface/ITableRecord.h"
+#include "FieldValueComparator.h"
 
 using namespace testing;
+namespace systelab::db::test_utility {
 
-namespace systelab { namespace test_utility {
-
-	template <>
-	testing::AssertionResult EntityComparator::operator() (const db::ITableRecord& expected, const db::ITableRecord& actual) const
+	AssertionResult TableRecordComparator::compare(const ITableRecord& expected, const ITableRecord& actual)
 	{
 		if (typeid(expected) != typeid(actual))
 		{
@@ -27,7 +25,7 @@ namespace systelab { namespace test_utility {
 			const db::IFieldValue& expectedFieldValue = expected.getFieldValue(i);
 			const db::IFieldValue& actualFieldValue = actual.getFieldValue(i);
 		
-			AssertionResult fieldValueResult = EntityComparator()(expectedFieldValue, actualFieldValue);
+			AssertionResult fieldValueResult = FieldValueComparator::compare(expectedFieldValue, actualFieldValue);
 			if (!fieldValueResult)
 			{
 				return AssertionFailure() << "Different data for field " << i << " "
@@ -39,5 +37,9 @@ namespace systelab { namespace test_utility {
 		return AssertionSuccess();
 	}
 
-}};
+	MatcherType<ITableRecord> TableRecordComparator::isEqualTo(const ITableRecord& expected)
+	{
+		return MakePolymorphicMatcher(EntityMatcher<ITableRecord>(expected, compare));
+	}
+}
 

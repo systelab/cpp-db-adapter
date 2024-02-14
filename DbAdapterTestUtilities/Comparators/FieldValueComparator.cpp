@@ -1,16 +1,14 @@
 #include "stdafx.h"
-#include "TestUtilitiesInterface/EntityComparator.h"
-#include "TestUtilitiesInterface/EntityComparatorMacros.h"
+#include "FieldValueComparator.h"
 
+#include "DbAdapterInterface/IField.h"
 #include "DbAdapterInterface/IFieldValue.h"
-
+#include "FieldComparator.h"
 
 using namespace testing;
+namespace systelab::db::test_utility {
 
-namespace systelab { namespace test_utility {
-
-	template <>
-	testing::AssertionResult EntityComparator::operator() (const db::IFieldValue& expected, const db::IFieldValue& actual) const
+	AssertionResult FieldValueComparator::compare(const IFieldValue& expected, const IFieldValue& actual)
 	{
 		if (typeid(expected) != typeid(actual))
 		{
@@ -19,16 +17,16 @@ namespace systelab { namespace test_utility {
 									  << "actual=" << typeid(actual).name();
 		}
 
-		const db::IField& expectedField = expected.getField();
-		const db::IField& actualField = actual.getField();
-		AssertionResult fieldResult = EntityComparator()(expectedField, actualField);
+		COMPARATOR_ASSERT_EQUAL(expected, actual, isDefault());
+		COMPARATOR_ASSERT_EQUAL(expected, actual, isNull());
+
+		const IField& expectedField = expected.getField();
+		const IField& actualField = actual.getField();
+		AssertionResult fieldResult = FieldComparator::compare(expectedField, actualField);
 		if (!fieldResult)
 		{
 			return AssertionFailure() << "Different field data: " << fieldResult.message();
 		}
-
-		COMPARATOR_ASSERT_EQUAL(expected, actual, isDefault());
-		COMPARATOR_ASSERT_EQUAL(expected, actual, isNull());
 
 		if (!expected.isNull())
 		{
@@ -62,5 +60,8 @@ namespace systelab { namespace test_utility {
 		return AssertionSuccess();
 	}
 
-}};
-
+	MatcherType<systelab::db::IFieldValue> FieldValueComparator::isEqualTo(const systelab::db::IFieldValue& expected)
+	{
+		return MakePolymorphicMatcher(EntityMatcher<systelab::db::IFieldValue>(expected, compare));
+	}
+}
