@@ -1,6 +1,5 @@
 #pragma once
 
-#include "EntityComparator.h"
 #include "EntityMatcher.h"
 
 namespace systelab::db {

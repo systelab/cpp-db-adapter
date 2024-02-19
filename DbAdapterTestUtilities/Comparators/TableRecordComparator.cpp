@@ -3,6 +3,7 @@
 
 #include "DbAdapterInterface/IFieldValue.h"
 #include "DbAdapterInterface/ITableRecord.h"
+#include "EntityComparatorMacros.h"
 #include "FieldValueComparator.h"
 
 using namespace testing;

@@ -2,6 +2,7 @@
 #include "FieldComparator.h"
 
 #include "DbAdapterInterface/IField.h"
+#include "EntityComparatorMacros.h"
 
 using namespace testing;
 namespace systelab::db::test_utility {
