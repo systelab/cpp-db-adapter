@@ -79,18 +79,12 @@ namespace systelab::db::test_utility {
 
 	IFieldValue& StubPrimaryKeyValue::getFieldValue(unsigned int index) const
 	{
-		if (index >= m_fieldValues.size())
-		{
-			throw std::runtime_error("Invalid primary key field index");
-
-		}
-
 		return *(m_fieldValues.at(index));
 	}
 
 	IFieldValue& StubPrimaryKeyValue::getFieldValue(const std::string& fieldName) const
 	{
-		const auto fieldValue = std::find_if(m_fieldValues.cbegin(), m_fieldValues.cend(),
+		const auto fieldValue = std::ranges::find_if(m_fieldValues,
 			[&fieldName](const std::unique_ptr<IFieldValue>& field)
 			{
 				return field->getField().getName() == fieldName;
@@ -98,7 +92,7 @@ namespace systelab::db::test_utility {
 
 		if (fieldValue != m_fieldValues.cend())
 		{
-			return *(fieldValue->get());
+			return **fieldValue;
 		}
 
 		throw std::runtime_error("The requested primary key field doesn't exist");

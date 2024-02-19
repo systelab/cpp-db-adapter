@@ -30,14 +30,7 @@ namespace systelab::db::test_utility {
 
 	const IField& StubPrimaryKey::getField(unsigned int index) const
 	{
-		if (index < m_fields.size())
-		{
-			return *(m_fields[index]);
-		}
-		else
-		{
-			throw std::runtime_error( "Invalid primary key field index" );
-		}
+		return *(m_fields.at(index));
 	}
 
 	const IField& StubPrimaryKey::getField(const std::string& fieldName) const

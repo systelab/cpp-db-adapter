@@ -10,7 +10,7 @@ namespace systelab::db::test_utility {
 	{
 	public:
 		MockFieldValue();
-		virtual ~MockFieldValue();
+		~MockFieldValue() override;
 
 		MOCK_METHOD(IField& , getField, (), (const, override));
 

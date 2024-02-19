@@ -30,12 +30,12 @@ namespace systelab::db::test_utility {
 		MOCK_METHOD(std::unique_ptr<ITableRecord>, getRecordByPrimaryKey, (const IPrimaryKeyValue&), (const, override));
 		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, filterRecordsByField, (const IFieldValue&, const IField*), (const, override));
 		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, filterRecordsByFieldsProxy, (const std::vector<IFieldValue*>&, const IField*), (const));
-		std::unique_ptr<db::ITableRecordSet> filterRecordsByFields(const std::vector<db::IFieldValue*>& conditionValues, const db::IField* orderByField = nullptr) const override
+		std::unique_ptr<ITableRecordSet> filterRecordsByFields(const std::vector<IFieldValue*>& conditionValues, const IField* orderByField = nullptr) const override
 		{
-			return std::unique_ptr<db::ITableRecordSet>(filterRecordsByFieldsProxy(conditionValues, orderByField));
+			return filterRecordsByFieldsProxy(conditionValues, orderByField);
 		}
 
-		MOCK_METHOD(std::unique_ptr<db::ITableRecordSet>, filterRecordsByCondition, (const std::string&), (const, override));
+		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, filterRecordsByCondition, (const std::string&), (const, override));
 		MOCK_METHOD(int, getMaxFieldValueInt, (const IField&), (const, override));
 		
 		MOCK_METHOD(std::unique_ptr<ITableRecord>, createRecord, (), (const, override));

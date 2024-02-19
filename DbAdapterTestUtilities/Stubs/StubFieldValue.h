@@ -20,7 +20,7 @@ namespace systelab::db::test_utility {
 		StubFieldValue(const std::string& name, int value);
 		StubFieldValue(const std::string& name, bool value);
 		StubFieldValue(const std::string& name, double value);
-		StubFieldValue(const std::string& name, const std::string& value);
+		explicit StubFieldValue(const std::string& name, const std::string& value);
 		StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value);
 
 		StubFieldValue(const std::string& name, const std::optional<int>& value);

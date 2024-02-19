@@ -12,7 +12,7 @@ namespace systelab::db::test_utility {
 		StubRecord();
 		StubRecord(const StubRecord&);
 		StubRecord(std::vector<std::unique_ptr<StubFieldValue>>& fieldValues);
-		virtual ~StubRecord() override;
+		~StubRecord() override;
 
 		unsigned int getFieldValuesCountStub() const;
 		db::IFieldValue& getFieldValueByIndexStub(unsigned int index) const;

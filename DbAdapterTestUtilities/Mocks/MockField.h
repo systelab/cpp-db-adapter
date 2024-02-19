@@ -11,7 +11,7 @@ namespace systelab::db::test_utility {
 	{
 	public:
 		MockField();
-		virtual ~MockField();
+		~MockField() override;
 
 		MOCK_METHOD(bool, hasNullDefaultValue, (), (const, override));
 		MOCK_METHOD(unsigned int, getIndex, (), (const, override));

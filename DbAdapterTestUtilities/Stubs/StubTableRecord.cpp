@@ -13,25 +13,23 @@ namespace systelab::db::test_utility {
 		for (unsigned int i = 0; i < nFieldValues; i++)
 		{
 			IFieldValue& fieldValue = other.getFieldValue(i);
-			m_fieldValues.push_back( std::unique_ptr<StubFieldValue>(new StubFieldValue(fieldValue)));
+			m_fieldValues.push_back(std::make_unique<StubFieldValue>(fieldValue));
 		}
 	}
 
 	StubTableRecord::StubTableRecord(const StubTableRecord& other)
 	{
-		unsigned int nFieldValues = (unsigned int) other.m_fieldValues.size();
-		for (unsigned int i = 0; i < nFieldValues; i++)
+		for (const auto& fieldValue: other.m_fieldValues)
 		{
-			m_fieldValues.push_back( std::unique_ptr<StubFieldValue>(new StubFieldValue(*other.m_fieldValues[i].get())) );
+			m_fieldValues.push_back(std::make_unique<StubFieldValue>(*fieldValue.get()));
 		}
 	}
 
-	StubTableRecord::StubTableRecord(std::vector< std::unique_ptr<StubFieldValue> >& fieldValues)
+	StubTableRecord::StubTableRecord(std::vector<std::unique_ptr<StubFieldValue>>& fieldValues)
 	{
-		unsigned int nFieldValues = (unsigned int) fieldValues.size();
-		for( unsigned int i = 0; i < nFieldValues; i++ )
+		for(auto& fieldValue: fieldValues)
 		{
-			m_fieldValues.push_back( std::move(fieldValues[i]) );
+			m_fieldValues.push_back(std::move(fieldValue));
 		}
 	}
 
@@ -42,19 +40,12 @@ namespace systelab::db::test_utility {
 
 	unsigned int StubTableRecord::getFieldValuesCount() const
 	{
-		return (unsigned int) m_fieldValues.size();
+		return static_cast<unsigned int>(m_fieldValues.size());
 	}
 
 	IFieldValue& StubTableRecord::getFieldValue(unsigned int index) const
 	{
-		if (index < m_fieldValues.size())
-		{
-			return *(m_fieldValues[index].get());
-		}
-		else
-		{
-			throw std::runtime_error( "Invalid field value index" );
-		}
+			return *(m_fieldValues.at(index).get());
 	}
 
 	db::IFieldValue& StubTableRecord::getFieldValue(const std::string& fieldName) const

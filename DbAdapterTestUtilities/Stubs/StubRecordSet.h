@@ -10,7 +10,7 @@ namespace systelab::db::test_utility {
 	class StubRecordSet : public MockRecordSet
 	{
 	public:
-		StubRecordSet(std::vector< std::unique_ptr<StubRecord> >& records);
+		StubRecordSet(std::vector<std::unique_ptr<StubRecord>>& records);
 		virtual ~StubRecordSet() override;
 
 		unsigned int getRecordsCountStub() const;

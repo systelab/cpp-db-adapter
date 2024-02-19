@@ -22,7 +22,7 @@ namespace systelab::db::test_utility {
 	{
 	public:
 		StubTableRecordSet(ITable& table, std::vector<StubTableRecord>& records);
-		~StubTableRecordSet() override;
+		~StubTableRecordSet() override = default;
 
 		ITable& getTable() const;
 

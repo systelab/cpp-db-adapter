@@ -12,7 +12,7 @@ namespace systelab::db::test_utility {
 	{
 	public:
 		MockDatabase();
-		virtual ~MockDatabase();
+		~MockDatabase() override;
 
 		MOCK_METHOD(ITable& , getTable, (const std::string&), (override));
 

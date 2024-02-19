@@ -8,7 +8,7 @@ namespace systelab::db::test_utility {
 	{
 	public:
 		MockRecordSet();
-		virtual ~MockRecordSet();
+		~MockRecordSet() override;
 
 		MOCK_METHOD(unsigned int, getFieldsCount, (), (const override));
 		MOCK_METHOD(const IField& , getField, (unsigned int), (const override));

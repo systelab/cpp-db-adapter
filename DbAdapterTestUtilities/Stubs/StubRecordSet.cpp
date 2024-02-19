@@ -10,11 +10,11 @@ using namespace testing;
 
 namespace systelab::db::test_utility {
 
-	StubRecordSet::StubRecordSet( std::vector< std::unique_ptr<StubRecord> >& records)
+	StubRecordSet::StubRecordSet(std::vector<std::unique_ptr<StubRecord>>& records)
 	{
-		for (unsigned int i = 0; i < records.size(); i++)
+		for (const auto& record: records)
 		{
-			m_records.push_back(std::unique_ptr<StubRecord>(new StubRecord(*records[i])));
+			m_records.push_back(std::make_unique<StubRecord>(*record));
 		}
 
 		m_iterator = m_records.begin();
@@ -31,7 +31,7 @@ namespace systelab::db::test_utility {
 
 	const IRecord& StubRecordSet::getCurrentRecordStub() const
 	{
-		return *m_iterator->get();
+		return **m_iterator;
 	}
 
 	bool StubRecordSet::isCurrentRecordValidStub() const

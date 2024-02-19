@@ -20,6 +20,5 @@ namespace systelab::db::test_utility {
 	private:
 		const IPrimaryKey& m_primaryKey;
 		std::vector<std::unique_ptr<IFieldValue>> m_fieldValues;
-
 	};
 }

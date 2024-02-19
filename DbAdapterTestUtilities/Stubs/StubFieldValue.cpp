@@ -525,7 +525,7 @@ namespace systelab::db::test_utility {
 		}
 	}
 
-	void StubFieldValue::setBinaryValue(std::unique_ptr<db::IBinaryValue> value)
+	void StubFieldValue::setBinaryValue(std::unique_ptr<IBinaryValue> value)
 	{
 		throw std::runtime_error( "Not implemented" );
 	}
@@ -566,7 +566,7 @@ namespace systelab::db::test_utility {
 
 	std::unique_ptr<IFieldValue> StubFieldValue::clone() const
 	{
-		return std::unique_ptr<db::IFieldValue>(new StubFieldValue(*this));
+		return std::make_unique<StubFieldValue>(*this);
 	}
 
 	StubFieldValue& StubFieldValue::operator= (const StubFieldValue& other)

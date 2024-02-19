@@ -12,7 +12,7 @@ namespace systelab::db {
 	class IDatabase
 	{
 	public:
-		virtual ~IDatabase() {}
+		virtual ~IDatabase() = default;
 
 		virtual ITable& getTable(cosnt std::string& tableName) = 0;
 		virtual std::unique_ptr<IRecordSet> executeQuery(const std::string& query) = 0;
