@@ -14,7 +14,7 @@ namespace systelab::db::test_utility {
 		MockDatabase();
 		virtual ~MockDatabase();
 
-		MOCK_METHOD(ITable& , getTable, (std::string), (override));
+		MOCK_METHOD(ITable& , getTable, (const std::string&), (override));
 
 		MOCK_METHOD(std::unique_ptr<IRecordSet>, executeQuery, (const std::string&), (override));
 		MOCK_METHOD(void, executeOperation, (const std::string&), (override));
