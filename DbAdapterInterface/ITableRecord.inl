@@ -28,10 +28,4 @@ namespace systelab::db {
 
 		return true;
 	}
-
-	bool operator!= (const ITableRecord& lhs, const ITableRecord& rhs)
-	{
-		return !(lhs == rhs);
-	}
-
 }

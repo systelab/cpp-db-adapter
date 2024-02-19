@@ -25,7 +25,6 @@ namespace systelab::db {
 		virtual std::vector<IFieldValue*> getValuesList() const = 0;
 
 		inline friend bool operator== (const ITableRecord& lhs, const ITableRecord& rhs);
-		inline friend bool operator!= (const ITableRecord& lhs, const ITableRecord& rhs);
 	};
 }
 

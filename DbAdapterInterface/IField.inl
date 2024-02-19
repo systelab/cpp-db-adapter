@@ -10,9 +10,4 @@ namespace systelab::db {
 
 		return true;
 	}
-
-	bool operator!= (const IField& lhs, const IField& rhs)
-	{
-		return !(lhs == rhs);
-	}
 }

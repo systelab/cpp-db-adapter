@@ -37,7 +37,6 @@ namespace systelab::db {
 		virtual std::unique_ptr<IFieldValue> clone() const = 0;
 
 		inline friend bool operator== (const IFieldValue& lhs, const IFieldValue& rhs);
-		inline friend bool operator!= (const IFieldValue& lhs, const IFieldValue& rhs);
 	};
 }
 

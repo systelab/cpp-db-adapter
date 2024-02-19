@@ -27,7 +27,6 @@ namespace systelab::db {
 		virtual IBinaryValue& getBinaryDefaultValue() const = 0;
 
 		inline friend bool operator== (const IField& lhs, const IField& rhs);
-		inline friend bool operator!= (const IField& lhs, const IField& rhs);
 	};
 }
 
