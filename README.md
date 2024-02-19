@@ -15,6 +15,7 @@ This repository defines a library-agnostic API for C++ to work with a database
 ## Available implementations
 
 * [SQLite](https://github.com/systelab/cpp-sqlite-db-adapter)
+* [Postgres](https://github.com/systelab/cpp-postgresql-db-adapter)
 
 ## Usage
 
