@@ -49,7 +49,7 @@ pipeline
 					def configurations = ['Debug', 'Release']
 					for(int i=0; i < configurations.size(); i++)
 					{
-						stage("Build ${configurations[i]})
+						stage("Build ${configurations[i]}")
 						{
 							bat "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile ./package.profile --force"
 							dir("DbAdapterTestUtilities")
