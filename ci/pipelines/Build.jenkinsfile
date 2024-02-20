@@ -58,7 +58,7 @@ pipeline
 								dir("build-${configurations[i]}")
 								{
 									bat "conan install .. --profile ../../build.profile -s build_type=${configurations[i]} -e VERSION=${version} -e CHANNEL=${channel}"
-									bat "cmake .."
+									bat "cmake .. -G "Visual Studio 17 2022" -A x64"
 									bat "cmake --build ."
 									bat "conan export-pkg .. ${packageNameTestUtilities}/${version}@systelab/${channel} --profile ../../package.profile-s build_type=${props.conanBuildType} --force"
 								}
