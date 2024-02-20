@@ -2,6 +2,7 @@
 #include "StubRecord.h"
 
 #include "StubFieldValue.h"
+#include "DbAdapterInterface/IField.h"
 
 using namespace testing;
 

@@ -14,7 +14,7 @@ namespace systelab::db {
 	public:
 		virtual ~IDatabase() = default;
 
-		virtual ITable& getTable(cosnt std::string& tableName) = 0;
+		virtual ITable& getTable(const std::string& tableName) = 0;
 		virtual std::unique_ptr<IRecordSet> executeQuery(const std::string& query) = 0;
 		virtual void executeOperation(const std::string& operation) = 0;
 		virtual void executeMultipleStatements(const std::string& statements) = 0;
