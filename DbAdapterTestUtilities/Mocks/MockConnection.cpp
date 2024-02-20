@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "MockConnection.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockConnection::MockConnection()
 	{
@@ -10,5 +9,5 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockConnection::~MockConnection() = default;
 
-}}}
+}
 

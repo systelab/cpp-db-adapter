@@ -1,5 +1,7 @@
+#include "Types.h"
+#include "DbAdapterInterface/IField.h"
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	bool operator== (const IFieldValue& lhs, const IFieldValue& rhs)
 	{
@@ -38,10 +40,4 @@ namespace systelab { namespace db {
 
 		return true;
 	}
-
-	bool operator!= (const IFieldValue& lhs, const IFieldValue& rhs)
-	{
-		return !(lhs == rhs);
-	}
-
-}}
+}

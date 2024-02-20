@@ -2,25 +2,24 @@
 
 #include "DbAdapterInterface/IRecordSet.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockRecordSet : public IRecordSet
 	{
 	public:
 		MockRecordSet();
-		virtual ~MockRecordSet();
+		~MockRecordSet() override;
 
-		MOCK_CONST_METHOD0(getFieldsCount, unsigned int());
-		MOCK_CONST_METHOD1(getField, const db::IField&(unsigned int));
-		MOCK_CONST_METHOD1(getField, const db::IField&(const std::string&));
+		MOCK_METHOD(unsigned int, getFieldsCount, (), (const override));
+		MOCK_METHOD(const IField& , getField, (unsigned int), (const override));
+		MOCK_METHOD(const IField& , getField, (const std::string&), (const override));
 
-		MOCK_CONST_METHOD0(getRecordsCount, unsigned int());
+		MOCK_METHOD(unsigned int, getRecordsCount, (), (const override));
 
-		MOCK_CONST_METHOD0(getCurrentRecord, const db::IRecord&());
-		MOCK_CONST_METHOD0(isCurrentRecordValid, bool());
-		MOCK_METHOD0(nextRecord, void());
+		MOCK_METHOD(const IRecord&, getCurrentRecord, (), (const override));
+		MOCK_METHOD(bool, isCurrentRecordValid, (), (const override));
+		MOCK_METHOD(void, nextRecord, (), (override));
 	};
 
-}}}
+}
 

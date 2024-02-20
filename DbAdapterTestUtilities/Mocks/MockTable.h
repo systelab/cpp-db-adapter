@@ -1,127 +1,57 @@
 #pragma once
 
 #include "DbAdapterInterface/ITable.h"
+#include "DbAdapterInterface/IBinaryValue.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockTable: public ITable
 	{
 	public:
 		MockTable();
-		virtual ~MockTable();
+		~MockTable() override;
 
-		MOCK_CONST_METHOD0(getName, std::string ());
-		MOCK_CONST_METHOD0(getPrimaryKey, const db::IPrimaryKey&());
+		MOCK_METHOD(std::string, getName, (), (const, override));
+		MOCK_METHOD(const IPrimaryKey&, getPrimaryKey, (), (const, override));
 
-		MOCK_CONST_METHOD0(getFieldsCount, unsigned int());
-		MOCK_CONST_METHOD1(getField, const db::IField& (unsigned int));
-		MOCK_CONST_METHOD1(getField, const db::IField& (const std::string&));
+		MOCK_METHOD(unsigned int, getFieldsCount, (), (const, override));
+		MOCK_METHOD(const IField&, getField, (unsigned int), (const, override));
+		MOCK_METHOD(const IField&, getField, (const std::string&), (const, override));
 
-		MOCK_CONST_METHOD1(createFieldValueProxy, db::IFieldValue* (const db::IField&));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field) const
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, bool), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, int), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, double), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, const std::string&), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, const std::chrono::system_clock::time_point&), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, std::unique_ptr<IBinaryValue>), (const, override));
+		MOCK_METHOD(std::unique_ptr<IPrimaryKeyValue>, createPrimaryKeyValue, (), (const, override));
+		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, getAllRecords, (), (const override));
+		MOCK_METHOD(std::unique_ptr<ITableRecord>, getRecordByPrimaryKey, (const IPrimaryKeyValue&), (const, override));
+		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, filterRecordsByField, (const IFieldValue&, const IField*), (const, override));
+		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, filterRecordsByFieldsProxy, (const std::vector<IFieldValue*>&, const IField*), (const));
+		std::unique_ptr<ITableRecordSet> filterRecordsByFields(const std::vector<IFieldValue*>& conditionValues, const IField* orderByField = nullptr) const override
 		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field));
+			return filterRecordsByFieldsProxy(conditionValues, orderByField);
 		}
 
-		MOCK_CONST_METHOD2(createFieldValueProxy, db::IFieldValue* (const db::IField&, bool));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field, bool value) const
-		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field, value));
-		}
+		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, filterRecordsByCondition, (const std::string&), (const, override));
+		MOCK_METHOD(int, getMaxFieldValueInt, (const IField&), (const, override));
+		
+		MOCK_METHOD(std::unique_ptr<ITableRecord>, createRecord, (), (const, override));
+		MOCK_METHOD(std::unique_ptr<ITableRecord>, copyRecord, (const ITableRecord&), (const, override));
 
-		MOCK_CONST_METHOD2(createFieldValueProxy, db::IFieldValue* (const db::IField&, int));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field, int value) const
-		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field, value));
-		}
+		MOCK_METHOD(RowsAffected, insertRecord, (ITableRecord&), (override));
+		MOCK_METHOD(RowsAffected, updateRecord, (const ITableRecord&), (override));
+		MOCK_METHOD(RowsAffected, updateRecord, (const std::vector<IFieldValue*>&, const IPrimaryKeyValue&), (override));
+		MOCK_METHOD(RowsAffected, deleteRecord, (const ITableRecord&), (override));
+		MOCK_METHOD(RowsAffected, deleteRecord, (const IPrimaryKeyValue&), (override));
 
-		MOCK_CONST_METHOD2(createFieldValueProxy, db::IFieldValue* (const db::IField&, double));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field, double value) const
-		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field, value));
-		}
+		MOCK_METHOD(RowsAffected, updateRecordsByCondition, (const std::vector<IFieldValue*>&, const std::vector<IFieldValue*>&), (override));
+		MOCK_METHOD(RowsAffected, deleteRecordsByCondition, (const std::vector<IFieldValue*>&), (override));
+		MOCK_METHOD(RowsAffected, deleteRecordsByCondition, (const std::string& condition), (override));
 
-		MOCK_CONST_METHOD2(createFieldValueProxy, db::IFieldValue* (const db::IField&, const std::string&));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field, const std::string& value) const
-		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field, value));
-		}
-
-		MOCK_CONST_METHOD2(createFieldValueProxy, db::IFieldValue* (const db::IField&, const boost::posix_time::ptime&));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field, const boost::posix_time::ptime& value) const
-		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field, value));
-		}
-
-		MOCK_CONST_METHOD2(createFieldValueProxy, db::IFieldValue* (const db::IField&, db::IBinaryValue*));
-		std::unique_ptr<db::IFieldValue> createFieldValue(const db::IField& field, std::unique_ptr<db::IBinaryValue> value) const
-		{
-			return std::unique_ptr<db::IFieldValue>(createFieldValueProxy(field, value.release()));
-		}
-
-		MOCK_CONST_METHOD0(createPrimaryKeyValueProxy, db::IPrimaryKeyValue*());
-		std::unique_ptr<db::IPrimaryKeyValue> createPrimaryKeyValue() const
-		{
-			return std::unique_ptr<db::IPrimaryKeyValue>(createPrimaryKeyValueProxy());
-		}
-
-		MOCK_CONST_METHOD0(getAllRecordsProxy, db::ITableRecordSet*());
-		std::unique_ptr<db::ITableRecordSet> getAllRecords() const
-		{
-			return std::unique_ptr<db::ITableRecordSet>(getAllRecordsProxy());
-		}
-
-		MOCK_CONST_METHOD1(getRecordByPrimaryKeyProxy, db::ITableRecord* (const db::IPrimaryKeyValue&));
-		std::unique_ptr<db::ITableRecord> getRecordByPrimaryKey(const db::IPrimaryKeyValue& primaryKeyValue) const
-		{
-			return std::unique_ptr<db::ITableRecord>(getRecordByPrimaryKeyProxy(primaryKeyValue));
-		}
-
-		MOCK_CONST_METHOD2(filterRecordsByFieldProxy, db::ITableRecordSet* (const db::IFieldValue&, const db::IField*));
-		std::unique_ptr<db::ITableRecordSet> filterRecordsByField(const db::IFieldValue& conditionValue, const db::IField* orderByField = NULL) const
-		{
-			return std::unique_ptr<db::ITableRecordSet>(filterRecordsByFieldProxy(conditionValue, orderByField));
-		}
-
-		MOCK_CONST_METHOD1(getMaxFieldValueInt, int (const db::IField&));
-
-		MOCK_CONST_METHOD2(filterRecordsByFieldsProxy, db::ITableRecordSet* (const std::vector<db::IFieldValue*>&, const db::IField*));
-		std::unique_ptr<db::ITableRecordSet> filterRecordsByFields(const std::vector<db::IFieldValue*>& conditionValues, const db::IField* orderByField = NULL) const
-		{
-			return std::unique_ptr<db::ITableRecordSet>(filterRecordsByFieldsProxy(conditionValues, orderByField));
-		}
-
-		MOCK_CONST_METHOD1(filterRecordsByConditionProxy, db::ITableRecordSet* (const std::string& condition));
-		std::unique_ptr<db::ITableRecordSet> filterRecordsByCondition(const std::string& condition) const
-		{
-			return std::unique_ptr<db::ITableRecordSet>(filterRecordsByConditionProxy(condition));
-		}
-
-		MOCK_CONST_METHOD0(createRecordProxy, db::ITableRecord*());
-		std::unique_ptr<db::ITableRecord> createRecord() const
-		{
-			return std::unique_ptr<db::ITableRecord>(createRecordProxy());
-		}
-
-		MOCK_CONST_METHOD1(copyRecordProxy, db::ITableRecord*(const db::ITableRecord&));
-		std::unique_ptr<db::ITableRecord> copyRecord(const db::ITableRecord& record) const
-		{
-			return std::unique_ptr<db::ITableRecord>(copyRecordProxy(record));
-		}
-
-		MOCK_METHOD1(insertRecord, db::RowsAffected(db::ITableRecord&));
-		MOCK_METHOD1(updateRecord, db::RowsAffected(const db::ITableRecord&));
-		MOCK_METHOD2(updateRecord, db::RowsAffected(const std::vector<db::IFieldValue*>&, const db::IPrimaryKeyValue&));
-		MOCK_METHOD1(deleteRecord, db::RowsAffected(const db::ITableRecord&));
-		MOCK_METHOD1(deleteRecord, db::RowsAffected(const db::IPrimaryKeyValue&));
-
-		MOCK_METHOD2(updateRecordsByCondition, db::RowsAffected(const std::vector<db::IFieldValue*>&, const std::vector<db::IFieldValue*>&));
-		MOCK_METHOD1(deleteRecordsByCondition, db::RowsAffected(const std::vector<db::IFieldValue*>&));
-		MOCK_METHOD1(deleteRecordsByCondition, db::RowsAffected(const std::string& condition));
-
-		MOCK_METHOD0(deleteAllRecords, db::RowsAffected());
+		MOCK_METHOD(RowsAffected, deleteAllRecords, (), (override));
 	};
-
-}}}
+}
 

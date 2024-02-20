@@ -1,21 +1,20 @@
 #pragma once
 
 #include "Types.h"
-#include "ITable.h"
-#include "IRecordSet.h"
-#include "ITransaction.h"
 
 #include <memory>
 
-
-namespace systelab { namespace db {
+namespace systelab::db {
+	class ITable;
+	class IRecordSet;
+	class ITransaction;
 
 	class IDatabase
 	{
 	public:
-		virtual ~IDatabase() {}
+		virtual ~IDatabase() = default;
 
-		virtual ITable& getTable(std::string tableName) = 0;
+		virtual ITable& getTable(const std::string& tableName) = 0;
 		virtual std::unique_ptr<IRecordSet> executeQuery(const std::string& query) = 0;
 		virtual void executeOperation(const std::string& operation) = 0;
 		virtual void executeMultipleStatements(const std::string& statements) = 0;
@@ -23,6 +22,5 @@ namespace systelab { namespace db {
 		virtual RowId getLastInsertedRowId() const = 0;
 		virtual std::unique_ptr<ITransaction> startTransaction() = 0;
 	};
-
-}}
+}
 

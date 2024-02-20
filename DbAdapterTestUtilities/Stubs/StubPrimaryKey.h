@@ -2,25 +2,22 @@
 
 #include "DbAdapterInterface/IPrimaryKey.h"
 
-#include <vector>
-
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class StubTable;
 
-	class StubPrimaryKey : public db::IPrimaryKey
+	class StubPrimaryKey : public IPrimaryKey
 	{
 		public:
 
 			StubPrimaryKey(StubTable& table);
 			~StubPrimaryKey(){};
 
-			ITable& getTable() const;
+			ITable& getTable() const override;
 
-			unsigned int getFieldsCount() const;
-			const IField& getField(unsigned int index) const;
-			const IField& getField(const std::string& fieldName) const;
+			unsigned int getFieldsCount() const override;
+			const IField& getField(unsigned int index) const override;
+			const IField& getField(const std::string& fieldName) const override;
 
 			void addField(const IField& tableField);
 
@@ -29,5 +26,5 @@ namespace systelab { namespace db { namespace test_utility {
 			std::vector<const IField*> m_fields;
 	};
 
-}}}
+}
 

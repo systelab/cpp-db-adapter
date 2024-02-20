@@ -2,11 +2,11 @@
 #include "StubRecord.h"
 
 #include "StubFieldValue.h"
-
+#include "DbAdapterInterface/IField.h"
 
 using namespace testing;
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubRecord::StubRecord()
 		:m_fieldValues()
@@ -20,13 +20,13 @@ namespace systelab { namespace db { namespace test_utility {
 		unsigned int nFieldValues = (unsigned int) other.m_fieldValues.size();
 		for (unsigned int i = 0; i < nFieldValues; i++)
 		{
-			m_fieldValues.push_back(std::unique_ptr<StubFieldValue>(new StubFieldValue(*other.m_fieldValues[i].get())));
+			m_fieldValues.push_back(std::make_unique<StubFieldValue>(*other.m_fieldValues[i].get()));
 		}
 
 		setUpStubMethods();
 	}
 
-	StubRecord::StubRecord(std::vector< std::unique_ptr<StubFieldValue> >& fieldValues)
+	StubRecord::StubRecord(std::vector<std::unique_ptr<StubFieldValue>>& fieldValues)
 	{
 		unsigned int nFieldValues = (unsigned int) fieldValues.size();
 		for (unsigned int i = 0; i < nFieldValues; i++)
@@ -51,13 +51,13 @@ namespace systelab { namespace db { namespace test_utility {
 
 	db::IFieldValue& StubRecord::getFieldValueByNameStub(const std::string& name) const
 	{
-		unsigned int nFieldValues = (unsigned int) m_fieldValues.size();
-		for (unsigned int i = 0; i < nFieldValues; i++)
+		unsigned int nFieldValues = static_cast<unsigned int>(m_fieldValues.size());
+		for (const auto& fieldValue: m_fieldValues)
 		{
-			std::string fieldName = m_fieldValues[i]->getField().getName();
+			std::string fieldName = fieldValue->getField().getName();
 			if (fieldName == name)
 			{
-				return *m_fieldValues[i];
+				return *fieldValue;
 			}
 		}
 
@@ -66,17 +66,13 @@ namespace systelab { namespace db { namespace test_utility {
 
 	bool StubRecord::hasFieldValueStub(const std::string& name) const
 	{
-		unsigned int nFieldValues = (unsigned int) m_fieldValues.size();
-		for (unsigned int i = 0; i < nFieldValues; i++)
-		{
-			std::string fieldName = m_fieldValues[i]->getField().getName();
-			if (fieldName == name)
+		const auto fieldValueIterator = std::ranges::find_if(m_fieldValues,
+			[&name](const std::unique_ptr<StubFieldValue>& fieldValue)
 			{
-				return true;
-			}
-		}
+				return fieldValue->getField().getName() == name;
+			});
 
-		return false;
+		return fieldValueIterator != m_fieldValues.cend();
 	}
 
 	StubRecord& StubRecord::operator= (const StubRecord& other)
@@ -84,7 +80,7 @@ namespace systelab { namespace db { namespace test_utility {
 		unsigned int nFieldValues = (unsigned int) other.m_fieldValues.size();
 		for (unsigned int i = 0; i < nFieldValues; i++)
 		{
-			m_fieldValues.push_back(std::unique_ptr<StubFieldValue>(new StubFieldValue(*other.m_fieldValues[i].get())));
+			m_fieldValues.push_back(std::make_unique<StubFieldValue>(*other.m_fieldValues[i].get()));
 		}
 
 		return *this;
@@ -97,5 +93,4 @@ namespace systelab { namespace db { namespace test_utility {
 		ON_CALL(*this, getFieldValue(A<const std::string&>())).WillByDefault(Invoke(this, &StubRecord::getFieldValueByNameStub));
 		ON_CALL(*this, hasFieldValue(_)).WillByDefault(Invoke(this, &StubRecord::hasFieldValueStub));
 	}
-
-}}}
+}

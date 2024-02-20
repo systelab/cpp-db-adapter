@@ -2,18 +2,17 @@
 
 #include "DbAdapterInterface/IConnectionConfiguration.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockConnectionConfiguration: public IConnectionConfiguration
 	{
 	public:
 		MockConnectionConfiguration();
-		virtual ~MockConnectionConfiguration();
+		~MockConnectionConfiguration() override;
 
-		MOCK_CONST_METHOD1(hasParameter, bool(const std::string& parameterName));
-		MOCK_CONST_METHOD1(getParameter, std::string (const std::string& parameterName));
+		MOCK_METHOD(bool, hasParameter, (const std::string& parameterName), (const, override));
+		MOCK_METHOD(std::string, getParameter, (const std::string&), (const, override));
 	};
 
-}}}
+}
 

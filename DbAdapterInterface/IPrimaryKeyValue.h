@@ -1,10 +1,12 @@
 #pragma once
 
-#include "IPrimaryKey.h"
-#include "IBinaryValue.h"
-#include "IFieldValue.h"
+#include <string>
 
-namespace systelab { namespace db {
+namespace systelab::db {
+
+	class IFieldValue;
+	class IPrimaryKey;
+	class ITable;
 
 	class IPrimaryKeyValue
 	{
@@ -19,5 +21,5 @@ namespace systelab { namespace db {
 		virtual IFieldValue& getFieldValue(const std::string& fieldName) const = 0;
 	};
 
-}}
+}
 

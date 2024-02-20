@@ -10,15 +10,14 @@
 
 #include "DbAdapterInterface/IDatabase.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 	
 	using namespace testing;
 
 	StubTable::StubTable(const std::string& name)
 		:m_name(name)
 	{
-		m_primaryKey = std::unique_ptr<StubPrimaryKey>( new StubPrimaryKey(*this) );
+		m_primaryKey = std::make_unique<StubPrimaryKey>(*this);
 
 		ON_CALL(*this, insertRecord(_)).WillByDefault(Invoke(this, &StubTable::insertRecordProxy));
 		ON_CALL(*this, updateRecord(_)).WillByDefault(Invoke(this, &StubTable::updateRecordProxy));
@@ -44,14 +43,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	const IField& StubTable::getField(unsigned int index) const
 	{
-		if (index < m_fields.size())
-		{
-			return *(m_fields[index].get());
-		}
-		else
-		{
-			throw std::runtime_error( "Invalid field index" );
-		}
+		return *(m_fields.at(index).get());
 	}
 
 	const IField& StubTable::getField(const std::string& fieldName) const
@@ -76,32 +68,32 @@ namespace systelab { namespace db { namespace test_utility {
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field) const
 	{
-		return std::unique_ptr<IFieldValue>( new StubFieldValue(field.getName()) );
+		return std::make_unique<StubFieldValue>(field.getName());
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, bool value) const
 	{
-		return std::unique_ptr<IFieldValue>( new StubFieldValue(field.getName(), value) );
+		return std::make_unique<StubFieldValue>(field.getName(), value);
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, int value) const
 	{
-		return std::unique_ptr<IFieldValue>( new StubFieldValue(field.getName(),value) );
+		return std::make_unique<StubFieldValue>(field.getName(),value);
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, double value) const
 	{
-		return std::unique_ptr<IFieldValue>( new StubFieldValue(field.getName(),value) );
+		return std::make_unique<StubFieldValue>(field.getName(),value);
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, const std::string& value) const
 	{
-		return std::unique_ptr<IFieldValue>( new StubFieldValue(field.getName(),value) );
+		return std::make_unique<StubFieldValue>(field.getName(),value);
 	}
 
-	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, const boost::posix_time::ptime& value) const
+	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, const std::chrono::system_clock::time_point& value) const
 	{
-		return std::unique_ptr<IFieldValue>( new StubFieldValue(field.getName(),value) );
+		return std::make_unique<StubFieldValue>(field.getName(),value);
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, std::unique_ptr<IBinaryValue> value) const
@@ -115,8 +107,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	std::unique_ptr<IPrimaryKeyValue> StubTable::createPrimaryKeyValue() const
 	{
-		const IPrimaryKey& primaryKey = getPrimaryKey();
-		return std::unique_ptr<IPrimaryKeyValue>( new StubPrimaryKeyValue(primaryKey) );
+		return std::make_unique<StubPrimaryKeyValue>(getPrimaryKey());
 	}
 
 	std::unique_ptr<ITableRecordSet> StubTable::getAllRecords() const
@@ -161,7 +152,7 @@ namespace systelab { namespace db { namespace test_utility {
 
 	std::unique_ptr<ITableRecord> StubTable::createRecord() const
 	{		
-		std::vector< std::unique_ptr<StubFieldValue> > fieldValues;
+		std::vector<std::unique_ptr<StubFieldValue>> fieldValues;
 
 		unsigned int nFields = (unsigned int) m_fields.size();
 		for (unsigned int i = 0; i < nFields; i++)
@@ -170,29 +161,14 @@ namespace systelab { namespace db { namespace test_utility {
 			std::unique_ptr<IFieldValue> fieldValue = createFieldValue(field);
 			std::unique_ptr<StubFieldValue> stubFieldValue(new StubFieldValue(*fieldValue));
 			fieldValue->setDefault();
-			fieldValues.push_back( std::move(stubFieldValue) );
+			fieldValues.push_back(std::move(stubFieldValue));
 		}
 
-		return std::unique_ptr<ITableRecord>( new StubTableRecord( fieldValues));
+		return std::make_unique<StubTableRecord>(fieldValues);
 	}
 
 	std::unique_ptr<ITableRecord> StubTable::copyRecord(const ITableRecord& /*record*/) const
 	{
-		/*if (&record.getTable() != this)
-		{
-			throw std::runtime_error("Can't copy records from other tables." );
-		}
-
-		std::vector< std::unique_ptr<IFieldValue> > copyFieldValues;
-		unsigned int nFieldValues = record.getFieldValuesCount();
-		for (unsigned int i = 0; i < nFieldValues; i++)
-		{
-			IFieldValue& fieldValue = record.getFieldValue(i);
-			std::unique_ptr<IFieldValue> copyFieldValue = fieldValue.clone();
-			copyFieldValues.push_back( std::move(copyFieldValue) );
-		}
-
-		return std::unique_ptr<ITableRecord>( new StubTableRecord((ITable&) *this, copyFieldValues) );*/
 		return std::unique_ptr<ITableRecord>(); 
 	}
 
@@ -328,8 +304,9 @@ namespace systelab { namespace db { namespace test_utility {
 					throw std::runtime_error("Invalid record field type." );
 					break;
 				case DATETIME:
-					fieldValueStream << "'" << boost::posix_time::to_iso_string( fieldValue.getDateTimeValue() ) << "'";
+					fieldValueStream << "'" << std::format("{:%FT%T%z}", fieldValue.getDateTimeValue()) << "'";
 					break;
+
 				case BINARY:
 					throw std::runtime_error("Insert of tables with binary fields not implemented." );
 					break;
@@ -355,5 +332,4 @@ namespace systelab { namespace db { namespace test_utility {
 
 		return to_return;
 	}
-
-}}}
+}

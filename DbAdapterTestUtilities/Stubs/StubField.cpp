@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "StubField.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	StubField::StubField(const db::IField& other)
 		:m_index(other.getIndex())
@@ -20,7 +19,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 	}
 
-	StubField::StubField(const std::string& name, systelab::db::FieldTypes type)
+	StubField::StubField(const std::string& name, FieldTypes type)
 		:m_index(0)
 		,m_name(name)
 		,m_type(type)
@@ -28,7 +27,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 	}
 
-	StubField::StubField(unsigned int index, const std::string& name, systelab::db::FieldTypes type, const std::string& defaultValue, bool primaryKey)
+	StubField::StubField(unsigned int index, const std::string& name, FieldTypes type, const std::string& defaultValue, bool primaryKey)
 		:m_index(index)
 		,m_name(name)
 		,m_type(type)
@@ -63,7 +62,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!hasNullDefaultValue())
 		{
-			if (m_type == db::BOOLEAN)
+			if (m_type == BOOLEAN)
 			{
 				return m_defaultBoolValue;
 			}
@@ -82,7 +81,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!hasNullDefaultValue())
 		{
-			if (m_type == db::INT)
+			if (m_type == INT)
 			{
 				return m_defaultIntValue;
 			}
@@ -101,7 +100,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!hasNullDefaultValue())
 		{
-			if (m_type == db::DOUBLE)
+			if (m_type == DOUBLE)
 			{
 				return m_defaultDoubleValue;
 			}
@@ -120,7 +119,7 @@ namespace systelab { namespace db { namespace test_utility {
 	{
 		if (!hasNullDefaultValue())
 		{
-			if (m_type == db::STRING)
+			if (m_type == STRING)
 			{
 				return m_defaultStringValue;
 			}
@@ -135,11 +134,11 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-	boost::posix_time::ptime StubField::getDateTimeDefaultValue() const
+	std::chrono::system_clock::time_point StubField::getDateTimeDefaultValue() const
 	{
 		if (!hasNullDefaultValue())
 		{
-			if (m_type == db::DATETIME)
+			if (m_type == DATETIME)
 			{
 				return m_defaultDateTimeValue;
 			}
@@ -154,7 +153,7 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 	
-	systelab::db::IBinaryValue& StubField::getBinaryDefaultValue() const
+	IBinaryValue& StubField::getBinaryDefaultValue() const
 	{
 		throw std::runtime_error( "Not implemented" );
 	}
@@ -170,7 +169,7 @@ namespace systelab { namespace db { namespace test_utility {
 		m_defaultIntValue = 0;
 		m_defaultDoubleValue = 0.;
 		m_defaultStringValue = "";
-		m_defaultDateTimeValue = boost::posix_time::ptime();
+		m_defaultDateTimeValue = std::chrono::system_clock::time_point{};
 
 		std::string defaultValueUpper = defaultValue;
 		std::transform(defaultValueUpper.begin(), defaultValueUpper.end(), defaultValueUpper.begin(), ::toupper);
@@ -196,7 +195,7 @@ namespace systelab { namespace db { namespace test_utility {
 					m_defaultStringValue = defaultValue;
 					break;
 				case db::DATETIME:
-					m_defaultDateTimeValue = getDateTimeFromSQLiteString(defaultValue);
+					m_defaultDateTimeValue = getDateTimeFromISOString(defaultValue);
 					break;
 				case db::BINARY:
 					//m_defaultBinaryValue = ; // Not implemented
@@ -208,17 +207,17 @@ namespace systelab { namespace db { namespace test_utility {
 		}
 	}
 
-	boost::posix_time::ptime StubField::getDateTimeFromSQLiteString(const std::string& sqliteDateTime) const
+	std::chrono::system_clock::time_point StubField::getDateTimeFromISOString(const std::string& ISODateTime) const
 	{
-		if (!sqliteDateTime.empty())
+		if (!ISODateTime.empty())
 		{
-			std::string sqliteDateTimeNoQuotes = sqliteDateTime.substr(1);
-			sqliteDateTimeNoQuotes = sqliteDateTimeNoQuotes.substr(0, sqliteDateTimeNoQuotes.length() - 1);
-			return boost::posix_time::from_iso_string(sqliteDateTimeNoQuotes);
+			std::chrono::system_clock::time_point timePointDateTime;
+			std::istringstream{ ISODateTime } >> std::chrono::parse("%FT%T%z", timePointDateTime);
+			return timePointDateTime;
 		}
 		else
 		{
-			return boost::posix_time::ptime();
+			return std::chrono::system_clock::time_point{};
 		}
 	}
 
@@ -232,4 +231,4 @@ namespace systelab { namespace db { namespace test_utility {
 		return *this;
 	}
 
-}}}
+}

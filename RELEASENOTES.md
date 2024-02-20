@@ -1,5 +1,12 @@
 # Summary of changes
 
+## Changes for version 2.0.0 (30 Sep 2021)
+
+### Continuous Integration Improvements
+
+- Updated project to C++ 20 standard.
+- Cleaned pipeline.
+
 ## Changes for version 1.1.13 (30 Sep 2021)
 
 ### Continuous Integration Improvements

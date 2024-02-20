@@ -1,11 +1,11 @@
 #pragma once
 
-#include "IField.h"
-#include "IRecord.h"
-
 #include <memory>
 
-namespace systelab { namespace db {
+namespace systelab::db {
+
+	class IField;
+	class IRecord;
 
 	class IRecordSet
 	{
@@ -23,6 +23,5 @@ namespace systelab { namespace db {
 		virtual bool isCurrentRecordValid() const = 0;
 		virtual void nextRecord() = 0;
 	};
-
-}}
+}
 

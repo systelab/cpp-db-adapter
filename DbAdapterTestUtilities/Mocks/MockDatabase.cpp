@@ -2,7 +2,7 @@
 #include "MockDatabase.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockDatabase::MockDatabase()
 	{
@@ -10,12 +10,12 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockDatabase::~MockDatabase()
 	{
-		size_t nTables = m_tables.size();
+		const size_t nTables = m_tables.size();
 		for (size_t i = 0; i < nTables; i++)
 		{
 			delete m_tables[i];
 		}
 	}
 
-}}}
+}
 

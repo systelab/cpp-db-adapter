@@ -1,34 +1,28 @@
 #pragma once
 
 #include "DbAdapterInterface/IDatabase.h"
+#include "DbAdapterInterface/IRecordSet.h"
+#include "DbAdapterInterface/ITable.h"
+#include "DbAdapterInterface/ITransaction.h"
+#include "DbAdapterInterface/Types.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockDatabase: public IDatabase
 	{
 	public:
 		MockDatabase();
-		virtual ~MockDatabase();
+		~MockDatabase() override;
 
-		MOCK_METHOD1(getTable, ITable& (std::string tableName));
+		MOCK_METHOD(ITable& , getTable, (const std::string&), (override));
 
-		MOCK_METHOD1(executeQueryProxy, IRecordSet* (const std::string& query));
-		std::unique_ptr<IRecordSet> executeQuery(const std::string& query)
-		{
-			return std::unique_ptr<db::IRecordSet>(executeQueryProxy(query));
-		}
+		MOCK_METHOD(std::unique_ptr<IRecordSet>, executeQuery, (const std::string&), (override));
+		MOCK_METHOD(void, executeOperation, (const std::string&), (override));
+		MOCK_METHOD(void, executeMultipleStatements, (const std::string&), (override));
+		MOCK_METHOD(RowsAffected, getRowsAffectedByLastChangeOperation, (), (const, override));
+		MOCK_METHOD(RowId, getLastInsertedRowId, (), (const, override));
 
-		MOCK_METHOD1(executeOperation, void (const std::string& operation));
-		MOCK_METHOD1(executeMultipleStatements, void (const std::string& operation));
-		MOCK_CONST_METHOD0(getRowsAffectedByLastChangeOperation, RowsAffected());
-		MOCK_CONST_METHOD0(getLastInsertedRowId, RowId());
-
-		MOCK_METHOD0(startTransactionProxy, ITransaction* ());
-		std::unique_ptr<ITransaction> startTransaction()
-		{
-			return std::unique_ptr<ITransaction>(startTransactionProxy());
-		};
+		MOCK_METHOD(std::unique_ptr<ITransaction>, startTransaction, (), (override));
 
 		void addTable(std::unique_ptr<ITable> table)
 		{
@@ -42,6 +36,5 @@ namespace systelab { namespace db { namespace test_utility {
 	private:
 		std::vector<ITable*> m_tables;
 	};
-
-}}}
+}
 

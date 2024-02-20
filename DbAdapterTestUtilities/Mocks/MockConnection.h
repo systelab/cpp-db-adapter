@@ -1,22 +1,16 @@
 #pragma once
 
 #include "DbAdapterInterface/IConnection.h"
+#include "DbAdapterInterface/IDatabase.h"
 
-
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockConnection : public IConnection
 	{
 	public:
 		MockConnection();
-		virtual ~MockConnection();
+		~MockConnection() override;
 
-		MOCK_METHOD1(loadDatabaseProxy, db::IDatabase* (db::IConnectionConfiguration&));
-		std::unique_ptr<db::IDatabase> loadDatabase(db::IConnectionConfiguration& config)
-		{
-			return std::unique_ptr<db::IDatabase>(loadDatabaseProxy(config));
-		}
+		MOCK_METHOD(std::unique_ptr<IDatabase>, loadDatabase, (IConnectionConfiguration&), (override));
 	};
-
-}}}
-
+}

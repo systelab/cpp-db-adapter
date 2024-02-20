@@ -6,24 +6,23 @@
 #include "MockFieldValue.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	class MockTableRecord : public ITableRecord
 	{
 	public:
 		MockTableRecord();
-		virtual ~MockTableRecord();
+		~MockTableRecord() override;
 
-		MOCK_CONST_METHOD0(getTable, db::ITable&());
+		MOCK_METHOD(ITable& , getTable, (), (const, override));
 
-		MOCK_CONST_METHOD0(getFieldValuesCount, unsigned int());
-		MOCK_CONST_METHOD1(getFieldValue, IFieldValue&(unsigned int));
-		MOCK_CONST_METHOD1(getFieldValue, IFieldValue&(const std::string&));
+		MOCK_METHOD(unsigned int, getFieldValuesCount, (), (const, override));
+		MOCK_METHOD(IFieldValue&, getFieldValue, (unsigned int), (const, override));
+		MOCK_METHOD(IFieldValue&, getFieldValue, (const std::string&), (const, override));
 
-		MOCK_CONST_METHOD1(hasFieldValue, bool(const std::string&));
+		MOCK_METHOD(bool, hasFieldValue, (const std::string&), (const, override));
 
-		MOCK_CONST_METHOD0(getValuesList, std::vector<IFieldValue*>());
+		MOCK_METHOD(std::vector<IFieldValue*>, getValuesList, (), (const, override));
 	};
-
-}}}
+}
 

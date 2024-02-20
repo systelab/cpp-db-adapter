@@ -2,7 +2,7 @@
 #include "MockFieldValue.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockFieldValue::MockFieldValue()
 	{
@@ -10,4 +10,4 @@ namespace systelab { namespace db { namespace test_utility {
 
 	MockFieldValue::~MockFieldValue() = default;
 
-}}}
+}

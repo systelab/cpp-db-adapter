@@ -9,8 +9,17 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <chrono>
 
-namespace systelab { namespace db {
+namespace systelab::db {
+
+	class IBinaryValue;
+	class IField;
+	class IFieldValue;
+	class IPrimaryKey;
+	class IPrimaryKeyValue;
+	class ITableRecord;
+	class ITableRecordSet;
 
 	class ITable
 	{
@@ -29,7 +38,7 @@ namespace systelab { namespace db {
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, int) const = 0;
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, double) const = 0;
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::string&) const = 0;
-		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, const boost::posix_time::ptime&) const = 0;
+		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::chrono::system_clock::time_point&) const = 0;
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, std::unique_ptr<IBinaryValue>) const = 0;
 
 		virtual std::unique_ptr<IPrimaryKeyValue> createPrimaryKeyValue() const = 0;
@@ -57,5 +66,5 @@ namespace systelab { namespace db {
 		virtual RowsAffected deleteAllRecords() = 0;
 	};
 
-}}
+}
 

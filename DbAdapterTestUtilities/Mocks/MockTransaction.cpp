@@ -2,12 +2,11 @@
 #include "MockTransaction.h"
 
 
-namespace systelab { namespace db { namespace test_utility {
+namespace systelab::db::test_utility {
 
 	MockTransaction::MockTransaction()
 	{
 	}
 
 	MockTransaction::~MockTransaction() = default;
-
-}}}
+}

@@ -2,8 +2,7 @@
 
 #include <string>
 
-
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	class IConnectionConfiguration
 	{
@@ -13,6 +12,5 @@ namespace systelab { namespace db {
 		virtual bool hasParameter(const std::string& parameterName) const = 0;
 		virtual std::string getParameter(const std::string& parameterName) const = 0;
 	};
-
-}}
+}
 

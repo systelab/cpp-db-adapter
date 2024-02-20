@@ -15,6 +15,7 @@ This repository defines a library-agnostic API for C++ to work with a database
 ## Available implementations
 
 * [SQLite](https://github.com/systelab/cpp-sqlite-db-adapter)
+* [Postgres](https://github.com/systelab/cpp-postgresql-db-adapter)
 
 ## Usage
 
@@ -35,7 +36,7 @@ while (recordset->isCurrentRecordValid())
     // Extract data from the current record
     int intValue = record.getFieldValue("intFieldName").getIntValue();
     std::string stringValue = record.getFieldValue("stringFieldName").getStringValue();
-    boost::posix_time::ptime dateTimeValue = record.getFieldValue("dateTimeFieldName").getDateTimeValue();
+    std::chrono::system_clock::time_point dateTimeValue = record.getFieldValue("dateTimeFieldName").getDateTimeValue();
 
     recordset->nextRecord();
 }
@@ -51,7 +52,7 @@ std::unique_ptr<systelab::db::ITableRecord> record = table.createRecord();
 // Fill record with data
 record->getFieldValue("intFieldName").setIntValue(1234);
 record->getFieldValue("stringFieldName").setStringValue("ABCDE");
-record->getFieldValue("dateTimeFieldName").setDateTimeValue(boost::posix_time::ptime today({2020,10,23}));
+record->getFieldValue("dateTimeFieldName").setDateTimeValue(std::chrono::sys_days{2020y/10/23});
 
 // Perform the record insertion
 table.insertRecord(*record);

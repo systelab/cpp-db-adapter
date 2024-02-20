@@ -6,22 +6,17 @@
 #include "StubField.h"
 #include "StubTableRecord.h"
 
+namespace systelab::db::test_utility {
 
-namespace systelab { namespace db { namespace test_utility {
-
-	StubTableRecordSet::StubTableRecordSet(ITable& table, std::vector< StubTableRecord >& records)
+	StubTableRecordSet::StubTableRecordSet(ITable& table, std::vector<StubTableRecord>& tableRecords)
 		:m_table(table)
 	{
-		for(unsigned int i = 0; i < records.size(); i++)
+		for(const auto& tableRecord: tableRecords)
 		{
-			m_records.push_back( std::unique_ptr<StubTableRecord>(new StubTableRecord(records[i])) );
+			m_records.push_back(std::make_unique<StubTableRecord>(tableRecord));
 		}
 
 		m_iterator = m_records.begin();
-	}
-
-	StubTableRecordSet::~StubTableRecordSet()
-	{
 	}
 
 	ITable& StubTableRecordSet::getTable() const
@@ -46,19 +41,19 @@ namespace systelab { namespace db { namespace test_utility {
 
 	unsigned int StubTableRecordSet::getRecordsCount() const
 	{
-		return (unsigned int) m_records.size();
+		return static_cast<unsigned int>(m_records.size());
 	}
 
 	const ITableRecord& StubTableRecordSet::getCurrentRecord() const
 	{
-		return *m_iterator->get();
+		return **m_iterator;
 	}
 
 	std::unique_ptr<ITableRecord> StubTableRecordSet::copyCurrentRecord() const
 	{
 		const ITableRecord& currentRecord = getCurrentRecord();
 		
-		return std::unique_ptr<ITableRecord>( new StubTableRecord(currentRecord) );
+		return std::make_unique<StubTableRecord>(currentRecord);
 	}
 
 	bool StubTableRecordSet::isCurrentRecordValid() const
@@ -71,4 +66,4 @@ namespace systelab { namespace db { namespace test_utility {
 		m_iterator++;
 	}
 
-}}}
+}

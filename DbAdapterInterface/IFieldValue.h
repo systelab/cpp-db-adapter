@@ -1,9 +1,10 @@
 #pragma once
 
-#include "IField.h"
-#include "IBinaryValue.h"
+#include <chrono>
 
-namespace systelab { namespace db {
+namespace systelab::db {
+	class IBinaryValue;
+	class IField;
 
 	class IFieldValue
 	{
@@ -18,7 +19,7 @@ namespace systelab { namespace db {
 		virtual int getIntValue() const = 0;
 		virtual double getDoubleValue() const = 0;
 		virtual std::string getStringValue() const = 0;
-		virtual boost::posix_time::ptime getDateTimeValue() const = 0;
+		virtual std::chrono::system_clock::time_point getDateTimeValue() const = 0;
 		virtual IBinaryValue& getBinaryValue() const = 0;
 
 		virtual void setValue(const IFieldValue&) = 0;
@@ -28,7 +29,7 @@ namespace systelab { namespace db {
 		virtual void setIntValue(int value) = 0;
 		virtual void setDoubleValue(double value) = 0;
 		virtual void setStringValue(const std::string& value) = 0;
-		virtual void setDateTimeValue(const boost::posix_time::ptime& value) = 0;
+		virtual void setDateTimeValue(const std::chrono::system_clock::time_point& value) = 0;
 		virtual void setBinaryValue(std::unique_ptr<IBinaryValue> value) = 0;
 
 		virtual void useDefaultValue() = 0;
@@ -36,9 +37,7 @@ namespace systelab { namespace db {
 		virtual std::unique_ptr<IFieldValue> clone() const = 0;
 
 		inline friend bool operator== (const IFieldValue& lhs, const IFieldValue& rhs);
-		inline friend bool operator!= (const IFieldValue& lhs, const IFieldValue& rhs);
 	};
-
-}}
+}
 
 #include "IFieldValue.inl"

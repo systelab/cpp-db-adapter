@@ -1,11 +1,8 @@
 #pragma once
 
-#include "IField.h"
-#include "IFieldValue.h"
+namespace systelab::db {
 
-namespace systelab { namespace db {
-
-	class ITable;
+	class IFieldValue;
 
 	class IRecord
 	{
@@ -18,5 +15,5 @@ namespace systelab { namespace db {
 
 		virtual bool hasFieldValue(const std::string& fieldName) const = 0;
 	};
-}}
+}
 

@@ -1,7 +1,7 @@
 #include "IFieldValue.h"
 #include "IField.h"
 
-namespace systelab { namespace db {
+namespace systelab::db {
 
 	bool operator== (const ITableRecord& lhs, const ITableRecord& rhs)
 	{
@@ -28,10 +28,4 @@ namespace systelab { namespace db {
 
 		return true;
 	}
-
-	bool operator!= (const ITableRecord& lhs, const ITableRecord& rhs)
-	{
-		return !(lhs == rhs);
-	}
-
-}}
+}
