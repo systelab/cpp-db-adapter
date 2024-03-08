@@ -53,7 +53,7 @@ pipeline
 						{
 							dir('DbAdapterInterface')
 							{
-								bat "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile ../package.profile --force"
+								bat "conan export-pkg ./conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile ../package.profile --force"
 							}
 							dir('DbAdapterTestUtilities')
 							{
