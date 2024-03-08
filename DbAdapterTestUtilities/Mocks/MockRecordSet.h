@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DbAdapterInterface/IRecordSet.h"
+#include "DbAdapterInterface/IRecord.h"
 
 namespace systelab::db::test_utility {
 
@@ -10,14 +11,14 @@ namespace systelab::db::test_utility {
 		MockRecordSet();
 		~MockRecordSet() override;
 
-		MOCK_METHOD(unsigned int, getFieldsCount, (), (const override));
-		MOCK_METHOD(const IField& , getField, (unsigned int), (const override));
-		MOCK_METHOD(const IField& , getField, (const std::string&), (const override));
+		MOCK_METHOD(unsigned int, getFieldsCount, (), (const, override));
+		MOCK_METHOD(const IField& , getField, (unsigned int), (const, override));
+		MOCK_METHOD(const IField& , getField, (const std::string&), (const, override));
 
-		MOCK_METHOD(unsigned int, getRecordsCount, (), (const override));
-
-		MOCK_METHOD(const IRecord&, getCurrentRecord, (), (const override));
-		MOCK_METHOD(bool, isCurrentRecordValid, (), (const override));
+		MOCK_METHOD(unsigned int, getRecordsCount, (), (const, override));
+		MOCK_METHOD(std::unique_ptr<IRecord>, copyCurrentRecord, (), (const, override));
+		MOCK_METHOD(const IRecord&, getCurrentRecord, (), (const, override));
+		MOCK_METHOD(bool, isCurrentRecordValid, (), (const, override));
 		MOCK_METHOD(void, nextRecord, (), (override));
 	};
 
