@@ -73,17 +73,17 @@ namespace systelab::db::test_utility {
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, bool value) const
 	{
-		return std::make_unique<StubFieldValue>(field.getName(), value);
+		return std::make_unique<StubFieldValue>(field.getName(), std::make_optional(value));
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, int value) const
 	{
-		return std::make_unique<StubFieldValue>(field.getName(),value);
+		return std::make_unique<StubFieldValue>(field.getName(), std::make_optional(value));
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, double value) const
 	{
-		return std::make_unique<StubFieldValue>(field.getName(),value);
+		return std::make_unique<StubFieldValue>(field.getName(), std::make_optional(value));
 	}
 
 	std::unique_ptr<IFieldValue> StubTable::createFieldValue(const IField& field, const std::string& value) const

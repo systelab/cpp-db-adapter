@@ -26,15 +26,15 @@ namespace systelab::db::test_utility {
 				switch(fieldType)
 				{
 					case db::BOOLEAN:
-						fieldValue.reset( new StubFieldValue(field.getName(), field.getBooleanDefaultValue()) );
+						fieldValue.reset( new StubFieldValue(field.getName(), std::make_optional(field.getBooleanDefaultValue())) );
 						break;
 
 					case db::INT:
-						fieldValue.reset( new StubFieldValue(field.getName(), field.getIntDefaultValue()) );
+						fieldValue.reset( new StubFieldValue(field.getName(), std::make_optional(field.getIntDefaultValue())));
 						break;
 
 					case db::DOUBLE:
-						fieldValue.reset( new StubFieldValue(field.getName(), field.getDoubleDefaultValue()) );
+						fieldValue.reset( new StubFieldValue(field.getName(), std::make_optional(field.getDoubleDefaultValue())));
 						break;
 
 					case STRING:

@@ -17,17 +17,12 @@ namespace systelab::db::test_utility {
 		StubFieldValue(const db::IFieldValue&);
 		StubFieldValue(const StubFieldValue&);
 		StubFieldValue(const std::string& name);
-		StubFieldValue(const std::string& name, int value);
-		StubFieldValue(const std::string& name, bool value);
-		StubFieldValue(const std::string& name, double value);
-		explicit StubFieldValue(const std::string& name, const std::string& value);
-		StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value);
 
-		StubFieldValue(const std::string& name, const std::optional<int>& value);
-		StubFieldValue(const std::string& name, const std::optional<bool>& value);
-		StubFieldValue(const std::string& name, const std::optional<double>& value);
-		StubFieldValue(const std::string& name, const std::optional<std::string>& value);
-		StubFieldValue(const std::string& name, const std::optional<std::chrono::system_clock::time_point>& value);
+		explicit StubFieldValue(const std::string& name, const std::optional<int>& value);
+		explicit StubFieldValue(const std::string& name, const std::optional<bool>& value);
+		explicit StubFieldValue(const std::string& name, const std::optional<double>& value);
+		explicit StubFieldValue(const std::string& name, const std::optional<std::string>& value);
+		explicit StubFieldValue(const std::string& name, const std::optional<std::chrono::system_clock::time_point>& value);
 
 		virtual ~StubFieldValue() override;
 
