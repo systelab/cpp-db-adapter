@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Mocks/MockTable.h"
+#include "DbAdapterTestUtilities/Mocks/MockTable.h"
 
 namespace systelab::db::test_utility {
 

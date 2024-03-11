@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DbAdapterTestUtilities/stdafx.h"
 #include "MockField.h"
 
 namespace systelab { namespace db { namespace test_utility {

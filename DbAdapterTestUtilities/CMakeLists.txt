@@ -36,7 +36,7 @@ target_link_libraries(${DB_ADAPTER_TEST_UTILITIES_PROJECT} GTest::gtest
 														   DbAdapterInterface::DbAdapterInterface)
 					  
 # Configure include directories
-target_include_directories(${DB_ADAPTER_TEST_UTILITIES_PROJECT} PUBLIC ${PROJECT_SOURCE_DIR}
+target_include_directories(${DB_ADAPTER_TEST_UTILITIES_PROJECT} PUBLIC ${PROJECT_SOURCE_DIR}/..
 																PUBLIC ${GTest_INCLUDE_DIRS})
 
 # Configure source groups

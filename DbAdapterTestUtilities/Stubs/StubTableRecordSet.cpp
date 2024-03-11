@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DbAdapterTestUtilities/stdafx.h"
 #include "StubTableRecordSet.h"
 
 #include "DbAdapterInterface/ITable.h"

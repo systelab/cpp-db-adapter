@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Mocks/MockTableRecord.h"
+#include "DbAdapterTestUtilities/Mocks/MockTableRecord.h"
 
 #include <memory>
 #include <vector>

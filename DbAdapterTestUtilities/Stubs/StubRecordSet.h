@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../Mocks/MockRecordSet.h"
-
+#include "DbAdapterTestUtilities/Mocks/MockRecordSet.h"
 
 namespace systelab::db::test_utility {
 
