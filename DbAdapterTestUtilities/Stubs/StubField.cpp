@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DbAdapterTestUtilities/stdafx.h"
 #include "StubField.h"
 
 namespace systelab::db::test_utility {

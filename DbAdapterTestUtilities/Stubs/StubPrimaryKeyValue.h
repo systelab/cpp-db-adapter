@@ -8,7 +8,7 @@ namespace systelab::db::test_utility {
 	{
 	public:
 		StubPrimaryKeyValue(const IPrimaryKey& primaryKey);
-		virtual ~StubPrimaryKeyValue() override;
+		~StubPrimaryKeyValue() override;
 
 		ITable& getTable() const override;
 		const IPrimaryKey& getPrimaryKey() const override;

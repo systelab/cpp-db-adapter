@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DbAdapterTestUtilities/stdafx.h"
 #include "TableRecordComparator.h"
 
 #include "DbAdapterInterface/IFieldValue.h"

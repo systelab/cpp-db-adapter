@@ -1,3 +1,4 @@
+import os
 from conans import ConanFile
 
 class DbAdapterInterfaceConan(ConanFile):
@@ -12,8 +13,8 @@ class DbAdapterInterfaceConan(ConanFile):
     exports_sources = "*.h", "*.inl"
 
     def package(self):
-        self.copy("*.h", dst="include/DbAdapterInterface")
-        self.copy("*.inl", dst="include/DbAdapterInterface")
+        self.copy("*.h", dst="include/DbAdapterInterface", excludes="DbAdapterTestUtilities/*.*")
+        self.copy("*.inl", dst="include/DbAdapterInterface", excludes="DbAdapterTestUtilities/*.*")
 
     def package_info(self):
         self.info.header_only()
