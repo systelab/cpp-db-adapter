@@ -51,8 +51,11 @@ pipeline
 					{
 						stage("Build ${configurations[i]}")
 						{
-							bat "conan export-pkg ${packageNameInterface}/conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile ./package.profile --force"
-							dir("DbAdapterTestUtilities")
+							dir('DbAdapterInterface')
+							{
+								bat "conan export-pkg ./conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile ../package.profile -s build_type=${configurations[i]} --force"
+							}
+							dir('DbAdapterTestUtilities')
 							{
 								bat "mkdir build-${configurations[i]}"
 								dir("build-${configurations[i]}")
