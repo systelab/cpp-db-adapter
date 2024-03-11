@@ -67,6 +67,66 @@ namespace systelab::db::test_utility {
 		m_field.reset(new StubField(name, INT));
 	}
 
+	StubFieldValue::StubFieldValue(const std::string& name, int value)
+		:m_nullValue(false)
+		,m_default(false)
+		,m_boolValue(false)
+		,m_intValue(value)
+		,m_doubleValue(0.)
+		,m_stringValue("")
+		,m_dateTimeValue()
+	{
+		m_field.reset(new StubField(name, INT));
+	}
+
+	StubFieldValue::StubFieldValue(const std::string& name, bool value)
+		:m_nullValue(false)
+		,m_default(false)
+		,m_boolValue(value)
+		,m_intValue(0)
+		,m_doubleValue(0.)
+		,m_stringValue("")
+		,m_dateTimeValue()
+	{
+		m_field.reset(new StubField(name, BOOLEAN));
+	}
+
+	StubFieldValue::StubFieldValue(const std::string& name, double value)
+		:m_nullValue(false)
+		,m_default(false)
+		,m_boolValue(false)
+		,m_intValue(0)
+		,m_doubleValue(value)
+		,m_stringValue("")
+		,m_dateTimeValue()
+	{
+		m_field.reset(new StubField(name, DOUBLE));
+	}
+
+	StubFieldValue::StubFieldValue(const std::string& name, const std::string& value)
+		:m_nullValue(false)
+		,m_default(false)
+		,m_boolValue(false)
+		,m_intValue(0)
+		,m_doubleValue(0.)
+		,m_stringValue(value)
+		,m_dateTimeValue()
+	{
+		m_field.reset(new StubField(name, STRING));
+	}
+
+	StubFieldValue::StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value)
+		:m_nullValue(false)
+		,m_default(false)
+		,m_boolValue(false)
+		,m_intValue(0)
+		,m_doubleValue(0.)
+		,m_stringValue("")
+		,m_dateTimeValue(value)
+	{
+		m_field.reset(new StubField(name, DATETIME));
+	}
+
 	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<int>& value)
 		:m_default(false)
 		,m_boolValue(false)
