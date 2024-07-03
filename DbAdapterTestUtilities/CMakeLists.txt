@@ -17,6 +17,7 @@ find_package(GTest REQUIRED)
 # Polished project configuration for Visual Studio
 IF(MSVC)
     ADD_DEFINITIONS("/EHsc")
+	add_compile_options(/MP)
 ENDIF(MSVC)
 
 # Configure DB Adapter test utilities project

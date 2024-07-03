@@ -1,6 +1,8 @@
 #pragma once
 
-#include <chrono>
+#include "Types.h"
+#include <memory>
+#include <string>
 
 namespace systelab::db {
 	class IBinaryValue;
@@ -19,7 +21,7 @@ namespace systelab::db {
 		virtual int getIntValue() const = 0;
 		virtual double getDoubleValue() const = 0;
 		virtual std::string getStringValue() const = 0;
-		virtual std::chrono::system_clock::time_point getDateTimeValue() const = 0;
+		virtual DateTimeType getDateTimeValue() const = 0;
 		virtual IBinaryValue& getBinaryValue() const = 0;
 
 		virtual void setValue(const IFieldValue&) = 0;
@@ -29,7 +31,7 @@ namespace systelab::db {
 		virtual void setIntValue(int value) = 0;
 		virtual void setDoubleValue(double value) = 0;
 		virtual void setStringValue(const std::string& value) = 0;
-		virtual void setDateTimeValue(const std::chrono::system_clock::time_point& value) = 0;
+		virtual void setDateTimeValue(const DateTimeType& value) = 0;
 		virtual void setBinaryValue(std::unique_ptr<IBinaryValue> value) = 0;
 
 		virtual void useDefaultValue() = 0;

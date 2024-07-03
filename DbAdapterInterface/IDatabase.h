@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Types.h"
-
 #include <memory>
+#include <string>
 
 namespace systelab::db {
 	class ITable;

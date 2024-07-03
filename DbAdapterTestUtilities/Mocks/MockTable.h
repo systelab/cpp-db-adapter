@@ -2,6 +2,7 @@
 
 #include "DbAdapterInterface/ITable.h"
 #include "DbAdapterInterface/IBinaryValue.h"
+#include "DbAdapterInterface/Types.h"
 
 namespace systelab::db::test_utility {
 
@@ -23,7 +24,7 @@ namespace systelab::db::test_utility {
 		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, int), (const, override));
 		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, double), (const, override));
 		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, const std::string&), (const, override));
-		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, const std::chrono::system_clock::time_point&), (const, override));
+		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, const DateTimeType&), (const, override));
 		MOCK_METHOD(std::unique_ptr<IFieldValue>, createFieldValue, (const IField&, std::unique_ptr<IBinaryValue>), (const, override));
 		MOCK_METHOD(std::unique_ptr<IPrimaryKeyValue>, createPrimaryKeyValue, (), (const, override));
 		MOCK_METHOD(std::unique_ptr<ITableRecordSet>, getAllRecords, (), (const override));

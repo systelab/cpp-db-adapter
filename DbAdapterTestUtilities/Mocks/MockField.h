@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DbAdapterInterface/IField.h"
-
+#include "DbAdapterInterface/Types.h"
 
 namespace systelab::db::test_utility {
 
@@ -23,7 +23,7 @@ namespace systelab::db::test_utility {
 		MOCK_METHOD(bool, getBooleanDefaultValue, (), (const, override));
 		MOCK_METHOD(double, getDoubleDefaultValue, (), (const, override));
 		MOCK_METHOD(std::string, getStringDefaultValue, (), (const, override));
-		MOCK_METHOD(std::chrono::system_clock::time_point, getDateTimeDefaultValue, (), (const, override));
+		MOCK_METHOD(DateTimeType, getDateTimeDefaultValue, (), (const, override));
 		MOCK_METHOD(IBinaryValue&, getBinaryDefaultValue, (), (const, override));
 	};
 }

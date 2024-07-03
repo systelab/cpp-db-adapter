@@ -9,7 +9,6 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <chrono>
 
 namespace systelab::db {
 
@@ -38,7 +37,7 @@ namespace systelab::db {
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, int) const = 0;
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, double) const = 0;
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::string&) const = 0;
-		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::chrono::system_clock::time_point&) const = 0;
+		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, const DateTimeType&) const = 0;
 		virtual std::unique_ptr<IFieldValue> createFieldValue(const IField&, std::unique_ptr<IBinaryValue>) const = 0;
 
 		virtual std::unique_ptr<IPrimaryKeyValue> createPrimaryKeyValue() const = 0;

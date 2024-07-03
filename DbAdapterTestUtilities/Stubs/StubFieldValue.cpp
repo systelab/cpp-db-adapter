@@ -115,7 +115,7 @@ namespace systelab::db::test_utility {
 		m_field.reset(new StubField(name, STRING));
 	}
 
-	StubFieldValue::StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const DateTimeType& value)
 		:m_nullValue(false)
 		,m_default(false)
 		,m_boolValue(false)
@@ -212,7 +212,7 @@ namespace systelab::db::test_utility {
 	}
 
 
-	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<std::chrono::system_clock::time_point>& value)
+	StubFieldValue::StubFieldValue(const std::string& name, const std::optional<DateTimeType>& value)
 		:m_default(false)
 		,m_intValue(0)
 		,m_boolValue(false)
@@ -227,7 +227,7 @@ namespace systelab::db::test_utility {
 		}
 		else
 		{
-			m_dateTimeValue = std::chrono::system_clock::time_point{};
+			m_dateTimeValue = DateTimeType{};
 			m_nullValue = true;
 		}
 
@@ -356,7 +356,7 @@ namespace systelab::db::test_utility {
 	}
 		
 
-	std::chrono::system_clock::time_point StubFieldValue::getDateTimeValue() const
+	DateTimeType StubFieldValue::getDateTimeValue() const
 	{
 		if (!isDefault())
 		{
@@ -372,7 +372,7 @@ namespace systelab::db::test_utility {
 				}
 				else
 				{
-					return std::chrono::system_clock::time_point{};
+					return DateTimeType{};
 				}
 			}
 			else
@@ -441,7 +441,7 @@ namespace systelab::db::test_utility {
 		m_intValue = 0;
 		m_doubleValue = 0.;
 		m_stringValue = "";
-		m_dateTimeValue = std::chrono::system_clock::time_point{};
+		m_dateTimeValue = DateTimeType{};
 	}
 
 	void StubFieldValue::setDefault()
@@ -452,7 +452,7 @@ namespace systelab::db::test_utility {
 		m_intValue = 0;
 		m_doubleValue = 0.;
 		m_stringValue = "";
-		m_dateTimeValue = std::chrono::system_clock::time_point{};
+		m_dateTimeValue = DateTimeType{};
 	}
 
 	void StubFieldValue::setBooleanValue(bool value)
@@ -511,12 +511,12 @@ namespace systelab::db::test_utility {
 		}
 	}
 
-	void StubFieldValue::setDateTimeValue(const std::chrono::system_clock::time_point& value)
+	void StubFieldValue::setDateTimeValue(const DateTimeType& value)
 	{
 		if( m_field->getType() == DATETIME )
 		{
 			m_dateTimeValue = value;
-			m_nullValue = (value == std::chrono::system_clock::time_point {});
+			m_nullValue = (value == DateTimeType {});
 			m_default = false;
 		}
 		else
@@ -583,17 +583,17 @@ namespace systelab::db::test_utility {
 		return *this;
 	}
 
-	std::chrono::system_clock::time_point StubFieldValue::getDateTimeFromISOString(const std::string& ISODateTime) const
+	DateTimeType StubFieldValue::getDateTimeFromISOString(const std::string& ISODateTime) const
 	{
 		if (!ISODateTime.empty())
 		{
-			std::chrono::system_clock::time_point result;
+			DateTimeType result;
 			std::istringstream{ ISODateTime } >> std::chrono::parse("%FT%T%z", result);
 			return result;
 		}
 		else
 		{
-			return std::chrono::system_clock::time_point{};
+			return DateTimeType{};
 		}
 	}
 }

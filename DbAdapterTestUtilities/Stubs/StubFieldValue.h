@@ -21,13 +21,13 @@ namespace systelab::db::test_utility {
 		explicit StubFieldValue(const std::string& name, bool value);
 		StubFieldValue(const std::string& name, double value);
 		StubFieldValue(const std::string& name, const std::string& value);
-		StubFieldValue(const std::string& name, const std::chrono::system_clock::time_point& value);
+		StubFieldValue(const std::string& name, const DateTimeType& value);
 
 		StubFieldValue(const std::string& name, const std::optional<int>& value);
 		StubFieldValue(const std::string& name, const std::optional<bool>& value);
 		StubFieldValue(const std::string& name, const std::optional<double>& value);
 		StubFieldValue(const std::string& name, const std::optional<std::string>& value);
-		StubFieldValue(const std::string& name, const std::optional<std::chrono::system_clock::time_point>& value);
+		StubFieldValue(const std::string& name, const std::optional<DateTimeType>& value);
 
 		virtual ~StubFieldValue() override;
 
@@ -39,7 +39,7 @@ namespace systelab::db::test_utility {
 		int getIntValue() const override;
 		double getDoubleValue() const override;
 		std::string getStringValue() const override;
-		std::chrono::system_clock::time_point getDateTimeValue() const override;
+		DateTimeType getDateTimeValue() const override;
 		IBinaryValue& getBinaryValue() const override;
 
 		void setValue(const IFieldValue&) override;
@@ -49,7 +49,7 @@ namespace systelab::db::test_utility {
 		void setIntValue(int) override;
 		void setDoubleValue(double) override;
 		void setStringValue(const std::string&) override;
-		void setDateTimeValue(const std::chrono::system_clock::time_point&) override;
+		void setDateTimeValue(const DateTimeType&) override;
 		void setBinaryValue(std::unique_ptr<IBinaryValue>) override;
 
 		void useDefaultValue() override;
@@ -65,9 +65,9 @@ namespace systelab::db::test_utility {
 		int m_intValue;
 		double m_doubleValue;
 		std::string m_stringValue;
-		std::chrono::system_clock::time_point m_dateTimeValue;
+		DateTimeType m_dateTimeValue;
 
-		std::chrono::system_clock::time_point getDateTimeFromISOString(const std::string& ISODateTime) const;
+		DateTimeType getDateTimeFromISOString(const std::string& ISODateTime) const;
 	};
 }
 

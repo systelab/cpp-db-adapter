@@ -26,7 +26,7 @@ namespace systelab::db::test_utility {
 		int getIntDefaultValue() const override;
 		double getDoubleDefaultValue() const override;
 		std::string getStringDefaultValue() const override;
-		std::chrono::system_clock::time_point getDateTimeDefaultValue() const override;
+		DateTimeType getDateTimeDefaultValue() const override;
 		IBinaryValue& getBinaryDefaultValue() const override;
 
 		bool isPrimaryKey() const override;
@@ -44,9 +44,9 @@ namespace systelab::db::test_utility {
 		int m_defaultIntValue;
 		double m_defaultDoubleValue;
 		std::string m_defaultStringValue;
-		std::chrono::system_clock::time_point m_defaultDateTimeValue;
+		DateTimeType m_defaultDateTimeValue;
 
 		void setDefaultValue(db::FieldTypes type, const std::string& defaultValue);
-		std::chrono::system_clock::time_point getDateTimeFromISOString(const std::string& postgresDateTime) const;
+		DateTimeType getDateTimeFromISOString(const std::string& postgresDateTime) const;
 	};
 }

@@ -3,6 +3,7 @@
 #include "DbAdapterInterface/IBinaryValue.h"
 #include "DbAdapterInterface/IField.h"
 #include "DbAdapterInterface/IFieldValue.h"
+#include "DbAdapterInterface/Types.h"
 
 namespace systelab::db::test_utility {
 
@@ -20,7 +21,7 @@ namespace systelab::db::test_utility {
 		MOCK_METHOD(int, getIntValue, (), (const, override));
 		MOCK_METHOD(double, getDoubleValue, (), (const, override));
 		MOCK_METHOD(std::string, getStringValue, (), (const, override));
-		MOCK_METHOD(std::chrono::system_clock::time_point, getDateTimeValue, (), (const, override));
+		MOCK_METHOD(DateTimeType, getDateTimeValue, (), (const, override));
 		MOCK_METHOD(IBinaryValue&, getBinaryValue, (), (const, override));
 
 		MOCK_METHOD(void, setValue, (const IFieldValue&), (override));
@@ -30,7 +31,7 @@ namespace systelab::db::test_utility {
 		MOCK_METHOD(void, setIntValue, (int), (override));
 		MOCK_METHOD(void, setDoubleValue, (double), (override));
 		MOCK_METHOD(void, setStringValue, (const std::string&), (override));
-		MOCK_METHOD(void, setDateTimeValue, (const std::chrono::system_clock::time_point&), (override));
+		MOCK_METHOD(void, setDateTimeValue, (const DateTimeType&), (override));
 
 		MOCK_METHOD(void, setBinaryValue, (std::unique_ptr<IBinaryValue>), (override));
 		MOCK_METHOD(void, useDefaultValue, (), (override));

@@ -26,7 +26,7 @@ namespace systelab::db::test_utility {
 		std::unique_ptr<IFieldValue> createFieldValue(const IField&, int) const;
 		std::unique_ptr<IFieldValue> createFieldValue(const IField&, double) const;
 		std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::string&) const;
-		std::unique_ptr<IFieldValue> createFieldValue(const IField&, const std::chrono::system_clock::time_point&) const;
+		std::unique_ptr<IFieldValue> createFieldValue(const IField&, const DateTimeType&) const;
 		std::unique_ptr<IFieldValue> createFieldValue(const IField&, std::unique_ptr<IBinaryValue>) const;
 
 		std::unique_ptr<IPrimaryKeyValue> createPrimaryKeyValue() const;

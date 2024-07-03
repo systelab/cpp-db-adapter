@@ -134,7 +134,7 @@ namespace systelab::db::test_utility {
 		}
 	}
 
-	std::chrono::system_clock::time_point StubField::getDateTimeDefaultValue() const
+	DateTimeType StubField::getDateTimeDefaultValue() const
 	{
 		if (!hasNullDefaultValue())
 		{
@@ -169,7 +169,7 @@ namespace systelab::db::test_utility {
 		m_defaultIntValue = 0;
 		m_defaultDoubleValue = 0.;
 		m_defaultStringValue = "";
-		m_defaultDateTimeValue = std::chrono::system_clock::time_point{};
+		m_defaultDateTimeValue = DateTimeType{};
 
 		std::string defaultValueUpper = defaultValue;
 		std::transform(defaultValueUpper.begin(), defaultValueUpper.end(), defaultValueUpper.begin(), ::toupper);
@@ -207,17 +207,17 @@ namespace systelab::db::test_utility {
 		}
 	}
 
-	std::chrono::system_clock::time_point StubField::getDateTimeFromISOString(const std::string& ISODateTime) const
+	DateTimeType StubField::getDateTimeFromISOString(const std::string& ISODateTime) const
 	{
 		if (!ISODateTime.empty())
 		{
-			std::chrono::system_clock::time_point timePointDateTime;
+			DateTimeType timePointDateTime;
 			std::istringstream{ ISODateTime } >> std::chrono::parse("%FT%T%z", timePointDateTime);
 			return timePointDateTime;
 		}
 		else
 		{
-			return std::chrono::system_clock::time_point{};
+			return DateTimeType{};
 		}
 	}
 
