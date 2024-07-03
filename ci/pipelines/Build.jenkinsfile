@@ -110,15 +110,15 @@ pipeline
 				}
 			}
 		}
-		
-		post
+	}
+	
+	post
+	{
+		always
 		{
-			always
+			script
 			{
-				script
-				{
-					currentBuild.description = "${version}/${channel}"
-				}
+				currentBuild.description = "${version}/${channel}"
 			}
 		}
 	}
