@@ -1,15 +1,12 @@
-def channel = "testing"
 def version = "0.0.0"
-def packageNameInterface = "DbAdapterInterface"
-def packageNameTestUtilities = "DbAdapterTestUtilities"
+def packageNameInterface = "db-adapter-interface"
+def packageNameTestUtilities = "db-adapter-test-utilities"
 def profile = "vs2022.conanprofile"
 def archs = ['x86', 'x86_64']
 def configs = ['Debug', 'Release']
 
 
-library identifier: "cpp-jenkins-pipelines@master", retriever: modernSCM(
-  [$class: "GitSCMSource",
-   remote: "https://github.com/systelab/cpp-jenkins-pipelines.git"])
+@Library('aid-pipeline-utils@1.0.23') _
    
 pipeline
 {
@@ -18,16 +15,17 @@ pipeline
 		label 'lib-build'
 	}
 
+	environment
+	{
+		PATH = "C:\\Users\\jenkins\\.venvs\\conan2\\Scripts;${env.PATH}"
+	}
+
 	parameters
 	{
 		string(	name: 'version',
 				description: 'Number of the version to build (must match the name of the tag that will be checked out), leave as 0.0.0 for checkout of current branch',
 				defaultValue: '0.0.0' )
 
-		booleanParam( name: 'stable',
-					  description: 'Show if generated library should be uploaded as stable or testing',
-					  defaultValue: false )
-	
 		booleanParam( name: 'uploadPackage',
 					  description: 'Whether or not to upload conan package',
 					  defaultValue: false )
@@ -58,7 +56,6 @@ pipeline
 						checkoutSourceCodeFromTag(version)
 						version = params.version
 					}
-					channel = params.stable ? 'stable' : 'testing'
 				}
 			}
 		}
@@ -69,8 +66,7 @@ pipeline
 			{
 				dir('DbAdapterInterface')
 				{
-					bat script: "conan export-pkg ./conanfile.py ${packageNameInterface}/${version}@systelab/${channel} --profile=${env.WORKSPACE}/${profile} --force",
-						label: "Exporting package ${packageNameInterface}/${version}@systelab/${channel}"
+					bat script: "conan create . --version=${version} --profile:all=${env.WORKSPACE}/${profile}", label: "Creating package ${packageNameInterface}/${version}"
 				}
 				dir('DbAdapterTestUtilities')
 				{
@@ -82,10 +78,7 @@ pipeline
 							{ config ->
 								stage("Build ${config}|${arch}")
 								{
-									def buildFolder = "build-${config}-${arch}"
-									bat script: "conan install . --install-folder ${buildFolder} --profile=${env.WORKSPACE}/${profile} -e VERSION=${version} -e CHANNEL=${channel} -s build_type=${config} -s arch=${arch}", label: 'Installing dependencies'
-									bat script: "conan build . --build-folder ${buildFolder}", label: 'Building'
-									bat script: "conan export-pkg . ${packageNameTestUtilities}/${version}@systelab/${channel} --build-folder ${buildFolder} --force", label: "Exporting package ${packageNameTestUtilities}/${version}@systelab/${channel}"
+									bat script: "conan create . --version=${version} --profile:all=${env.WORKSPACE}/${profile} --settings:host build_type=${config} --settings:host arch=${arch}", label: "Creating package ${packageNameTestUtilities}/${version}"
 								}
 							}
 						}
@@ -105,8 +98,8 @@ pipeline
 			{
 				script
 				{
-					bat script: "conan upload ${packageNameInterface}/${version}@systelab/${channel} --all -r systelab-conan-local --force", label: "Uploading package for ${packageNameInterface}/${version}@systelab/${channel}"
-					bat script: "conan upload ${packageNameTestUtilities}/${version}@systelab/${channel} --all -r systelab-conan-local --force", label: "Uploading packages for ${packageNameTestUtilities}/${version}@systelab/${channel}"
+					bat script: "conan upload ${packageNameInterface}/${version} -r aid-conan-production-local --confirm --force", label: "Uploading package for ${packageNameInterface}/${version}"
+					bat script: "conan upload ${packageNameTestUtilities}/${version} -r aid-conan-production-local --confirm --force", label: "Uploading packages for ${packageNameTestUtilities}/${version}"
 				}
 			}
 		}
@@ -118,7 +111,7 @@ pipeline
 		{
 			script
 			{
-				currentBuild.description = "${version}/${channel}"
+				currentBuild.description = "${version}"
 			}
 		}
 	}
