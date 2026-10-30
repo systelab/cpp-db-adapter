@@ -24,7 +24,8 @@ pipeline
 	{
 		string(	name: 'version',
 				description: 'Number of the version to build (must match the name of the tag that will be checked out), leave as 0.0.0 for checkout of current branch',
-				defaultValue: '0.0.0' )
+				defaultValue: '',
+				trim: true )
 
 		booleanParam( name: 'uploadPackage',
 					  description: 'Whether or not to upload conan package',
