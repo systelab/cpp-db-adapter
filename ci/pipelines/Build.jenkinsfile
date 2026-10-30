@@ -47,14 +47,14 @@ pipeline
 				deleteDir()
 				script 
 				{
-					if (params.version == '0.0.0')
+					if (params.version == '')
 					{
-						checkoutSourceCode()
+						checkoutFromGIT()
 					}
 					else
 					{
-						checkoutSourceCodeFromTag(version)
 						version = params.version
+						checkoutFromGIT(scm.userRemoteConfigs[0].url, "v${version}", true)
 					}
 				}
 			}
