@@ -67,7 +67,7 @@ pipeline
 			{
 				dir('DbAdapterInterface')
 				{
-					bat script: "conan create . --version=${version} --profile:all=${env.WORKSPACE}/${profile}", label: "Creating package ${packageNameInterface}/${version}"
+					bat script: "conan export-pkg . --version=${version} --profile:all=${env.WORKSPACE}/${profile}", label: "Creating package ${packageNameInterface}/${version}"
 				}
 				dir('DbAdapterTestUtilities')
 				{
