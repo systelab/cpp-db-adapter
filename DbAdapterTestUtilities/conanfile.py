@@ -13,6 +13,7 @@ class DbAdapterTestUtilitiesConan(ConanFile):
     author = "CSW <csw@werfen.com>"
     topics = ("conan", "db", "sql", "adapter", "wrapper")
     license = "MIT"
+    package_type = "static-library"
     settings = "os", "compiler", "build_type", "arch"
 
     # The sources include their own headers as "DbAdapterTestUtilities/...", so in the Conan cache they must live in a folder with that name
@@ -28,11 +29,11 @@ class DbAdapterTestUtilitiesConan(ConanFile):
         return os.path.join(self.source_folder, "DbAdapterTestUtilities")
 
     def requirements(self):
-        self.requires("gtest/1.14.0")
+        self.requires("gtest/1.14.0", transitive_headers=True, transitive_libs=True)
         if self.version is None:
-            self.requires(f"db-adapter-interface/{os.environ['VERSION']}")
+            self.requires(f"db-adapter-interface/{os.environ['VERSION']}", transitive_headers=True)
         else:
-            self.requires(f"db-adapter-interface/{self.version}")
+            self.requires(f"db-adapter-interface/{self.version}", transitive_headers=True)
 
     def generate(self):
         deps = CMakeDeps(self)
